@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace CourseProject
 {
-    public class Client : Person
+    public class Client : User
     {
-
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public DateTime dateOfBirthday { get; set; }
     }
 }

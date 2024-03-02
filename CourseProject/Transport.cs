@@ -10,15 +10,15 @@ namespace CourseProject
 {
     public abstract class Transport
     {
-        protected Guid Id { get; set; }
-        protected string Model { get; set; }
-        protected string Country { get; set; }
-        protected string Brand { get; set; }
-        protected string Color { get; set; }
-        protected int YearOfManufacture { get; set; }
-        protected double FuelConsumption { get; set; }
-        protected double Price { get; set; }
-        protected bool IsDamaged { get; set; }
+        public Guid Id { get; set; }
+        public string Model { get; set; }
+        public string Country { get; set; }
+        public string Brand { get; set; }
+        public string Color { get; set; }
+        public int YearOfManufacture { get; set; }
+        public double FuelConsumption { get; set; }
+        public double Price { get; set; }
+        public bool IsDamaged { get; set; }
 
         public Transport()
         {
