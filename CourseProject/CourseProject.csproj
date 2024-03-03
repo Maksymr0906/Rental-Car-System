@@ -93,7 +93,6 @@
     <Compile Include="Forms\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
     <Compile Include="Transport.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Program.cs" />

@@ -59,28 +59,11 @@ namespace CourseProject.Forms
             loggedClient.Name = nameTextField.Text;
             loggedClient.DateOfBirthday = Convert.ToDateTime(dateOfBirthTimePicker.Text);
 
-            var clients = ClientCredentialsManager.ReadClientCredentialsFromFile();
-            for(int i = 0; i < clients.Count; i++)
-            {
-                if(clients[i].Login == loggedClient.Login)
-                {
-                    clients[i] = loggedClient;
-                }
-            }
-
-            //using (var writer = new StreamWriter("users.txt", false))
-            //{
-            //    foreach(var client in clients)
-            //    {
-            //        writer.WriteLine($"{client.Id},{client.Login},{client.Password},{client.Name},{client.Surname},{client.DateOfBirthday},{client.Money}");
-            //    }
-            //}
-            foreach(var client in clients)
-            {
-                ClientCredentialsManager.WriteClientToFile(client);
-            }
+            ClientCredentialsManager.UpdateClient(loggedClient);
+            ClientCredentialsManager.WriteClientsToFile();
 
             MessageBox.Show("Your order adressed to the administrator. Please wait until ...");
+
             Order order = new Order()
             {
                 Id = Guid.NewGuid(),

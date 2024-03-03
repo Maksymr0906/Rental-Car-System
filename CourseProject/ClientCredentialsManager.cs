@@ -6,21 +6,26 @@ namespace CourseProject
 {
     public static class ClientCredentialsManager
     {
-        private static readonly string USERS_FILENAME;
-        public static List<User> Users { get; set; }
+        private static readonly string CLIENTS_FILENAME;
+        public static List<Client> Clients { get; set; }
 
         static ClientCredentialsManager()
         {
-            USERS_FILENAME = "users.txt";
+            CLIENTS_FILENAME = "clients.txt";
 
-            if (!File.Exists(USERS_FILENAME))
+            if (!File.Exists(CLIENTS_FILENAME))
             {
-                File.Create(USERS_FILENAME).Close();
+                File.Create(CLIENTS_FILENAME).Close();
             }
 
-            Users = new List<User>();
+            ReadClientsFromFile();
+        }
 
-            string[] lines = File.ReadAllLines(USERS_FILENAME);
+        private static void ReadClientsFromFile()
+        {
+            Clients = new List<Client>();
+
+            string[] lines = File.ReadAllLines(CLIENTS_FILENAME);
 
             foreach (var line in lines)
             {
@@ -36,55 +41,33 @@ namespace CourseProject
                     Money = Convert.ToDouble(data[6])
                 };
 
-                Users.Add(client);
+                Clients.Add(client);
             }
         }
-        public static List<Client> ReadClientCredentialsFromFile()
+
+        public static void WriteClientsToFile()
         {
-            var clientCredentials = new List<Client>();
-
-            string[] lines = File.ReadAllLines(USERS_FILENAME);
-
-            foreach (var line in lines)
+            using (var writer = new StreamWriter(CLIENTS_FILENAME, false))
             {
-                string[] data = line.Split(',');
-                var client = new Client()
+                foreach(var client in Clients)
                 {
-                    Id = Guid.Parse(data[0]),
-                    Login = data[1],
-                    Password = data[2],
-                    Name = data[3],
-                    Surname = data[4],
-                    DateOfBirthday = Convert.ToDateTime(data[5]),
-                    Money = Convert.ToDouble(data[6])
-                };
-
-                clientCredentials.Add(client);
-            }
-
-            return clientCredentials;
-        }
-
-        public static void WriteClientToFile(Client client)
-        {
-            using (var writer = new StreamWriter(USERS_FILENAME, true))
-            {
-                client.WriteToFile(writer);
+                    client.WriteToFile(writer);
+                }
             }
         }
 
         public static void AddClient(Client client)
         {
-            Users.Add(client);
+            Clients.Add(client);
         }
 
         public static void UpdateClient(Client client)
         {
-            for(int i = 0; i < Users.Count ; i++)
+            for(int i = 0; i < Clients.Count ; i++)
             {
-                if (Users[i].Id == client.Id)
+                if (Clients[i].Id == client.Id)
                 {
-                    Users[i] = client;
+                    Clients[i] = client;
                 }
             }
         }

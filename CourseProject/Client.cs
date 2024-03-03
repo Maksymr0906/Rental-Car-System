@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace CourseProject
 {
-    public class Client : User
+    public class Client
     {
+        public Guid Id { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirthday { get; set; }
@@ -29,7 +32,7 @@ namespace CourseProject
             Login = login;
             Password = password;
         }
-        public override void WriteToFile(StreamWriter writer)
+        public void WriteToFile(StreamWriter writer)
         {
             writer.WriteLine($"{Id},{Login},{Password},{Name},{Surname},{DateOfBirthday},{Money}");
         }

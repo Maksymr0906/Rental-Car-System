@@ -40,7 +40,7 @@ namespace CourseProject.Forms
 
         private void signInButton_Click(object sender, EventArgs e)
         {
-            Client currentClient = new Client(loginTextField.Text, passwordTextField.Text);
+            var currentClient = new Client(loginTextField.Text, passwordTextField.Text);
 
             if (currentClient.Login == string.Empty || currentClient.Password == string.Empty)
             {
@@ -48,9 +48,7 @@ namespace CourseProject.Forms
                 return;
             }
 
-            var clientCredentials = ClientCredentialsManager.ReadClientCredentialsFromFile();
-
-            Client foundClient = clientCredentials.FirstOrDefault(client => client.Login == currentClient.Login);
+            var foundClient = ClientCredentialsManager.Clients.FirstOrDefault(client => client.Login == currentClient.Login);
 
             if (foundClient == null)
             {
@@ -65,7 +63,7 @@ namespace CourseProject.Forms
             }
 
             MessageBox.Show("You are successfuly logged in!");
-            SwitchToForm(new ClientForm(currentClient));
+            SwitchToForm(new ClientForm(foundClient));
         }
 
         private void signUpLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -32,7 +32,7 @@ namespace CourseProject.Forms
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            Client newClient = new Client(loginTextField.Text, passwordTextField.Text);
+            var newClient = new Client(loginTextField.Text, passwordTextField.Text);
             
             if(newClient.Login == string.Empty || newClient.Password == string.Empty || repeatPasswordTextField.Text == string.Empty)
             {
@@ -52,7 +52,8 @@ namespace CourseProject.Forms
                 return;
             }
 
-            ClientCredentialsManager.WriteClientToFile(newClient);
+            ClientCredentialsManager.AddClient(newClient);
+            ClientCredentialsManager.WriteClientsToFile();
 
             MessageBox.Show("You are successfully registered.");
             Close();
@@ -60,7 +61,7 @@ namespace CourseProject.Forms
 
         private bool IsLoginExists(string login)
         {
-            var clientCredentials = ClientCredentialsManager.ReadClientCredentialsFromFile();
+            var clientCredentials = ClientCredentialsManager.Clients;
 
             foreach (var client in clientCredentials)
             {
