@@ -36,5 +36,17 @@ namespace CourseProject
         {
             writer.WriteLine($"{Id},{Login},{Password},{Name},{Surname},{DateOfBirthday},{Money}");
         }
+
+        public void ReadFromFile(string line)
+        {
+            string[] parts = line.Split(',');
+            Id = Guid.Parse(parts[0]);
+            Login = parts[1];
+            Password = parts[2];
+            Name = parts[3];
+            Surname = parts[4];
+            DateOfBirthday = Convert.ToDateTime(parts[5]);
+            Money = Convert.ToDouble(parts[6]);
+        }
     }
 }

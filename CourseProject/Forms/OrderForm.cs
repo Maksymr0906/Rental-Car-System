@@ -19,29 +19,24 @@ namespace CourseProject.Forms
         private const int MAX_NUMBER_OF_LETTERS = 25;
         private const int MAX_MONTH_TO_RENT = 1;
 
-        Transport transportToOrder;
+        Car carToOrder;
         Client loggedClient;
         public OrderForm()
         {
             InitializeComponent();
-
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
-
+            MaterialFormSkinManager.SetTheme(this);
             rentToTimePicker.MinDate = DateTime.Now.AddDays(1);
             rentToTimePicker.MaxDate = DateTime.Now.AddMonths(MAX_MONTH_TO_RENT);
             dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18).AddDays(-1);
         }
 
-        public OrderForm(Transport transport) : this()
+        public OrderForm(Car car) : this()
         {
-            transportToOrder = transport;
-            Text = $"Order Transport: {transportToOrder.Model}";
+            carToOrder = car;
+            Text = $"Order car: {carToOrder.Model}";
         }
 
-        public OrderForm(Client client, Transport transport) :this(transport)
+        public OrderForm(Client client, Car car) :this(car)
         {
             loggedClient = client;
             userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
@@ -68,10 +63,10 @@ namespace CourseProject.Forms
             {
                 Id = Guid.NewGuid(),
                 ClientId = loggedClient.Id,
-                TransportId = transportToOrder.Id,
+                TransportId = carToOrder.Id,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Parse(rentToTimePicker.Text),
-                Price = transportToOrder.Price / 10,
+                Price = carToOrder.Price / 10,
                 OrderStatus = Order.Status.Processing
             };
 

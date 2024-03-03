@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Administrator.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="CarsManager.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientCredentialsManager.cs" />
     <Compile Include="Forms\AdministratorForm.cs">
@@ -93,7 +94,7 @@
     <Compile Include="Forms\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transport.cs" />
+    <Compile Include="MaterialFormSkinManager.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

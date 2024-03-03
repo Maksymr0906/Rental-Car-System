@@ -15,17 +15,12 @@ namespace CourseProject.Forms
 {
     public partial class ClientForm : MaterialForm
     {
-        private const string TRANSPORT_FILENAME = "transport.txt";
         private Client loggedClient;
         public ClientForm()
         {
             InitializeComponent();
-
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
-            ReadTransportsFromFile();
+            MaterialFormSkinManager.SetTheme(this);
+            PrintCars();
         }
 
         public ClientForm(Client client) :this()
@@ -34,14 +29,11 @@ namespace CourseProject.Forms
             userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
         } 
 
-        private void ReadTransportsFromFile()
+        private void PrintCars()
         {
-            string[] lines = File.ReadAllLines(TRANSPORT_FILENAME);
-            foreach (string line in lines)
+            foreach (var car in CarsManager.Cars)
             {
-                var car = new Car();
-                car.ReadFromFile(line);
-                transportDataGridView.Rows.Add(car.Id, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
+                carDataGridView.Rows.Add(car.Id, car.OrderId, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
             }
         }
 
@@ -49,15 +41,16 @@ namespace CourseProject.Forms
         {
             var car = new Car()
             {
-                Id = Guid.Parse(transportDataGridView.CurrentRow.Cells[0].Value.ToString()),
-                Model = transportDataGridView.CurrentRow.Cells[1].Value.ToString(),
-                Country = transportDataGridView.CurrentRow.Cells[2].Value.ToString(),
-                Brand = transportDataGridView.CurrentRow.Cells[3].Value.ToString(),
-                Color = transportDataGridView.CurrentRow.Cells[4].Value.ToString(),
-                YearOfManufacture = Convert.ToInt32(transportDataGridView.CurrentRow.Cells[5].Value),
-                FuelConsumption = Convert.ToDouble(transportDataGridView.CurrentRow.Cells[6].Value),
-                Price = Convert.ToDouble(transportDataGridView.CurrentRow.Cells[7].Value),
-                IsDamaged = Convert.ToBoolean(transportDataGridView.CurrentRow.Cells[8].Value)
+                Id = Guid.Parse(carDataGridView.CurrentRow.Cells[0].Value.ToString()),
+                OrderId = Guid.Parse(carDataGridView.CurrentRow.Cells[1].Value.ToString()),
+                Model = carDataGridView.CurrentRow.Cells[2].Value.ToString(),
+                Country = carDataGridView.CurrentRow.Cells[3].Value.ToString(),
+                Brand = carDataGridView.CurrentRow.Cells[4].Value.ToString(),
+                Color = carDataGridView.CurrentRow.Cells[5].Value.ToString(),
+                YearOfManufacture = Convert.ToInt32(carDataGridView.CurrentRow.Cells[6].Value),
+                FuelConsumption = Convert.ToDouble(carDataGridView.CurrentRow.Cells[7].Value),
+                Price = Convert.ToDouble(carDataGridView.CurrentRow.Cells[8].Value),
+                IsDamaged = Convert.ToBoolean(carDataGridView.CurrentRow.Cells[9].Value)
             };
 
             Hide();

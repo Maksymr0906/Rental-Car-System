@@ -19,11 +19,7 @@ namespace CourseProject.Forms
         public SignInForm()
         {
             InitializeComponent();
-            
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            MaterialFormSkinManager.SetTheme(this);
         }
 
         private void SwitchToForm(Form form)

@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.createOrderButton = new System.Windows.Forms.Button();
-            this.transportDataGridView = new System.Windows.Forms.DataGridView();
+            this.carDataGridView = new System.Windows.Forms.DataGridView();
+            this.userLoginLabel = new System.Windows.Forms.Label();
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.brandColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,8 +41,7 @@
             this.fuelConsumptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isDamagedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userLoginLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.transportDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // createOrderButton
@@ -59,17 +60,18 @@
             this.createOrderButton.UseVisualStyleBackColor = false;
             this.createOrderButton.Click += new System.EventHandler(this.createOrderButton_Click);
             // 
-            // transportDataGridView
+            // carDataGridView
             // 
-            this.transportDataGridView.AllowUserToAddRows = false;
-            this.transportDataGridView.AllowUserToResizeColumns = false;
-            this.transportDataGridView.AllowUserToResizeRows = false;
-            this.transportDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.transportDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.transportDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            this.transportDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.transportDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.carDataGridView.AllowUserToAddRows = false;
+            this.carDataGridView.AllowUserToResizeColumns = false;
+            this.carDataGridView.AllowUserToResizeRows = false;
+            this.carDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.carDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.carDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.carDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.carDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn,
+            this.orderIdColumn,
             this.modelColumn,
             this.countryColumn,
             this.brandColumn,
@@ -78,18 +80,30 @@
             this.fuelConsumptionColumn,
             this.priceColumn,
             this.isDamagedColumn});
-            this.transportDataGridView.GridColor = System.Drawing.SystemColors.Window;
-            this.transportDataGridView.Location = new System.Drawing.Point(12, 80);
-            this.transportDataGridView.MultiSelect = false;
-            this.transportDataGridView.Name = "transportDataGridView";
-            this.transportDataGridView.ReadOnly = true;
-            this.transportDataGridView.RowHeadersVisible = false;
-            this.transportDataGridView.RowHeadersWidth = 51;
-            this.transportDataGridView.RowTemplate.Height = 24;
-            this.transportDataGridView.RowTemplate.ReadOnly = true;
-            this.transportDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.transportDataGridView.Size = new System.Drawing.Size(1094, 521);
-            this.transportDataGridView.TabIndex = 17;
+            this.carDataGridView.GridColor = System.Drawing.SystemColors.Window;
+            this.carDataGridView.Location = new System.Drawing.Point(12, 80);
+            this.carDataGridView.MultiSelect = false;
+            this.carDataGridView.Name = "carDataGridView";
+            this.carDataGridView.ReadOnly = true;
+            this.carDataGridView.RowHeadersVisible = false;
+            this.carDataGridView.RowHeadersWidth = 51;
+            this.carDataGridView.RowTemplate.Height = 24;
+            this.carDataGridView.RowTemplate.ReadOnly = true;
+            this.carDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.carDataGridView.Size = new System.Drawing.Size(1094, 521);
+            this.carDataGridView.TabIndex = 17;
+            // 
+            // userLoginLabel
+            // 
+            this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.userLoginLabel.Location = new System.Drawing.Point(798, 21);
+            this.userLoginLabel.Name = "userLoginLabel";
+            this.userLoginLabel.Size = new System.Drawing.Size(308, 46);
+            this.userLoginLabel.TabIndex = 23;
+            this.userLoginLabel.Text = "Logged as: ";
+            this.userLoginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // idColumn
             // 
@@ -99,6 +113,15 @@
             this.idColumn.ReadOnly = true;
             this.idColumn.Visible = false;
             this.idColumn.Width = 125;
+            // 
+            // orderIdColumn
+            // 
+            this.orderIdColumn.HeaderText = "OrderId";
+            this.orderIdColumn.MinimumWidth = 6;
+            this.orderIdColumn.Name = "orderIdColumn";
+            this.orderIdColumn.ReadOnly = true;
+            this.orderIdColumn.Visible = false;
+            this.orderIdColumn.Width = 125;
             // 
             // modelColumn
             // 
@@ -164,38 +187,28 @@
             this.isDamagedColumn.ReadOnly = true;
             this.isDamagedColumn.Width = 70;
             // 
-            // userLoginLabel
-            // 
-            this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.userLoginLabel.Location = new System.Drawing.Point(798, 21);
-            this.userLoginLabel.Name = "userLoginLabel";
-            this.userLoginLabel.Size = new System.Drawing.Size(308, 46);
-            this.userLoginLabel.TabIndex = 23;
-            this.userLoginLabel.Text = "Logged as: ";
-            this.userLoginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 664);
             this.Controls.Add(this.userLoginLabel);
-            this.Controls.Add(this.transportDataGridView);
+            this.Controls.Add(this.carDataGridView);
             this.Controls.Add(this.createOrderButton);
             this.Name = "ClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client";
-            ((System.ComponentModel.ISupportInitialize)(this.transportDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Button createOrderButton;
-        private System.Windows.Forms.DataGridView transportDataGridView;
+        private System.Windows.Forms.DataGridView carDataGridView;
+        private System.Windows.Forms.Label userLoginLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderIdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn modelColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn countryColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn brandColumn;
@@ -204,6 +217,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fuelConsumptionColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn isDamagedColumn;
-        private System.Windows.Forms.Label userLoginLabel;
     }
 }

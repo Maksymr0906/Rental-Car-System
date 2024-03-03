@@ -29,18 +29,8 @@ namespace CourseProject
 
             foreach (var line in lines)
             {
-                string[] data = line.Split(',');
-                var client = new Client()
-                {
-                    Id = Guid.Parse(data[0]),
-                    Login = data[1],
-                    Password = data[2],
-                    Name = data[3],
-                    Surname = data[4],
-                    DateOfBirthday = Convert.ToDateTime(data[5]),
-                    Money = Convert.ToDouble(data[6])
-                };
-
+                var client = new Client();
+                client.ReadFromFile(line);
                 Clients.Add(client);
             }
         }
