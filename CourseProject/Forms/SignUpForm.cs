@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
 using System.IO;
+using System.Net;
 
 namespace CourseProject.Forms
 {
     public partial class SignUpForm : MaterialForm
     {
-        private readonly string USERS_FILENAME;
         public SignUpForm()
         {
             InitializeComponent();
@@ -25,17 +25,6 @@ namespace CourseProject.Forms
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
-
-        public SignUpForm(string fileName) : this()
-        {
-            USERS_FILENAME = fileName;
-
-            if (!File.Exists(USERS_FILENAME))
-            {
-                File.Create(USERS_FILENAME).Close();
-            }
-        }
-
         private void signInLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Close();
@@ -43,53 +32,58 @@ namespace CourseProject.Forms
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            string login = loginTextField.Text, password = passwordTextField.Text;
-            if(login == string.Empty || password == string.Empty || repeatPasswordTextField.Text == string.Empty)
+            Client newClient = new Client(loginTextField.Text, passwordTextField.Text);
+            
+            if(newClient.Login == string.Empty || newClient.Password == string.Empty || repeatPasswordTextField.Text == string.Empty)
             {
                 MessageBox.Show("Fill in all fields.");
                 return;
             }
 
-            if(password != repeatPasswordTextField.Text)
+            if(newClient.Password != repeatPasswordTextField.Text)
             {
                 MessageBox.Show("Passwords do not match. Please try again.");
                 return;
             }
 
-            var userCredentials = ReadUserCredentialsFromFile();
-
-            if(userCredentials.ContainsKey(login))
+            if(IsLoginExists(newClient.Login))
             {
                 MessageBox.Show("User with this login already exists!");
                 return;
             }
 
-            WriteNewUserToFile();
+            ClientCredentialsManager.WriteClientToFile(newClient);
 
             MessageBox.Show("You are successfully registered.");
             Close();
         }
 
-        private Dictionary<string, string> ReadUserCredentialsFromFile()
+        private bool IsLoginExists(string login)
         {
-            var userCredentials = new Dictionary<string, string>();
+            var clientCredentials = ClientCredentialsManager.ReadClientCredentialsFromFile();
 
-            string[] lines = File.ReadAllLines(USERS_FILENAME);
-
-            foreach(var line in lines)
+            foreach (var client in clientCredentials)
             {
-                string[] data = line.Split(':');
-                userCredentials[data[0]] = data[1];
+                if (client.Login == login)
+                {
+                    return true;
+                }
             }
 
-            return userCredentials;
+            return false;
         }
 
-        private void WriteNewUserToFile()
+        private void seePasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            using (var writer = new StreamWriter(USERS_FILENAME, true))
+            if(seePasswordCheckBox.Checked)
             {
-                writer.WriteLine($"{loginTextField.Text}:{passwordTextField.Text}");
+                passwordTextField.PasswordChar = '\0';
+                repeatPasswordTextField.PasswordChar = '\0';
+            }
+            else
+            {
+                passwordTextField.PasswordChar = '*';
+                repeatPasswordTextField.PasswordChar = '*';
             }
         }
     }

@@ -32,12 +32,9 @@ namespace CourseProject
             Price = 0;
             IsDamaged = false;
         }
-        public void WriteToFile(string fileName)
+        public void WriteToFile(StreamWriter writer)
         {
-            using (StreamWriter writer = new StreamWriter(fileName, true))
-            {
-                writer.WriteLine($"{Id},{Model},{Country},{Brand},{Color},{YearOfManufacture},{FuelConsumption},{Price},{IsDamaged}");
-            }
+            writer.WriteLine($"{Id},{Model},{Country},{Brand},{Color},{YearOfManufacture},{FuelConsumption},{Price},{IsDamaged}");
         }
 
         public void Print()

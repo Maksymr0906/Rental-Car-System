@@ -37,6 +37,7 @@
             this.createOrderButton = new System.Windows.Forms.Button();
             this.surnameTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.nameTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.userLoginLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // dateOfBirthTimePicker
@@ -153,11 +154,24 @@
             this.nameTextField.UseSystemPasswordChar = false;
             this.nameTextField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nameTextField_KeyPress);
             // 
+            // userLoginLabel
+            // 
+            this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.userLoginLabel.Location = new System.Drawing.Point(491, 23);
+            this.userLoginLabel.Name = "userLoginLabel";
+            this.userLoginLabel.Size = new System.Drawing.Size(308, 46);
+            this.userLoginLabel.TabIndex = 22;
+            this.userLoginLabel.Text = "Logged as: ";
+            this.userLoginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.userLoginLabel);
             this.Controls.Add(this.nameTextField);
             this.Controls.Add(this.surnameTextField);
             this.Controls.Add(this.createOrderButton);
@@ -184,5 +198,6 @@
         private System.Windows.Forms.Button createOrderButton;
         private MaterialSkin.Controls.MaterialSingleLineTextField surnameTextField;
         private MaterialSkin.Controls.MaterialSingleLineTextField nameTextField;
+        private System.Windows.Forms.Label userLoginLabel;
     }
 }

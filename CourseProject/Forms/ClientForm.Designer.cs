@@ -39,6 +39,7 @@
             this.fuelConsumptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isDamagedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userLoginLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.transportDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,11 +164,24 @@
             this.isDamagedColumn.ReadOnly = true;
             this.isDamagedColumn.Width = 70;
             // 
+            // userLoginLabel
+            // 
+            this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.userLoginLabel.Location = new System.Drawing.Point(798, 21);
+            this.userLoginLabel.Name = "userLoginLabel";
+            this.userLoginLabel.Size = new System.Drawing.Size(308, 46);
+            this.userLoginLabel.TabIndex = 23;
+            this.userLoginLabel.Text = "Logged as: ";
+            this.userLoginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 664);
+            this.Controls.Add(this.userLoginLabel);
             this.Controls.Add(this.transportDataGridView);
             this.Controls.Add(this.createOrderButton);
             this.Name = "ClientForm";
@@ -190,5 +204,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fuelConsumptionColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn isDamagedColumn;
+        private System.Windows.Forms.Label userLoginLabel;
     }
 }

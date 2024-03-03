@@ -37,6 +37,7 @@
             this.passwordTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.runAsAdministratorButton = new System.Windows.Forms.Button();
             this.signUpLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.seePasswordCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -160,11 +161,29 @@
             this.signUpLinkLabel.Text = "Not registered? Sign up";
             this.signUpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signUpLinkLabel_LinkClicked);
             // 
+            // seePasswordCheckBox
+            // 
+            this.seePasswordCheckBox.AutoSize = true;
+            this.seePasswordCheckBox.Depth = 0;
+            this.seePasswordCheckBox.Font = new System.Drawing.Font("Roboto", 10F);
+            this.seePasswordCheckBox.Location = new System.Drawing.Point(266, 315);
+            this.seePasswordCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.seePasswordCheckBox.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.seePasswordCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.seePasswordCheckBox.Name = "seePasswordCheckBox";
+            this.seePasswordCheckBox.Ripple = true;
+            this.seePasswordCheckBox.Size = new System.Drawing.Size(139, 30);
+            this.seePasswordCheckBox.TabIndex = 23;
+            this.seePasswordCheckBox.Text = "See password";
+            this.seePasswordCheckBox.UseVisualStyleBackColor = true;
+            this.seePasswordCheckBox.CheckedChanged += new System.EventHandler(this.seePasswordCheckBox_CheckedChanged);
+            // 
             // SignInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 498);
+            this.Controls.Add(this.seePasswordCheckBox);
             this.Controls.Add(this.signUpLinkLabel);
             this.Controls.Add(this.runAsAdministratorButton);
             this.Controls.Add(this.passwordTextField);
@@ -194,6 +213,7 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField passwordTextField;
         private System.Windows.Forms.Button runAsAdministratorButton;
         private System.Windows.Forms.LinkLabel signUpLinkLabel;
+        private MaterialSkin.Controls.MaterialCheckBox seePasswordCheckBox;
     }
 }
 

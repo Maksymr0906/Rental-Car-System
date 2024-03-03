@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject
 {
-    public class Administrator : User
+    public class Administrator
     {
 
     }

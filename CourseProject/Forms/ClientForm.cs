@@ -16,7 +16,7 @@ namespace CourseProject.Forms
     public partial class ClientForm : MaterialForm
     {
         private const string TRANSPORT_FILENAME = "transport.txt";
-        //private List<Transport> transports = new List<Transport>();
+        private Client loggedClient;
         public ClientForm()
         {
             InitializeComponent();
@@ -28,6 +28,12 @@ namespace CourseProject.Forms
             ReadTransportsFromFile();
         }
 
+        public ClientForm(Client client) :this()
+        {
+            loggedClient = client;
+            userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
+        } 
+
         private void ReadTransportsFromFile()
         {
             string[] lines = File.ReadAllLines(TRANSPORT_FILENAME);
@@ -38,21 +44,6 @@ namespace CourseProject.Forms
                 transportDataGridView.Rows.Add(car.Id, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
             }
         }
-
-        //private void PrintTransportToListView()
-        //{
-        //    foreach (var transport in transports)
-        //    {
-        //        var item = new ListViewItem(transport.Model);
-        //        item.SubItems.Add(transport.Country);
-        //        item.SubItems.Add(transport.Brand);
-        //        item.SubItems.Add(transport.Color);
-        //        item.SubItems.Add(transport.YearOfManufacture.ToString());
-        //        item.SubItems.Add(transport.FuelConsumption.ToString());
-        //        item.SubItems.Add(transport.Price.ToString());
-        //        item.SubItems.Add(transport.IsDamaged.ToString());
-        //    }
-        //}
 
         private void createOrderButton_Click(object sender, EventArgs e)
         {
@@ -70,7 +61,7 @@ namespace CourseProject.Forms
             };
 
             Hide();
-            var orderForm = new OrderForm(car);
+            var orderForm = new OrderForm(loggedClient, car);
             orderForm.FormClosed += (s, args) => Show();
             orderForm.Show();
         }

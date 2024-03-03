@@ -16,7 +16,6 @@ namespace CourseProject.Forms
 {
     public partial class SignInForm : MaterialForm
     {
-        private const string USERS_FILENAME = "users.txt";
         public SignInForm()
         {
             InitializeComponent();
@@ -41,50 +40,49 @@ namespace CourseProject.Forms
 
         private void signInButton_Click(object sender, EventArgs e)
         {
-            string login = loginTextField.Text, password = passwordTextField.Text;
+            Client currentClient = new Client(loginTextField.Text, passwordTextField.Text);
 
-            if (login == string.Empty || password == string.Empty)
+            if (currentClient.Login == string.Empty || currentClient.Password == string.Empty)
             {
                 MessageBox.Show("Fill in all fields.");
                 return;
             }
 
-            var userCredentials = ReadUserCredentialsFromFile();
+            var clientCredentials = ClientCredentialsManager.ReadClientCredentialsFromFile();
 
-            if (!userCredentials.ContainsKey(login))
+            Client foundClient = clientCredentials.FirstOrDefault(client => client.Login == currentClient.Login);
+
+            if (foundClient == null)
             {
                 MessageBox.Show("User with current login does not exist.");
                 return;
             }
 
-            if (userCredentials[login] != password)
+            if (foundClient.Password != currentClient.Password)
             {
                 MessageBox.Show("Incorrect Password.");
                 return;
             }
 
             MessageBox.Show("You are successfuly logged in!");
-            SwitchToForm(new ClientForm());
+            SwitchToForm(new ClientForm(currentClient));
         }
 
         private void signUpLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            SwitchToForm(new SignUpForm(USERS_FILENAME));
+            SwitchToForm(new SignUpForm());
         }
 
-        private Dictionary<string, string> ReadUserCredentialsFromFile()
+        private void seePasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            var userCredentials = new Dictionary<string, string>();
-
-            string[] lines = File.ReadAllLines(USERS_FILENAME);
-
-            foreach (var line in lines)
+            if (seePasswordCheckBox.Checked)
             {
-                string[] data = line.Split(':');
-                userCredentials[data[0]] = data[1];
+                passwordTextField.PasswordChar = '\0';
             }
-
-            return userCredentials;
+            else
+            {
+                passwordTextField.PasswordChar = '*';
+            }
         }
     }
 }

@@ -36,6 +36,7 @@
             this.loginLabel = new System.Windows.Forms.Label();
             this.repeatPasswordTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label1 = new System.Windows.Forms.Label();
+            this.seePasswordCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             this.SuspendLayout();
             // 
             // signInLinkLabel
@@ -149,11 +150,29 @@
             this.label1.Text = "Repeat Password:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // seePasswordCheckBox
+            // 
+            this.seePasswordCheckBox.AutoSize = true;
+            this.seePasswordCheckBox.Depth = 0;
+            this.seePasswordCheckBox.Font = new System.Drawing.Font("Roboto", 10F);
+            this.seePasswordCheckBox.Location = new System.Drawing.Point(326, 318);
+            this.seePasswordCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.seePasswordCheckBox.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.seePasswordCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.seePasswordCheckBox.Name = "seePasswordCheckBox";
+            this.seePasswordCheckBox.Ripple = true;
+            this.seePasswordCheckBox.Size = new System.Drawing.Size(139, 30);
+            this.seePasswordCheckBox.TabIndex = 22;
+            this.seePasswordCheckBox.Text = "See password";
+            this.seePasswordCheckBox.UseVisualStyleBackColor = true;
+            this.seePasswordCheckBox.CheckedChanged += new System.EventHandler(this.seePasswordCheckBox_CheckedChanged);
+            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.seePasswordCheckBox);
             this.Controls.Add(this.repeatPasswordTextField);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.passwordTextField);
@@ -180,5 +199,6 @@
         private System.Windows.Forms.Label loginLabel;
         private MaterialSkin.Controls.MaterialSingleLineTextField repeatPasswordTextField;
         private System.Windows.Forms.Label label1;
+        private MaterialSkin.Controls.MaterialCheckBox seePasswordCheckBox;
     }
 }

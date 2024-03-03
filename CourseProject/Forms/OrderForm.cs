@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace CourseProject.Forms
         private const int MAX_MONTH_TO_RENT = 1;
 
         Transport transportToOrder;
+        Client loggedClient;
         public OrderForm()
         {
             InitializeComponent();
@@ -39,9 +41,61 @@ namespace CourseProject.Forms
             Text = $"Order Transport: {transportToOrder.Model}";
         }
 
+        public OrderForm(Client client, Transport transport) :this(transport)
+        {
+            loggedClient = client;
+            userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
+        }
+
         private void createOrderButton_Click(object sender, EventArgs e)
         {
+            if(surnameTextField.Text == string.Empty || nameTextField.Text == string.Empty)
+            {
+                MessageBox.Show("Fill in all fields.");
+                return;
+            }
 
+            loggedClient.Surname = surnameTextField.Text;
+            loggedClient.Name = nameTextField.Text;
+            loggedClient.DateOfBirthday = Convert.ToDateTime(dateOfBirthTimePicker.Text);
+
+            var clients = ClientCredentialsManager.ReadClientCredentialsFromFile();
+            for(int i = 0; i < clients.Count; i++)
+            {
+                if(clients[i].Login == loggedClient.Login)
+                {
+                    clients[i] = loggedClient;
+                }
+            }
+
+            //using (var writer = new StreamWriter("users.txt", false))
+            //{
+            //    foreach(var client in clients)
+            //    {
+            //        writer.WriteLine($"{client.Id},{client.Login},{client.Password},{client.Name},{client.Surname},{client.DateOfBirthday},{client.Money}");
+            //    }
+            //}
+            foreach(var client in clients)
+            {
+                ClientCredentialsManager.WriteClientToFile(client);
+            }
+
+            MessageBox.Show("Your order adressed to the administrator. Please wait until ...");
+            Order order = new Order()
+            {
+                Id = Guid.NewGuid(),
+                ClientId = loggedClient.Id,
+                TransportId = transportToOrder.Id,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Parse(rentToTimePicker.Text),
+                Price = transportToOrder.Price / 10,
+                OrderStatus = Order.Status.Processing
+            };
+
+            using (var writer = new StreamWriter("orders.txt", true))
+            {
+                writer.Write($"{order.Id},{order.ClientId},{order.TransportId},{order.StartDate},{order.EndDate},{order.Price},{order.OrderStatus}");
+            }
         }
 
         private void surnameTextField_KeyPress(object sender, KeyPressEventArgs e)
@@ -58,7 +112,7 @@ namespace CourseProject.Forms
         {
             char inputChar = e.KeyChar;
 
-            if ((!Char.IsLetter(inputChar) && !Char.IsWhiteSpace(inputChar) && inputChar != '\b') || (textField.Text.Length >= MAX_NUMBER_OF_LETTERS && inputChar != '\b'))
+            if ((!char.IsLetter(inputChar) && !char.IsWhiteSpace(inputChar) && inputChar != '\b') || (textField.Text.Length >= MAX_NUMBER_OF_LETTERS && inputChar != '\b'))
             {
                 e.Handled = true;
             }
