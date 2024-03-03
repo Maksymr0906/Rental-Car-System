@@ -59,21 +59,22 @@ namespace CourseProject.Forms
 
             MessageBox.Show("Your order adressed to the administrator. Please wait until ...");
 
-            Order order = new Order()
+            var order = new Order()
             {
                 Id = Guid.NewGuid(),
                 ClientId = loggedClient.Id,
-                TransportId = carToOrder.Id,
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Parse(rentToTimePicker.Text),
+                OrderCreatedDate = DateTime.Now,
+                EndRentDate = DateTime.Parse(rentToTimePicker.Text),
                 Price = carToOrder.Price / 10,
                 OrderStatus = Order.Status.Processing
             };
 
-            using (var writer = new StreamWriter("orders.txt", true))
-            {
-                writer.Write($"{order.Id},{order.ClientId},{order.TransportId},{order.StartDate},{order.EndDate},{order.Price},{order.OrderStatus}");
-            }
+            carToOrder.OrderId = order.Id;
+            CarsManager.UpdateCar(carToOrder);
+            CarsManager.WriteCarsToFile();
+
+            OrderManager.AddOrder(order);
+            OrderManager.WriteOrdersToFile();
         }
 
         private void surnameTextField_KeyPress(object sender, KeyPressEventArgs e)

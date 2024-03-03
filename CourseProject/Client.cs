@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject
 {
-    public class Client
+    public class Client : IFileSerializable
     {
         public Guid Id { get; set; }
         public string Login { get; set; }

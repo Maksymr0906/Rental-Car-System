@@ -4,6 +4,7 @@ using System.IO;
 
 namespace CourseProject
 {
+    //create template class instead of Cars and ClientCredentials Managers
     public static class ClientCredentialsManager
     {
         private static readonly string CLIENTS_FILENAME;

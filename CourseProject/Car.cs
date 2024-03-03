@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CourseProject
 {
-    public class Car
+    public class Car : IFileSerializable
     {
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }

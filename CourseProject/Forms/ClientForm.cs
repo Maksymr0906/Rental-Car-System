@@ -20,20 +20,40 @@ namespace CourseProject.Forms
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
-            PrintCars();
         }
 
         public ClientForm(Client client) :this()
         {
             loggedClient = client;
             userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
+            PrintAvailableCars();
+            PrintClientOrders();
         } 
 
-        private void PrintCars()
+        private void PrintAvailableCars()
         {
             foreach (var car in CarsManager.Cars)
             {
-                carDataGridView.Rows.Add(car.Id, car.OrderId, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
+                if (car.OrderId == Guid.Empty)
+                {
+                    availableCarsDataGridView.Rows.Add(car.Id, car.OrderId, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
+                }
+            }
+        }
+
+        private void PrintClientOrders()
+        {
+            var orders = OrderManager.Orders;
+
+            foreach (var car in CarsManager.Cars)
+            {
+                foreach (var order in orders)
+                {
+                    if (car.OrderId == order.Id && order.ClientId == loggedClient.Id)
+                    {
+                        orderedCarsDataGridView.Rows.Add(car.Id, car.OrderId, car.Model, car.Brand, car.Color, order.Price, order.OrderStatus);
+                    }
+                }
             }
         }
 
@@ -41,21 +61,29 @@ namespace CourseProject.Forms
         {
             var car = new Car()
             {
-                Id = Guid.Parse(carDataGridView.CurrentRow.Cells[0].Value.ToString()),
-                OrderId = Guid.Parse(carDataGridView.CurrentRow.Cells[1].Value.ToString()),
-                Model = carDataGridView.CurrentRow.Cells[2].Value.ToString(),
-                Country = carDataGridView.CurrentRow.Cells[3].Value.ToString(),
-                Brand = carDataGridView.CurrentRow.Cells[4].Value.ToString(),
-                Color = carDataGridView.CurrentRow.Cells[5].Value.ToString(),
-                YearOfManufacture = Convert.ToInt32(carDataGridView.CurrentRow.Cells[6].Value),
-                FuelConsumption = Convert.ToDouble(carDataGridView.CurrentRow.Cells[7].Value),
-                Price = Convert.ToDouble(carDataGridView.CurrentRow.Cells[8].Value),
-                IsDamaged = Convert.ToBoolean(carDataGridView.CurrentRow.Cells[9].Value)
+                Id = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[0].Value.ToString()),
+                OrderId = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[1].Value.ToString()),
+                Model = availableCarsDataGridView.CurrentRow.Cells[2].Value.ToString(),
+                Country = availableCarsDataGridView.CurrentRow.Cells[3].Value.ToString(),
+                Brand = availableCarsDataGridView.CurrentRow.Cells[4].Value.ToString(),
+                Color = availableCarsDataGridView.CurrentRow.Cells[5].Value.ToString(),
+                YearOfManufacture = Convert.ToInt32(availableCarsDataGridView.CurrentRow.Cells[6].Value),
+                FuelConsumption = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[7].Value),
+                Price = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[8].Value),
+                IsDamaged = Convert.ToBoolean(availableCarsDataGridView.CurrentRow.Cells[9].Value)
             };
 
             Hide();
             var orderForm = new OrderForm(loggedClient, car);
-            orderForm.FormClosed += (s, args) => Show();
+            orderForm.FormClosed += (s, args) =>
+            {
+                orderedCarsDataGridView.Rows.Clear();
+                availableCarsDataGridView.Rows.Clear();
+                PrintAvailableCars();
+                PrintClientOrders();
+                Show();
+            };
+
             orderForm.Show();
         }
     }

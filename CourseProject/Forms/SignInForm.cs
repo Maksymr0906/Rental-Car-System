@@ -25,7 +25,12 @@ namespace CourseProject.Forms
         private void SwitchToForm(Form form)
         {
             Hide();
-            form.FormClosed += (s, args) => Show();
+            form.FormClosed += (s, args) => 
+            {
+                loginTextField.Text = string.Empty;
+                passwordTextField.Text = string.Empty;
+                Show();
+            };
             form.Show();
         }
 
