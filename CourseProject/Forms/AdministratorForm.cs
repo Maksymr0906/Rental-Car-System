@@ -19,5 +19,13 @@ namespace CourseProject.Forms
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
         }
+
+        private void addCarButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+            var addCarForm = new AddCarForm();
+            addCarForm.FormClosed += (s, args) => Show();
+            addCarForm.Show();
+        }
     }
 }
