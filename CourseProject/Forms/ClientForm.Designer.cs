@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.createOrderButton = new System.Windows.Forms.Button();
+            this.userLoginLabel = new System.Windows.Forms.Label();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.availableCarsTabPage = new System.Windows.Forms.TabPage();
             this.availableCarsDataGridView = new System.Windows.Forms.DataGridView();
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.brandColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,21 +42,18 @@
             this.fuelConsumptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isDamagedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userLoginLabel = new System.Windows.Forms.Label();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.availableCarsTabPage = new System.Windows.Forms.TabPage();
             this.myOrdersTabPage = new System.Windows.Forms.TabPage();
             this.orderedCarsDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.availableCarsDataGridView)).BeginInit();
+            this.commentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.availableCarsTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.availableCarsDataGridView)).BeginInit();
             this.myOrdersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderedCarsDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +74,40 @@
             this.createOrderButton.UseVisualStyleBackColor = false;
             this.createOrderButton.Click += new System.EventHandler(this.createOrderButton_Click);
             // 
+            // userLoginLabel
+            // 
+            this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.userLoginLabel.Location = new System.Drawing.Point(798, 21);
+            this.userLoginLabel.Name = "userLoginLabel";
+            this.userLoginLabel.Size = new System.Drawing.Size(308, 46);
+            this.userLoginLabel.TabIndex = 23;
+            this.userLoginLabel.Text = "Logged as: ";
+            this.userLoginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.availableCarsTabPage);
+            this.tabControl.Controls.Add(this.myOrdersTabPage);
+            this.tabControl.Location = new System.Drawing.Point(0, 90);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1119, 600);
+            this.tabControl.TabIndex = 24;
+            // 
+            // availableCarsTabPage
+            // 
+            this.availableCarsTabPage.Controls.Add(this.availableCarsDataGridView);
+            this.availableCarsTabPage.Controls.Add(this.createOrderButton);
+            this.availableCarsTabPage.Location = new System.Drawing.Point(4, 25);
+            this.availableCarsTabPage.Name = "availableCarsTabPage";
+            this.availableCarsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.availableCarsTabPage.Size = new System.Drawing.Size(1111, 571);
+            this.availableCarsTabPage.TabIndex = 0;
+            this.availableCarsTabPage.Text = "Available Cars";
+            this.availableCarsTabPage.UseVisualStyleBackColor = true;
+            // 
             // availableCarsDataGridView
             // 
             this.availableCarsDataGridView.AllowUserToAddRows = false;
@@ -86,7 +119,6 @@
             this.availableCarsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.availableCarsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn,
-            this.orderIdColumn,
             this.modelColumn,
             this.countryColumn,
             this.brandColumn,
@@ -116,15 +148,6 @@
             this.idColumn.ReadOnly = true;
             this.idColumn.Visible = false;
             this.idColumn.Width = 125;
-            // 
-            // orderIdColumn
-            // 
-            this.orderIdColumn.HeaderText = "OrderId";
-            this.orderIdColumn.MinimumWidth = 6;
-            this.orderIdColumn.Name = "orderIdColumn";
-            this.orderIdColumn.ReadOnly = true;
-            this.orderIdColumn.Visible = false;
-            this.orderIdColumn.Width = 125;
             // 
             // modelColumn
             // 
@@ -190,40 +213,6 @@
             this.isDamagedColumn.ReadOnly = true;
             this.isDamagedColumn.Width = 70;
             // 
-            // userLoginLabel
-            // 
-            this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.userLoginLabel.Location = new System.Drawing.Point(798, 21);
-            this.userLoginLabel.Name = "userLoginLabel";
-            this.userLoginLabel.Size = new System.Drawing.Size(308, 46);
-            this.userLoginLabel.TabIndex = 23;
-            this.userLoginLabel.Text = "Logged as: ";
-            this.userLoginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.availableCarsTabPage);
-            this.tabControl.Controls.Add(this.myOrdersTabPage);
-            this.tabControl.Location = new System.Drawing.Point(0, 90);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1119, 600);
-            this.tabControl.TabIndex = 24;
-            // 
-            // availableCarsTabPage
-            // 
-            this.availableCarsTabPage.Controls.Add(this.availableCarsDataGridView);
-            this.availableCarsTabPage.Controls.Add(this.createOrderButton);
-            this.availableCarsTabPage.Location = new System.Drawing.Point(4, 25);
-            this.availableCarsTabPage.Name = "availableCarsTabPage";
-            this.availableCarsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.availableCarsTabPage.Size = new System.Drawing.Size(1111, 571);
-            this.availableCarsTabPage.TabIndex = 0;
-            this.availableCarsTabPage.Text = "Available Cars";
-            this.availableCarsTabPage.UseVisualStyleBackColor = true;
-            // 
             // myOrdersTabPage
             // 
             this.myOrdersTabPage.Controls.Add(this.orderedCarsDataGridView);
@@ -246,12 +235,12 @@
             this.orderedCarsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.orderedCarsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.Column1,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn9,
-            this.statusColumn});
+            this.statusColumn,
+            this.commentColumn});
             this.orderedCarsDataGridView.GridColor = System.Drawing.SystemColors.Window;
             this.orderedCarsDataGridView.Location = new System.Drawing.Point(8, 6);
             this.orderedCarsDataGridView.MultiSelect = false;
@@ -273,15 +262,6 @@
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
             this.dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "OrderId";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            this.dataGridViewTextBoxColumn2.Width = 125;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -323,6 +303,14 @@
             this.statusColumn.ReadOnly = true;
             this.statusColumn.Width = 125;
             // 
+            // commentColumn
+            // 
+            this.commentColumn.HeaderText = "Administrator\'s Comment";
+            this.commentColumn.MinimumWidth = 6;
+            this.commentColumn.Name = "commentColumn";
+            this.commentColumn.ReadOnly = true;
+            this.commentColumn.Width = 125;
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -333,9 +321,9 @@
             this.Name = "ClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client";
-            ((System.ComponentModel.ISupportInitialize)(this.availableCarsDataGridView)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.availableCarsTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.availableCarsDataGridView)).EndInit();
             this.myOrdersTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.orderedCarsDataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -344,10 +332,13 @@
 
         #endregion
         private System.Windows.Forms.Button createOrderButton;
-        private System.Windows.Forms.DataGridView availableCarsDataGridView;
         private System.Windows.Forms.Label userLoginLabel;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage myOrdersTabPage;
+        private System.Windows.Forms.TabPage availableCarsTabPage;
+        private System.Windows.Forms.DataGridView orderedCarsDataGridView;
+        private System.Windows.Forms.DataGridView availableCarsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orderIdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn modelColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn countryColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn brandColumn;
@@ -356,16 +347,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fuelConsumptionColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn isDamagedColumn;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage myOrdersTabPage;
-        private System.Windows.Forms.TabPage availableCarsTabPage;
-        private System.Windows.Forms.DataGridView orderedCarsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commentColumn;
     }
 }

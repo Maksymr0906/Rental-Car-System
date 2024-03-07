@@ -1,16 +1,7 @@
-﻿using MaterialSkin;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
-using System.IO;
-using System.Diagnostics.Eventing.Reader;
 
 namespace CourseProject.Forms
 {
@@ -49,7 +40,7 @@ namespace CourseProject.Forms
                 return;
             }
 
-            var foundClient = ClientCredentialsManager.Clients.FirstOrDefault(client => client.Login == currentClient.Login);
+            var foundClient = ClientManager.Clients.FirstOrDefault(client => client.Login == currentClient.Login);
 
             if (foundClient == null)
             {

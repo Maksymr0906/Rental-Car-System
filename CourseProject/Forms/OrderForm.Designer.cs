@@ -182,6 +182,7 @@
             this.Controls.Add(this.surnameLabel);
             this.Controls.Add(this.dateOfBirthTimePicker);
             this.Name = "OrderForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order";
             this.ResumeLayout(false);
 

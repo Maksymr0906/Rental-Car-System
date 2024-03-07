@@ -1,13 +1,5 @@
-﻿using MaterialSkin;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CourseProject.Forms
@@ -15,6 +7,7 @@ namespace CourseProject.Forms
     public partial class AddCarForm : MaterialForm
     {
         private const int MIN_YEAR_OF_MANUFACTURE = 2000;
+        private readonly int MAX_YEAR_OF_MANUFACTURE;
         private const int MAX_NUMBER_OF_LETTERS = 25;
         private const int MIN_PRICE = 1000;
         private const int MAX_PRICE = 1000000;
@@ -24,30 +17,18 @@ namespace CourseProject.Forms
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
+            MAX_YEAR_OF_MANUFACTURE = DateTime.Now.Year;
         }
 
         private void addCarButton_Click(object sender, EventArgs e)
         {
             if (!IsCarDataValid())
             {
-                MessageBox.Show("Incorrect data.");
                 return;
             }
 
-            var car = new Car()
-            {
-                Id = Guid.NewGuid(),
-                Model = modelTextField.Text,
-                Country = countryTextField.Text,
-                Brand = brandTextField.Text,
-                FuelConsumption = Convert.ToDouble(fuelConsumptionTextField.Text),
-                Price = Convert.ToDouble(priceTextField.Text),
-                Color = colorComboBox.Text,
-                YearOfManufacture = Convert.ToInt32(yearOfManufactureTextField.Text)
-            };
-
-            CarsManager.AddCar(car);
-            CarsManager.WriteCarsToFile();
+            CarManager.AddCar(CreateCar());
+            CarManager.WriteCarsToFile();
             MessageBox.Show("Car added.");
         }
 
@@ -56,7 +37,7 @@ namespace CourseProject.Forms
             var year = Convert.ToInt32(yearOfManufactureTextField.Text);
             if(year > DateTime.Now.Year || year < MIN_YEAR_OF_MANUFACTURE) 
             {
-                MessageBox.Show($"Year must be in range: {MIN_YEAR_OF_MANUFACTURE} - {DateTime.Now.Year}");
+                MessageBox.Show($"Year must be in range: {MIN_YEAR_OF_MANUFACTURE} - {MAX_YEAR_OF_MANUFACTURE}");
                 return false;
             }
 
@@ -76,6 +57,21 @@ namespace CourseProject.Forms
 
 
             return true;
+        }
+
+        private Car CreateCar()
+        {
+            return new Car()
+            {
+                Id = Guid.NewGuid(),
+                Model = modelTextField.Text,
+                Country = countryTextField.Text,
+                Brand = brandTextField.Text,
+                FuelConsumption = Convert.ToDouble(fuelConsumptionTextField.Text),
+                Price = Convert.ToDouble(priceTextField.Text),
+                Color = colorComboBox.Text,
+                YearOfManufacture = Convert.ToInt32(yearOfManufactureTextField.Text)
+            };
         }
 
         private void priceTextField_KeyPress(object sender, KeyPressEventArgs e)

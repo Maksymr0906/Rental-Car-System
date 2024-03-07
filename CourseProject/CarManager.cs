@@ -5,12 +5,12 @@ using System.IO;
 namespace CourseProject
 {
     //create template class instead of Cars and ClientCredentials Managers
-    public static class CarsManager
+    public static class CarManager
     {
         private static readonly string CARS_FILENAME;
         public static List<Car> Cars { get; set; }
 
-        static CarsManager()
+        static CarManager()
         {
             CARS_FILENAME = "cars.txt";
 
@@ -61,6 +61,19 @@ namespace CourseProject
                     Cars[i] = car;
                 }
             }
+        }
+
+        public static Car GetCarById(Guid id)
+        {
+            foreach (var car in Cars)
+            {
+                if (car.Id == id)
+                {
+                    return car;
+                }
+            }
+
+            return null;
         }
     }
 }

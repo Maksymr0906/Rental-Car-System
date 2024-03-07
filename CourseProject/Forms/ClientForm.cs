@@ -1,15 +1,5 @@
-﻿using MaterialSkin;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CourseProject.Forms
 {
@@ -32,59 +22,72 @@ namespace CourseProject.Forms
 
         private void PrintAvailableCars()
         {
-            foreach (var car in CarsManager.Cars)
+            availableCarsDataGridView.Rows.Clear();
+            foreach (var car in CarManager.Cars)
             {
-                if (car.OrderId == Guid.Empty)
+                if (car.IsAvailable)
                 {
-                    availableCarsDataGridView.Rows.Add(car.Id, car.OrderId, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
+                    availableCarsDataGridView.Rows.Add(car.Id, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
                 }
             }
         }
 
         private void PrintClientOrders()
         {
-            var orders = OrderManager.Orders;
-
-            foreach (var car in CarsManager.Cars)
+            orderedCarsDataGridView.Rows.Clear();
+            foreach (var order in OrderManager.Orders)
             {
-                foreach (var order in orders)
+                if(loggedClient.Id == order.ClientId)
                 {
-                    if (car.OrderId == order.Id && order.ClientId == loggedClient.Id)
-                    {
-                        orderedCarsDataGridView.Rows.Add(car.Id, car.OrderId, car.Model, car.Brand, car.Color, order.Price, order.OrderStatus);
-                    }
+                    string adminComment = GetAdminCommentForOrder(order.Id);
+                    var car = CarManager.GetCarById(order.CarId);
+                    orderedCarsDataGridView.Rows.Add(car.Id, car.Model, car.Brand, car.Color, order.Price, order.Status, adminComment);
                 }
             }
         }
 
+        private string GetAdminCommentForOrder(Guid orderId)
+        {
+            foreach (var application in ApplicationManager.Applications)
+            {
+                if (application.OrderId == orderId)
+                {
+                    return application.RejectionComment;
+                }
+            }
+            return string.Empty;
+        }
+
         private void createOrderButton_Click(object sender, EventArgs e)
         {
-            var car = new Car()
-            {
-                Id = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[0].Value.ToString()),
-                OrderId = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[1].Value.ToString()),
-                Model = availableCarsDataGridView.CurrentRow.Cells[2].Value.ToString(),
-                Country = availableCarsDataGridView.CurrentRow.Cells[3].Value.ToString(),
-                Brand = availableCarsDataGridView.CurrentRow.Cells[4].Value.ToString(),
-                Color = availableCarsDataGridView.CurrentRow.Cells[5].Value.ToString(),
-                YearOfManufacture = Convert.ToInt32(availableCarsDataGridView.CurrentRow.Cells[6].Value),
-                FuelConsumption = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[7].Value),
-                Price = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[8].Value),
-                IsDamaged = Convert.ToBoolean(availableCarsDataGridView.CurrentRow.Cells[9].Value)
-            };
-
             Hide();
-            var orderForm = new OrderForm(loggedClient, car);
+
+            var orderForm = new OrderForm(loggedClient, CreateSelectedCarFromDataGridView());
+            
             orderForm.FormClosed += (s, args) =>
             {
-                orderedCarsDataGridView.Rows.Clear();
-                availableCarsDataGridView.Rows.Clear();
                 PrintAvailableCars();
                 PrintClientOrders();
                 Show();
             };
 
             orderForm.Show();
+        }
+
+        private Car CreateSelectedCarFromDataGridView()
+        {
+            return new Car()
+            {
+                Id = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[0].Value.ToString()),
+                Model = availableCarsDataGridView.CurrentRow.Cells[1].Value.ToString(),
+                Country = availableCarsDataGridView.CurrentRow.Cells[2].Value.ToString(),
+                Brand = availableCarsDataGridView.CurrentRow.Cells[3].Value.ToString(),
+                Color = availableCarsDataGridView.CurrentRow.Cells[4].Value.ToString(),
+                YearOfManufacture = Convert.ToInt32(availableCarsDataGridView.CurrentRow.Cells[5].Value),
+                FuelConsumption = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[6].Value),
+                Price = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[7].Value),
+                IsDamaged = Convert.ToBoolean(availableCarsDataGridView.CurrentRow.Cells[8].Value),
+            };
         }
     }
 }

@@ -59,11 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administrator.cs" />
+    <Compile Include="ApplicationManager.cs" />
     <Compile Include="Car.cs" />
-    <Compile Include="CarsManager.cs" />
+    <Compile Include="CarManager.cs" />
     <Compile Include="Client.cs" />
-    <Compile Include="ClientCredentialsManager.cs" />
+    <Compile Include="ClientManager.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Forms\AddCarForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,12 @@
     </Compile>
     <Compile Include="Forms\AdministratorForm.Designer.cs">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ApplicationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ApplicationForm.Designer.cs">
+      <DependentUpon>ApplicationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ClientForm.cs">
       <SubType>Form</SubType>
@@ -112,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdministratorForm.resx">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ApplicationForm.resx">
+      <DependentUpon>ApplicationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>

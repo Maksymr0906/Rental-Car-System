@@ -1,16 +1,6 @@
-﻿using MaterialSkin;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
-using System.IO;
-using System.Net;
 
 namespace CourseProject.Forms
 {
@@ -48,8 +38,8 @@ namespace CourseProject.Forms
                 return;
             }
 
-            ClientCredentialsManager.AddClient(newClient);
-            ClientCredentialsManager.WriteClientsToFile();
+            ClientManager.AddClient(newClient);
+            ClientManager.WriteClientsToFile();
 
             MessageBox.Show("You are successfully registered.");
             Close();
@@ -57,7 +47,7 @@ namespace CourseProject.Forms
 
         private bool IsLoginExists(string login)
         {
-            var clientCredentials = ClientCredentialsManager.Clients;
+            var clientCredentials = ClientManager.Clients;
 
             foreach (var client in clientCredentials)
             {

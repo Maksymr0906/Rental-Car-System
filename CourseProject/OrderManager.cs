@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CourseProject
 {
@@ -63,6 +60,19 @@ namespace CourseProject
                     Orders[i] = order;
                 }
             }
+        }
+
+        public static Order GetOrderById(Guid id)
+        {
+            foreach(var order in Orders)
+            {
+                if(order.Id == id)
+                {
+                    return order;
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -1,15 +1,5 @@
-﻿using MaterialSkin;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CourseProject.Forms
@@ -25,21 +15,29 @@ namespace CourseProject.Forms
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
+            SetUpDateTimePickers();
+        }
+
+        private void SetUpDateTimePickers()
+        {
             rentToTimePicker.MinDate = DateTime.Now.AddDays(1);
             rentToTimePicker.MaxDate = DateTime.Now.AddMonths(MAX_MONTH_TO_RENT);
-            dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18).AddDays(-1);
+            dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18);
         }
 
-        public OrderForm(Car car) : this()
+        public OrderForm(Client client, Car car) :this()
         {
             carToOrder = car;
-            Text = $"Order car: {carToOrder.Model}";
+            loggedClient = client;
+            SetUpFields();
         }
 
-        public OrderForm(Client client, Car car) :this(car)
+        private void SetUpFields()
         {
-            loggedClient = client;
+            Text = $"Order car: {carToOrder.Model}";
             userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
+            surnameTextField.Text = loggedClient.Surname;
+            nameTextField.Text = loggedClient.Name;
         }
 
         private void createOrderButton_Click(object sender, EventArgs e)
@@ -50,31 +48,46 @@ namespace CourseProject.Forms
                 return;
             }
 
+            UpdateClientInfo();
+            CreateNewOrder();
+            UpdateCarAvailability();
+
+            MessageBox.Show("Your order adressed to the administrator. Please wait.");
+        }
+
+
+        private void UpdateClientInfo()
+        {
+
             loggedClient.Surname = surnameTextField.Text;
             loggedClient.Name = nameTextField.Text;
             loggedClient.DateOfBirthday = Convert.ToDateTime(dateOfBirthTimePicker.Text);
 
-            ClientCredentialsManager.UpdateClient(loggedClient);
-            ClientCredentialsManager.WriteClientsToFile();
-
-            MessageBox.Show("Your order adressed to the administrator. Please wait until ...");
-
+            ClientManager.UpdateClient(loggedClient);
+            ClientManager.WriteClientsToFile();
+        }
+        private void CreateNewOrder()
+        {
             var order = new Order()
             {
                 Id = Guid.NewGuid(),
                 ClientId = loggedClient.Id,
+                CarId = carToOrder.Id,
                 OrderCreatedDate = DateTime.Now,
                 EndRentDate = DateTime.Parse(rentToTimePicker.Text),
                 Price = carToOrder.Price / 10,
-                OrderStatus = Order.Status.Processing
+                Status = Order.OrderStatus.Processing
             };
-
-            carToOrder.OrderId = order.Id;
-            CarsManager.UpdateCar(carToOrder);
-            CarsManager.WriteCarsToFile();
 
             OrderManager.AddOrder(order);
             OrderManager.WriteOrdersToFile();
+        }
+
+        private void UpdateCarAvailability()
+        {
+            carToOrder.IsAvailable = false;
+            CarManager.UpdateCar(carToOrder);
+            CarManager.WriteCarsToFile();
         }
 
         private void surnameTextField_KeyPress(object sender, KeyPressEventArgs e)
