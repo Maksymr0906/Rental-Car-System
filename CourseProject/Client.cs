@@ -3,9 +3,8 @@ using System.IO;
 
 namespace CourseProject
 {
-    public class Client : IFileSerializable
+    public class Client : Entity
     {
-        public Guid Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
@@ -13,9 +12,8 @@ namespace CourseProject
         public DateTime DateOfBirthday { get; set; }
         public double Money { get; set; }
 
-        public Client()
+        public Client() : base()
         {
-            Id = Guid.NewGuid();
             DateOfBirthday = DateTime.Now;
             Money = 20000;
         }
@@ -24,21 +22,22 @@ namespace CourseProject
             Login = login;
             Password = password;
         }
-        public void WriteToFile(StreamWriter writer)
+        public override void WriteToFile(StreamWriter writer)
         {
-            writer.WriteLine($"{Id},{Login},{Password},{Name},{Surname},{DateOfBirthday},{Money}");
+            base.WriteToFile(writer);
+            writer.WriteLine($",{Login},{Password},{Name},{Surname},{DateOfBirthday},{Money}");
         }
 
-        public void ReadFromFile(string line)
+        public override void ReadFromFile(string line)
         {
+            base.ReadFromFile(line);
             string[] parts = line.Split(',');
-            Id = Guid.Parse(parts[0]);
-            Login = parts[1];
-            Password = parts[2];
-            Name = parts[3];
-            Surname = parts[4];
-            DateOfBirthday = Convert.ToDateTime(parts[5]);
-            Money = Convert.ToDouble(parts[6]);
+            Login = parts[2];
+            Password = parts[3];
+            Name = parts[4];
+            Surname = parts[5];
+            DateOfBirthday = Convert.ToDateTime(parts[6]);
+            Money = Convert.ToDouble(parts[7]);
         }
     }
 }

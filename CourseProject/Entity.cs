@@ -1,22 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CourseProject
 {
     public class Entity : IFileSerializable
     {
-        public void ReadFromFile(string line)
+        public Guid Id { get; set; }
+        public DateTime DateCreated { get; set; }
+        
+        public Entity()
         {
-            throw new NotImplementedException();
+            Id = Guid.NewGuid();
+            DateCreated = DateTime.Now;
+        }
+        public virtual void ReadFromFile(string line)
+        {
+            string[] parts = line.Split(',');
+            Id = Guid.Parse(parts[0]);
+            DateCreated = DateTime.Parse(parts[1]);
         }
 
-        public void WriteToFile(StreamWriter writer)
+        public virtual void WriteToFile(StreamWriter writer)
         {
-            throw new NotImplementedException();
+            writer.Write($"{Id},{DateCreated}");
         }
     }
 }

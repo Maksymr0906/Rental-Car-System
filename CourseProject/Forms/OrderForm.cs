@@ -58,7 +58,6 @@ namespace CourseProject.Forms
 
         private void UpdateClientInfo()
         {
-
             loggedClient.Surname = surnameTextField.Text;
             loggedClient.Name = nameTextField.Text;
             loggedClient.DateOfBirthday = Convert.ToDateTime(dateOfBirthTimePicker.Text);
@@ -71,9 +70,9 @@ namespace CourseProject.Forms
             var order = new Order()
             {
                 Id = Guid.NewGuid(),
+                DateCreated = DateTime.Now,
                 ClientId = loggedClient.Id,
                 CarId = carToOrder.Id,
-                OrderCreatedDate = DateTime.Now,
                 EndRentDate = DateTime.Parse(rentToTimePicker.Text),
                 Price = carToOrder.Price / 10,
                 Status = Order.OrderStatus.Processing

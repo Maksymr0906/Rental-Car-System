@@ -1,11 +1,14 @@
 ﻿using MaterialSkin.Controls;
 using System;
+using System.Windows.Forms;
 
 namespace CourseProject.Forms
 {
     public partial class ApplicationForm : MaterialForm
     {
-        Application currentApplication;
+        private readonly double feeForCarDamage;
+        private const double COEFFICIENT_FOR_CAR_DAMAGE = 30;
+        private Application currentApplication;
         public ApplicationForm()
         {
             InitializeComponent();
@@ -15,20 +18,44 @@ namespace CourseProject.Forms
         public ApplicationForm(Application application) : this()
         {
             currentApplication = application;
-            if(currentApplication.Type == Application.ApplicationType.ORDER_CAR)
+            var order = GetCurrentOrder();
+            var carPrice = CarManager.GetCarById(order.CarId).Price;
+            feeForCarDamage = carPrice / COEFFICIENT_FOR_CAR_DAMAGE;
+
+            SetUIVisibility();
+            UpdateLabels();
+        }
+
+        private void SetUIVisibility()
+        {
+            if (currentApplication.Type == Application.ApplicationType.ORDER_CAR)
             {
-                rejectionCommentLabel.Visible = true;
-                rejectionCommentTextField.Visible = true;
-                confirmOrderButton.Visible = true;
-                cancelOrderButton.Visible = true;
+                ShowOrderCarUI();
             }
-            if(currentApplication.Type == Application.ApplicationType.RENT_ENDED)
+            else if (currentApplication.Type == Application.ApplicationType.RENT_ENDED)
             {
-                isCarDamagedCheckBox.Visible = true;
-                sendApplicationButton.Visible = true;
+                ShowRentEndedUI();
             }
+        }
+
+        private void ShowOrderCarUI()
+        {
+            rejectionCommentLabel.Visible = true;
+            rejectionCommentTextField.Visible = true;
+            confirmOrderButton.Visible = true;
+            cancelOrderButton.Visible = true;
+        }
+
+        private void ShowRentEndedUI()
+        {
+            isCarDamagedCheckBox.Visible = true;
+            sendApplicationButton.Visible = true;
+        }
+
+        private void UpdateLabels()
+        {
+            var order = GetCurrentOrder();
             Text = $"Application: {currentApplication.Type}";
-            var order = OrderManager.GetOrderById(currentApplication.OrderId);
             var clientSurname = ClientManager.GetClientById(order.ClientId).Surname;
             var carModel = CarManager.GetCarById(order.CarId).Model;
             clientSurnameLabel.Text += $"{clientSurname}";
@@ -37,54 +64,83 @@ namespace CourseProject.Forms
 
         private void sendApplicationButton_Click(object sender, EventArgs e)
         {
-            var order = OrderManager.GetOrderById(currentApplication.OrderId);
-            order.Status = Order.OrderStatus.Closed;
-            OrderManager.UpdateOrder(order);
-            OrderManager.WriteOrdersToFile();
+            var order = GetCurrentOrder();
+            UpdateOrderStatus(order, Order.OrderStatus.Closed);
             var car = CarManager.GetCarById(order.CarId);
+            HandleCarDamage(car);
+            UpdateCarAvailability(car, true);
+        }
+
+        private void confirmOrderButton_Click(object sender, EventArgs e)
+        {
+            var order = GetCurrentOrder();
+            UpdateOrderStatus(order, Order.OrderStatus.Accepted);
             var client = ClientManager.GetClientById(order.ClientId);
+            HandlePayment(client, order.Price);
+        }
+
+        private void cancelOrderButton_Click(object sender, EventArgs e)
+        {
+            if (rejectionCommentTextField.Text == string.Empty)
+            {
+                MessageBox.Show("Write the descriptive rejection comment before cancelling order.");
+                return;
+            }
+
+            var order = GetCurrentOrder();
+            UpdateOrderStatus(order, Order.OrderStatus.Declined);
+
+            var car = CarManager.GetCarById(order.CarId);
+            UpdateCarAvailability(car, true);
+
+            UpdateRejectionComment();
+        }
+
+        private void HandleCarDamage(Car car)
+        {
             if(isCarDamagedCheckBox.Checked)
             {
                 car.IsDamaged = true;
-                client.Money -= car.Price / 30;
-                ClientManager.UpdateClient(client);
-                ClientManager.WriteClientsToFile();
+                var client = ClientManager.GetClientById(GetCurrentOrder().ClientId);
+                HandlePayment(client, feeForCarDamage);
             }
             else
             {
                 car.IsDamaged = false;
             }
-            car.IsAvailable = true;
+        }
+
+        private void UpdateCarAvailability(Car car, bool isAvailable)
+        {
+            car.IsAvailable = isAvailable;
             CarManager.UpdateCar(car);
             CarManager.WriteCarsToFile();
         }
 
-        private void confirmOrderButton_Click(object sender, EventArgs e)
+        private Order GetCurrentOrder()
         {
-            var order = OrderManager.GetOrderById(currentApplication.OrderId);
-            order.Status = Order.OrderStatus.Accepted;
-            OrderManager.UpdateOrder(order);
-            OrderManager.WriteOrdersToFile();
-            var client = ClientManager.GetClientById(order.ClientId);
-            client.Money -= order.Price;
-            ClientManager.UpdateClient(client);
-            ClientManager.WriteClientsToFile();
+            return OrderManager.GetOrderById(currentApplication.OrderId);
         }
 
-        private void cancelOrderButton_Click(object sender, EventArgs e)
+        private void UpdateOrderStatus(Order order, Order.OrderStatus status)
         {
-            var order = OrderManager.GetOrderById(currentApplication.OrderId);
-            var car = CarManager.GetCarById(order.CarId);
-            order.Status = Order.OrderStatus.Declined;
+            order.Status = status;
             OrderManager.UpdateOrder(order);
             OrderManager.WriteOrdersToFile();
-            car.IsAvailable = true;
-            CarManager.UpdateCar(car);
-            CarManager.WriteCarsToFile();
+        }
 
+        private void UpdateRejectionComment()
+        {
             currentApplication.RejectionComment = rejectionCommentTextField.Text;
             ApplicationManager.AddApplication(currentApplication);
             ApplicationManager.WriteApplicationsToFile();
+        }
+
+        private void HandlePayment(Client client, double price)
+        {
+            client.Money -= price;
+            ClientManager.UpdateClient(client);
+            ClientManager.WriteClientsToFile();
         }
     }
 }

@@ -3,9 +3,8 @@ using System.IO;
 
 namespace CourseProject
 {
-    public class Car : IFileSerializable
+    public class Car : Entity
     {
-        public Guid Id { get; set; }
         public string Model { get; set; }
         public string Country { get; set; }
         public string Brand { get; set; }
@@ -16,9 +15,8 @@ namespace CourseProject
         public bool IsDamaged { get; set; }
         public bool IsAvailable {  get; set; }
 
-        public Car()
+        public Car() : base()
         {
-            Id = Guid.NewGuid();
             Model = "None";
             Country = "None";
             Brand = "None";
@@ -47,24 +45,25 @@ namespace CourseProject
             FuelConsumption = fuelConsumption;
         }
 
-        public void WriteToFile(StreamWriter writer)
+        public override void WriteToFile(StreamWriter writer)
         {
-            writer.WriteLine($"{Id},{Model},{Country},{Brand},{Color},{YearOfManufacture},{FuelConsumption},{Price},{IsDamaged},{IsAvailable}");
+            base.WriteToFile(writer);
+            writer.WriteLine($",{Model},{Country},{Brand},{Color},{YearOfManufacture},{FuelConsumption},{Price},{IsDamaged},{IsAvailable}");
         }
 
-        public void ReadFromFile(string line)
+        public override void ReadFromFile(string line)
         {
+            base.ReadFromFile(line);
             string[] parts = line.Split(',');
-            Id = Guid.Parse(parts[0]);
-            Model = parts[1];
-            Country = parts[2];
-            Brand = parts[3];
-            Color = parts[4];
-            YearOfManufacture = int.Parse(parts[5]);
-            FuelConsumption = double.Parse(parts[6]);
-            Price = double.Parse(parts[7]);
-            IsDamaged = bool.Parse(parts[8]);
-            IsAvailable = bool.Parse(parts[9]);
+            Model = parts[2];
+            Country = parts[3];
+            Brand = parts[4];
+            Color = parts[5];
+            YearOfManufacture = int.Parse(parts[6]);
+            FuelConsumption = double.Parse(parts[7]);
+            Price = double.Parse(parts[8]);
+            IsDamaged = bool.Parse(parts[9]);
+            IsAvailable = bool.Parse(parts[10]);
         }
     }
 }

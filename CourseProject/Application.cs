@@ -3,30 +3,30 @@ using System.IO;
 
 namespace CourseProject
 {
-    public class Application : IFileSerializable
+    public class Application : Entity
     {
         public enum ApplicationType
         {
             ORDER_CAR,
             RENT_ENDED,
         }
-        public Guid Id { get; set; }
         public Guid OrderId { get; set; }
         public string RejectionComment { get; set; }
         public ApplicationType Type { get; set; }
 
-        public void ReadFromFile(string line)
+        public override void ReadFromFile(string line)
         {
+            base.ReadFromFile(line);
             string[] parts = line.Split(',');
-            Id = Guid.Parse(parts[0]);
-            OrderId = Guid.Parse(parts[1]);
-            RejectionComment = parts[2];
-            Type = (ApplicationType)Enum.Parse(typeof(ApplicationType), parts[3]);
+            OrderId = Guid.Parse(parts[2]);
+            RejectionComment = parts[3];
+            Type = (ApplicationType)Enum.Parse(typeof(ApplicationType), parts[4]);
         }
 
-        public void WriteToFile(StreamWriter writer)
+        public override void WriteToFile(StreamWriter writer)
         {
-            writer.WriteLine($"{Id},{OrderId},{RejectionComment},{Type}");
+            base.WriteToFile(writer);
+            writer.WriteLine($",{OrderId},{RejectionComment},{Type}");
         }
     }
 }

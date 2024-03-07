@@ -21,7 +21,7 @@ namespace CourseProject.Forms
                 {
                     var client = ClientManager.GetClientById(order.ClientId);
                     var car = CarManager.GetCarById(order.CarId);
-                    ordersDataGridView.Rows.Add(order.Id, client.Name, client.Surname, car.Model, car.Color, order.OrderCreatedDate, order.EndRentDate, order.Price);
+                    ordersDataGridView.Rows.Add(order.Id, client.Name, client.Surname, car.Model, car.Color, order.DateCreated, order.EndRentDate, order.Price);
                 }
             }
         }
@@ -40,7 +40,6 @@ namespace CourseProject.Forms
 
             var application = new Application()
             {
-                Id = Guid.NewGuid(),
                 OrderId = Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString()),
                 Type = type,
             };
