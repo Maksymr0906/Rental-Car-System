@@ -39,7 +39,7 @@
             this.createDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endRentDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.skipTimeButton = new System.Windows.Forms.Button();
+            this.skipOrderTimeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,27 +171,28 @@
             this.priceColumn.ReadOnly = true;
             this.priceColumn.Width = 70;
             // 
-            // skipTimeButton
+            // skipOrderTimeButton
             // 
-            this.skipTimeButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.skipTimeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.skipTimeButton.FlatAppearance.BorderSize = 0;
-            this.skipTimeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.skipTimeButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.skipTimeButton.ForeColor = System.Drawing.Color.White;
-            this.skipTimeButton.Location = new System.Drawing.Point(12, 497);
-            this.skipTimeButton.Name = "skipTimeButton";
-            this.skipTimeButton.Size = new System.Drawing.Size(138, 34);
-            this.skipTimeButton.TabIndex = 20;
-            this.skipTimeButton.Text = "Skip Time";
-            this.skipTimeButton.UseVisualStyleBackColor = false;
+            this.skipOrderTimeButton.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.skipOrderTimeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.skipOrderTimeButton.FlatAppearance.BorderSize = 0;
+            this.skipOrderTimeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.skipOrderTimeButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.skipOrderTimeButton.ForeColor = System.Drawing.Color.White;
+            this.skipOrderTimeButton.Location = new System.Drawing.Point(12, 497);
+            this.skipOrderTimeButton.Name = "skipOrderTimeButton";
+            this.skipOrderTimeButton.Size = new System.Drawing.Size(249, 34);
+            this.skipOrderTimeButton.TabIndex = 20;
+            this.skipOrderTimeButton.Text = "Skip Order Time";
+            this.skipOrderTimeButton.UseVisualStyleBackColor = false;
+            this.skipOrderTimeButton.Click += new System.EventHandler(this.skipOrderTimeButton_Click);
             // 
             // AdministratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 543);
-            this.Controls.Add(this.skipTimeButton);
+            this.Controls.Add(this.skipOrderTimeButton);
             this.Controls.Add(this.ordersDataGridView);
             this.Controls.Add(this.addCarButton);
             this.Controls.Add(this.createApplicationButton);
@@ -216,6 +217,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endRentDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceColumn;
-        private System.Windows.Forms.Button skipTimeButton;
+        private System.Windows.Forms.Button skipOrderTimeButton;
     }
 }

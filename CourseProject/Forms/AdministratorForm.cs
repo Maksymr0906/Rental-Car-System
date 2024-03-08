@@ -5,6 +5,7 @@ namespace CourseProject.Forms
 {
     public partial class AdministratorForm : MaterialForm
     {
+        private const int DAYS_TO_SKIP = 2;
         public AdministratorForm()
         {
             InitializeComponent();
@@ -68,6 +69,19 @@ namespace CourseProject.Forms
             {
                 return Application.ApplicationType.RENT_ENDED;
             }
+        }
+
+        private void skipOrderTimeButton_Click(object sender, EventArgs e)
+        {
+            foreach(var order in OrderManager.Orders)
+            {
+                if(order.Status == Order.OrderStatus.Processing)
+                {
+                    order.EndRentDate = order.EndRentDate.AddDays(-DAYS_TO_SKIP);
+                }
+            }
+
+            OrderManager.WriteOrdersToFile();
         }
     }
 }

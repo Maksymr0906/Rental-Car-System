@@ -69,6 +69,7 @@ namespace CourseProject.Forms
             var car = CarManager.GetCarById(order.CarId);
             HandleCarDamage(car);
             UpdateCarAvailability(car, true);
+            MessageBox.Show("Car rent ended. Client will be notificated");
         }
 
         private void confirmOrderButton_Click(object sender, EventArgs e)
@@ -77,6 +78,7 @@ namespace CourseProject.Forms
             UpdateOrderStatus(order, Order.OrderStatus.Accepted);
             var client = ClientManager.GetClientById(order.ClientId);
             HandlePayment(client, order.Price);
+            MessageBox.Show("Order confirmed. Client will be notificated.");
         }
 
         private void cancelOrderButton_Click(object sender, EventArgs e)
@@ -94,6 +96,7 @@ namespace CourseProject.Forms
             UpdateCarAvailability(car, true);
 
             UpdateRejectionComment();
+            MessageBox.Show("Order cancelled. Client will be notificated.");
         }
 
         private void HandleCarDamage(Car car)
@@ -138,9 +141,10 @@ namespace CourseProject.Forms
 
         private void HandlePayment(Client client, double price)
         {
-            client.Money -= price;
+            client.Balance -= price;
             ClientManager.UpdateClient(client);
             ClientManager.WriteClientsToFile();
+            MessageBox.Show($"Client paid {price}.");
         }
     }
 }

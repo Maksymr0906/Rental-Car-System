@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace CourseProject
 {
-    public class Car : Entity
+    public sealed class Car : Entity
     {
         public string Model { get; set; }
         public string Country { get; set; }

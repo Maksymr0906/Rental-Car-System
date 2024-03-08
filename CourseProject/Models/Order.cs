@@ -3,7 +3,7 @@ using System.IO;
 
 namespace CourseProject
 {
-    public class Order : Entity
+    public sealed class Order : Entity
     {
         public enum OrderStatus
         {

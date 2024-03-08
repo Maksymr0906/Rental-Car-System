@@ -6,7 +6,7 @@ namespace CourseProject
 {
     internal static class Program
     {
-        
+        // Add admin registration logic
 
         /// <summary>
         /// The main entry point for the application.
