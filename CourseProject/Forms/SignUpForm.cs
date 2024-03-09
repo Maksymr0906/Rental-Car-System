@@ -32,7 +32,7 @@ namespace CourseProject.Forms
                 return;
             }
 
-            if(IsLoginExists(newClient.Login))
+            if(ClientManager.IsClientWithLoginExists(newClient.Login))
             {
                 MessageBox.Show("User with this login already exists!");
                 return;
@@ -43,21 +43,6 @@ namespace CourseProject.Forms
 
             MessageBox.Show("You are successfully registered.");
             Close();
-        }
-
-        private bool IsLoginExists(string login)
-        {
-            var clientCredentials = ClientManager.Clients;
-
-            foreach (var client in clientCredentials)
-            {
-                if (client.Login == login)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private void seePasswordCheckBox_CheckedChanged(object sender, EventArgs e)

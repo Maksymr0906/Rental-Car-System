@@ -74,5 +74,51 @@ namespace CourseProject
 
             return null;
         }
+
+        public static string GetCommentForOrder(Guid orderId)
+        {
+            foreach (var application in Applications)
+            {
+                if (application.OrderId == orderId)
+                {
+                    return application.RejectionComment;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        public static Application CreateApplication(Order order)
+        {
+            var application = new Application()
+            {
+                OrderId = order.Id,
+                Type = GetApplicationType(order)
+            };
+
+            AddApplication(application);
+            WriteApplicationsToFile();
+
+            return application;
+        }
+
+        private static Application.ApplicationType GetApplicationType(Order order)
+        {
+            if (order.Status == Order.OrderStatus.Processing)
+            {
+                return Application.ApplicationType.ORDER_CAR;
+            }
+            else
+            {
+                return Application.ApplicationType.RENT_ENDED;
+            }
+        }
+
+        public static void UpdateRejectionComment(Application application, string rejectionComment)
+        {
+            application.RejectionComment = rejectionComment;
+            UpdateApplication(application);
+            WriteApplicationsToFile();
+        }
     }
 }

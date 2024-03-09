@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 
 namespace CourseProject
@@ -7,6 +8,8 @@ namespace CourseProject
     public static class OrderManager
     {
         private static readonly string ORDER_FILENAME;
+        private const double PRICE_DIVISOR = 10.0;
+        private const int DAYS_TO_SKIP = 2;
         public static List<Order> Orders { get; set; }
 
         static OrderManager()
@@ -73,6 +76,46 @@ namespace CourseProject
             }
 
             return null;
+        }
+
+        public static void CreateNewOrder(Client client, Car car, DateTime rentEndDate)
+        {
+            var order = new Order()
+            {
+                Id = Guid.NewGuid(),
+                DateCreated = DateTime.Now,
+                ClientId = client.Id,
+                CarId = car.Id,
+                EndRentDate = rentEndDate,
+                Price = car.Price / PRICE_DIVISOR,
+                Status = Order.OrderStatus.Processing
+            };
+
+            AddOrder(order);
+            WriteOrdersToFile();
+        }
+
+        public static void SkipTime()
+        {
+            foreach (var order in Orders)
+            {
+                if (order.Status == Order.OrderStatus.Processing || order.Status == Order.OrderStatus.Accepted)
+                {
+                    order.EndRentDate = order.EndRentDate.AddDays(-DAYS_TO_SKIP);
+                    if(order.EndRentDate <= order.DateCreated)
+                    {
+                        order.Status = Order.OrderStatus.Ended;
+                    }
+                }
+            }
+
+            WriteOrdersToFile();
+        }
+
+        public static void UpdateOrderStatus(Order order, Order.OrderStatus status)
+        {
+            order.Status = status;
+            WriteOrdersToFile();
         }
     }
 }

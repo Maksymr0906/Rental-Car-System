@@ -5,7 +5,6 @@ namespace CourseProject.Forms
 {
     public partial class AdministratorForm : MaterialForm
     {
-        private const int DAYS_TO_SKIP = 2;
         public AdministratorForm()
         {
             InitializeComponent();
@@ -37,13 +36,8 @@ namespace CourseProject.Forms
 
         private void createApplicationButton_Click(object sender, EventArgs e)
         {
-            Application.ApplicationType type = GetApplicationType();
-
-            var application = new Application()
-            {
-                OrderId = Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString()),
-                Type = type,
-            };
+            var order = OrderManager.GetOrderById(Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString()));
+            var application = ApplicationManager.CreateApplication(order);
 
             Hide();
 
@@ -57,31 +51,10 @@ namespace CourseProject.Forms
 
             applicationForm.Show();
         }
-
-        private Application.ApplicationType GetApplicationType()
-        {
-            var order = OrderManager.GetOrderById(Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString()));
-            if (order.Status == Order.OrderStatus.Processing)
-            {
-                return Application.ApplicationType.ORDER_CAR;
-            }
-            else
-            {
-                return Application.ApplicationType.RENT_ENDED;
-            }
-        }
-
         private void skipOrderTimeButton_Click(object sender, EventArgs e)
         {
-            foreach(var order in OrderManager.Orders)
-            {
-                if(order.Status == Order.OrderStatus.Processing)
-                {
-                    order.EndRentDate = order.EndRentDate.AddDays(-DAYS_TO_SKIP);
-                }
-            }
-
-            OrderManager.WriteOrdersToFile();
+            OrderManager.SkipTime();
+            PrintOrders();
         }
     }
 }

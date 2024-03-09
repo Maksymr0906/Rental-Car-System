@@ -39,30 +39,20 @@ namespace CourseProject.Forms
             {
                 if(loggedClient.Id == order.ClientId)
                 {
-                    string adminComment = GetAdminCommentForOrder(order.Id);
+                    string adminComment = ApplicationManager.GetCommentForOrder(order.Id);
                     var car = CarManager.GetCarById(order.CarId);
                     orderedCarsDataGridView.Rows.Add(car.Id, car.Model, car.Brand, car.Color, order.Price, order.Status, adminComment);
                 }
             }
         }
 
-        private string GetAdminCommentForOrder(Guid orderId)
-        {
-            foreach (var application in ApplicationManager.Applications)
-            {
-                if (application.OrderId == orderId)
-                {
-                    return application.RejectionComment;
-                }
-            }
-            return string.Empty;
-        }
-
         private void createOrderButton_Click(object sender, EventArgs e)
         {
             Hide();
 
-            var orderForm = new OrderForm(loggedClient, CreateSelectedCarFromDataGridView());
+            var carId = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[0].Value.ToString());
+            var car = CarManager.GetCarById(carId);
+            var orderForm = new OrderForm(loggedClient, car);
             
             orderForm.FormClosed += (s, args) =>
             {
@@ -72,22 +62,6 @@ namespace CourseProject.Forms
             };
 
             orderForm.Show();
-        }
-
-        private Car CreateSelectedCarFromDataGridView()
-        {
-            return new Car()
-            {
-                Id = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[0].Value.ToString()),
-                Model = availableCarsDataGridView.CurrentRow.Cells[1].Value.ToString(),
-                Country = availableCarsDataGridView.CurrentRow.Cells[2].Value.ToString(),
-                Brand = availableCarsDataGridView.CurrentRow.Cells[3].Value.ToString(),
-                Color = availableCarsDataGridView.CurrentRow.Cells[4].Value.ToString(),
-                YearOfManufacture = Convert.ToInt32(availableCarsDataGridView.CurrentRow.Cells[5].Value),
-                FuelConsumption = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[6].Value),
-                Price = Convert.ToDouble(availableCarsDataGridView.CurrentRow.Cells[7].Value),
-                IsDamaged = Convert.ToBoolean(availableCarsDataGridView.CurrentRow.Cells[8].Value),
-            };
         }
     }
 }

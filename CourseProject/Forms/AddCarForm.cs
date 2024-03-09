@@ -6,72 +6,39 @@ namespace CourseProject.Forms
 {
     public partial class AddCarForm : MaterialForm
     {
-        private const int MIN_YEAR_OF_MANUFACTURE = 2000;
-        private readonly int MAX_YEAR_OF_MANUFACTURE;
         private const int MAX_NUMBER_OF_LETTERS = 25;
-        private const int MIN_PRICE = 1000;
-        private const int MAX_PRICE = 1000000;
-        private const double MIN_FUEL_CONSUMPTION = 1;
-        private const double MAX_FUEL_CONSUMPTION = 100;
+
         public AddCarForm()
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
-            MAX_YEAR_OF_MANUFACTURE = DateTime.Now.Year;
         }
 
         private void addCarButton_Click(object sender, EventArgs e)
         {
-            if (!IsCarDataValid())
+            var car = CreateCar();
+            if (!CarManager.IsCarDataValid(car))
             {
                 return;
             }
 
-            CarManager.AddCar(CreateCar());
+            CarManager.AddCar(car);
             CarManager.WriteCarsToFile();
             MessageBox.Show("Car added.");
-        }
-
-        private bool IsCarDataValid()
-        {
-            var year = Convert.ToInt32(yearOfManufactureTextField.Text);
-            if(year > DateTime.Now.Year || year < MIN_YEAR_OF_MANUFACTURE) 
-            {
-                MessageBox.Show($"Year must be in range: {MIN_YEAR_OF_MANUFACTURE} - {MAX_YEAR_OF_MANUFACTURE}");
-                return false;
-            }
-
-            var fuel = Convert.ToDouble(fuelConsumptionTextField.Text);
-            if(fuel < MIN_FUEL_CONSUMPTION || fuel > MAX_FUEL_CONSUMPTION)
-            {
-                MessageBox.Show($"Fuel consumption must be in range: {MIN_FUEL_CONSUMPTION} - {MAX_FUEL_CONSUMPTION}");
-                return false;
-            }
-
-            var price = Convert.ToDouble(priceTextField.Text);
-            if(price < MIN_PRICE || price > MAX_PRICE)
-            {
-                MessageBox.Show($"Price must be in range: {MIN_PRICE} - {MAX_PRICE}");
-                return false;
-            }
-
-
-            return true;
+            Close();
         }
 
         private Car CreateCar()
         {
-            return new Car()
-            {
-                Id = Guid.NewGuid(),
-                Model = modelTextField.Text,
-                Country = countryTextField.Text,
-                Brand = brandTextField.Text,
-                FuelConsumption = Convert.ToDouble(fuelConsumptionTextField.Text),
-                Price = Convert.ToDouble(priceTextField.Text),
-                Color = colorComboBox.Text,
-                YearOfManufacture = Convert.ToInt32(yearOfManufactureTextField.Text)
-            };
+            return CarManager.CreateCar(
+                modelTextField.Text,
+                countryTextField.Text,
+                brandTextField.Text,
+                Convert.ToDouble(fuelConsumptionTextField.Text),
+                Convert.ToDouble(priceTextField.Text),
+                colorComboBox.Text,
+                Convert.ToInt32(yearOfManufactureTextField.Text)
+            );
         }
 
         private void priceTextField_KeyPress(object sender, KeyPressEventArgs e)

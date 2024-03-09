@@ -6,8 +6,6 @@ namespace CourseProject.Forms
 {
     public partial class ApplicationForm : MaterialForm
     {
-        private readonly double feeForCarDamage;
-        private const double COEFFICIENT_FOR_CAR_DAMAGE = 30;
         private Application currentApplication;
         public ApplicationForm()
         {
@@ -18,10 +16,6 @@ namespace CourseProject.Forms
         public ApplicationForm(Application application) : this()
         {
             currentApplication = application;
-            var order = GetCurrentOrder();
-            var carPrice = CarManager.GetCarById(order.CarId).Price;
-            feeForCarDamage = carPrice / COEFFICIENT_FOR_CAR_DAMAGE;
-
             SetUIVisibility();
             UpdateLabels();
         }
@@ -65,19 +59,20 @@ namespace CourseProject.Forms
         private void sendApplicationButton_Click(object sender, EventArgs e)
         {
             var order = GetCurrentOrder();
-            UpdateOrderStatus(order, Order.OrderStatus.Closed);
+            OrderManager.UpdateOrderStatus(order, Order.OrderStatus.Closed);
             var car = CarManager.GetCarById(order.CarId);
-            HandleCarDamage(car);
-            UpdateCarAvailability(car, true);
+            var client = ClientManager.GetClientById(order.ClientId);
+            CarManager.HandleCarDamage(client, car, isCarDamagedCheckBox.Checked);
+            CarManager.UpdateCarAvailability(car, true);
             MessageBox.Show("Car rent ended. Client will be notificated");
         }
 
         private void confirmOrderButton_Click(object sender, EventArgs e)
         {
             var order = GetCurrentOrder();
-            UpdateOrderStatus(order, Order.OrderStatus.Accepted);
+            OrderManager.UpdateOrderStatus(order, Order.OrderStatus.Accepted);
             var client = ClientManager.GetClientById(order.ClientId);
-            HandlePayment(client, order.Price);
+            ClientManager.HandlePayment(client, order.Price);
             MessageBox.Show("Order confirmed. Client will be notificated.");
         }
 
@@ -90,61 +85,18 @@ namespace CourseProject.Forms
             }
 
             var order = GetCurrentOrder();
-            UpdateOrderStatus(order, Order.OrderStatus.Declined);
+            OrderManager.UpdateOrderStatus(order, Order.OrderStatus.Declined);
 
             var car = CarManager.GetCarById(order.CarId);
-            UpdateCarAvailability(car, true);
+            CarManager.UpdateCarAvailability(car, true);
 
-            UpdateRejectionComment();
+            ApplicationManager.UpdateRejectionComment(currentApplication, rejectionCommentTextField.Text);
             MessageBox.Show("Order cancelled. Client will be notificated.");
-        }
-
-        private void HandleCarDamage(Car car)
-        {
-            if(isCarDamagedCheckBox.Checked)
-            {
-                car.IsDamaged = true;
-                var client = ClientManager.GetClientById(GetCurrentOrder().ClientId);
-                HandlePayment(client, feeForCarDamage);
-            }
-            else
-            {
-                car.IsDamaged = false;
-            }
-        }
-
-        private void UpdateCarAvailability(Car car, bool isAvailable)
-        {
-            car.IsAvailable = isAvailable;
-            CarManager.UpdateCar(car);
-            CarManager.WriteCarsToFile();
         }
 
         private Order GetCurrentOrder()
         {
             return OrderManager.GetOrderById(currentApplication.OrderId);
-        }
-
-        private void UpdateOrderStatus(Order order, Order.OrderStatus status)
-        {
-            order.Status = status;
-            OrderManager.UpdateOrder(order);
-            OrderManager.WriteOrdersToFile();
-        }
-
-        private void UpdateRejectionComment()
-        {
-            currentApplication.RejectionComment = rejectionCommentTextField.Text;
-            ApplicationManager.AddApplication(currentApplication);
-            ApplicationManager.WriteApplicationsToFile();
-        }
-
-        private void HandlePayment(Client client, double price)
-        {
-            client.Balance -= price;
-            ClientManager.UpdateClient(client);
-            ClientManager.WriteClientsToFile();
-            MessageBox.Show($"Client paid {price}.");
         }
     }
 }

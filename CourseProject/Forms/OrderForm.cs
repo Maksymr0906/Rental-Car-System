@@ -48,45 +48,14 @@ namespace CourseProject.Forms
                 return;
             }
 
-            UpdateClientInfo();
-            CreateNewOrder();
-            UpdateCarAvailability();
+            var clientSurname = surnameTextField.Text;
+            var clientName = nameTextField.Text;
+            var clientDateOfBirthday = Convert.ToDateTime(dateOfBirthTimePicker.Text);
+            ClientManager.UpdateClientPersonalData(loggedClient, clientSurname, clientName, clientDateOfBirthday);
+            OrderManager.CreateNewOrder(loggedClient, carToOrder, DateTime.Parse(rentToTimePicker.Text));
+            CarManager.UpdateCarAvailability(carToOrder, false);
 
             MessageBox.Show("Your order adressed to the administrator. Please wait.");
-        }
-
-
-        private void UpdateClientInfo()
-        {
-            loggedClient.Surname = surnameTextField.Text;
-            loggedClient.Name = nameTextField.Text;
-            loggedClient.DateOfBirthday = Convert.ToDateTime(dateOfBirthTimePicker.Text);
-
-            ClientManager.UpdateClient(loggedClient);
-            ClientManager.WriteClientsToFile();
-        }
-        private void CreateNewOrder()
-        {
-            var order = new Order()
-            {
-                Id = Guid.NewGuid(),
-                DateCreated = DateTime.Now,
-                ClientId = loggedClient.Id,
-                CarId = carToOrder.Id,
-                EndRentDate = DateTime.Parse(rentToTimePicker.Text),
-                Price = carToOrder.Price / 10,
-                Status = Order.OrderStatus.Processing
-            };
-
-            OrderManager.AddOrder(order);
-            OrderManager.WriteOrdersToFile();
-        }
-
-        private void UpdateCarAvailability()
-        {
-            carToOrder.IsAvailable = false;
-            CarManager.UpdateCar(carToOrder);
-            CarManager.WriteCarsToFile();
         }
 
         private void surnameTextField_KeyPress(object sender, KeyPressEventArgs e)

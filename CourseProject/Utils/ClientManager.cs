@@ -4,7 +4,6 @@ using System.IO;
 
 namespace CourseProject
 {
-    //create template class instead of Cars and ClientCredentials Managers
     public static class ClientManager
     {
         private static readonly string CLIENTS_FILENAME;
@@ -74,6 +73,33 @@ namespace CourseProject
             }
 
             return null;
+        }
+
+        public static bool IsClientWithLoginExists(string login)
+        {
+            foreach(var client in Clients)
+            {
+                if(client.Login == login)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static void UpdateClientPersonalData(Client client, string surname, string name, DateTime dateOfBirthday)
+        {
+            client.Surname = surname;
+            client.Name = name;
+            client.DateOfBirthday = dateOfBirthday;
+            WriteClientsToFile();
+        }
+
+        public static void HandlePayment(Client client, double price)
+        {
+            client.Balance -= price;
+            WriteClientsToFile();
         }
     }
 }
