@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using CourseProject.Forms.ApplicationFormStates;
+using MaterialSkin.Controls;
 using System;
 using System.Windows.Forms;
 
@@ -7,6 +8,7 @@ namespace CourseProject.Forms
     public partial class ApplicationForm : MaterialForm
     {
         private Application currentApplication;
+        private IApplicationState currentState;
         public ApplicationForm()
         {
             InitializeComponent();
@@ -16,23 +18,29 @@ namespace CourseProject.Forms
         public ApplicationForm(Application application) : this()
         {
             currentApplication = application;
-            SetUIVisibility();
+            SetState();
+            ShowUIElements();
             UpdateLabels();
         }
 
-        private void SetUIVisibility()
+        private void SetState()
         {
             if (currentApplication.Type == Application.ApplicationType.ORDER_CAR)
             {
-                ShowOrderCarUI();
+                currentState = new OrderCarState(this);
             }
             else if (currentApplication.Type == Application.ApplicationType.RENT_ENDED)
             {
-                ShowRentEndedUI();
+                currentState = new RentEndedState(this);
             }
         }
 
-        private void ShowOrderCarUI()
+        private void ShowUIElements() 
+        {
+            currentState.ShowUIElements();
+        }
+
+        public void ShowOrderCarUI()
         {
             rejectionCommentLabel.Visible = true;
             rejectionCommentTextField.Visible = true;
@@ -40,7 +48,7 @@ namespace CourseProject.Forms
             cancelOrderButton.Visible = true;
         }
 
-        private void ShowRentEndedUI()
+        public void ShowRentEndedUI()
         {
             isCarDamagedCheckBox.Visible = true;
             sendApplicationButton.Visible = true;

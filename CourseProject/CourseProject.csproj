@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationFormStates\IApplicationState.cs" />
+    <Compile Include="ApplicationFormStates\OrderCarState.cs" />
+    <Compile Include="ApplicationFormStates\RentEndedState.cs" />
     <Compile Include="Utils\ApplicationManager.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Utils\CarManager.cs" />
