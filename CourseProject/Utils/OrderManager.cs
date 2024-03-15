@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace CourseProject
 {
@@ -67,15 +67,7 @@ namespace CourseProject
 
         public static Order GetOrderById(Guid id)
         {
-            foreach(var order in Orders)
-            {
-                if(order.Id == id)
-                {
-                    return order;
-                }
-            }
-
-            return null;
+            return Orders.FirstOrDefault(order =>  order.Id == id);
         }
 
         public static void CreateNewOrder(Client client, Car car, DateTime rentEndDate)

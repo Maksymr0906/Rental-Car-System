@@ -42,9 +42,10 @@
             // signInLinkLabel
             // 
             this.signInLinkLabel.AutoSize = true;
+            this.signInLinkLabel.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signInLinkLabel.Location = new System.Drawing.Point(323, 425);
             this.signInLinkLabel.Name = "signInLinkLabel";
-            this.signInLinkLabel.Size = new System.Drawing.Size(168, 16);
+            this.signInLinkLabel.Size = new System.Drawing.Size(157, 17);
             this.signInLinkLabel.TabIndex = 14;
             this.signInLinkLabel.TabStop = true;
             this.signInLinkLabel.Text = "Already registered? Sign in";
@@ -56,7 +57,7 @@
             this.signUpButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signUpButton.FlatAppearance.BorderSize = 0;
             this.signUpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.signUpButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signUpButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpButton.ForeColor = System.Drawing.Color.White;
             this.signUpButton.Location = new System.Drawing.Point(266, 388);
             this.signUpButton.Name = "signUpButton";
@@ -103,7 +104,7 @@
             // passwordLabel
             // 
             this.passwordLabel.BackColor = System.Drawing.Color.Transparent;
-            this.passwordLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.Location = new System.Drawing.Point(91, 197);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(165, 46);
@@ -114,7 +115,7 @@
             // loginLabel
             // 
             this.loginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.loginLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginLabel.Location = new System.Drawing.Point(91, 151);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(165, 46);
@@ -142,7 +143,7 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(91, 246);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(215, 46);

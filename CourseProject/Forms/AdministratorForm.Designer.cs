@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.createApplicationButton = new System.Windows.Forms.Button();
             this.addCarButton = new System.Windows.Forms.Button();
             this.ordersDataGridView = new System.Windows.Forms.DataGridView();
@@ -49,7 +53,7 @@
             this.createApplicationButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createApplicationButton.FlatAppearance.BorderSize = 0;
             this.createApplicationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createApplicationButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createApplicationButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createApplicationButton.ForeColor = System.Drawing.Color.White;
             this.createApplicationButton.Location = new System.Drawing.Point(316, 497);
             this.createApplicationButton.Name = "createApplicationButton";
@@ -65,7 +69,7 @@
             this.addCarButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addCarButton.FlatAppearance.BorderSize = 0;
             this.addCarButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCarButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCarButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCarButton.ForeColor = System.Drawing.Color.White;
             this.addCarButton.Location = new System.Drawing.Point(828, 497);
             this.addCarButton.Name = "addCarButton";
@@ -83,6 +87,14 @@
             this.ordersDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.ordersDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ordersDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ordersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ordersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ordersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.orderIdColumn,
@@ -93,13 +105,31 @@
             this.createDateColumn,
             this.endRentDateColumn,
             this.priceColumn});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ordersDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.ordersDataGridView.GridColor = System.Drawing.SystemColors.Window;
             this.ordersDataGridView.Location = new System.Drawing.Point(12, 82);
             this.ordersDataGridView.MultiSelect = false;
             this.ordersDataGridView.Name = "ordersDataGridView";
             this.ordersDataGridView.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ordersDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.ordersDataGridView.RowHeadersVisible = false;
             this.ordersDataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ordersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.ordersDataGridView.RowTemplate.Height = 24;
             this.ordersDataGridView.RowTemplate.ReadOnly = true;
             this.ordersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -177,7 +207,7 @@
             this.skipOrderTimeButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.skipOrderTimeButton.FlatAppearance.BorderSize = 0;
             this.skipOrderTimeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.skipOrderTimeButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.skipOrderTimeButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.skipOrderTimeButton.ForeColor = System.Drawing.Color.White;
             this.skipOrderTimeButton.Location = new System.Drawing.Point(12, 497);
             this.skipOrderTimeButton.Name = "skipOrderTimeButton";

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CourseProject
 {
@@ -64,15 +65,7 @@ namespace CourseProject
 
         public static Application GetApplicationById(Guid id)
         {
-            foreach (var application in Applications)
-            {
-                if (application.Id == id)
-                {
-                    return application;
-                }
-            }
-
-            return null;
+            return Applications.FirstOrDefault(application => application.Id == id);
         }
 
         public static string GetCommentForOrder(Guid orderId)

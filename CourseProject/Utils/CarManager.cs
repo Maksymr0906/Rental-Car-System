@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CourseProject
@@ -75,15 +76,7 @@ namespace CourseProject
 
         public static Car GetCarById(Guid id)
         {
-            foreach (var car in Cars)
-            {
-                if (car.Id == id)
-                {
-                    return car;
-                }
-            }
-
-            return null;
+            return Cars.FirstOrDefault(car => car.Id == id);
         }
 
         public static void UpdateCarAvailability(Car car, bool isAvailable)

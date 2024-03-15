@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CourseProject
 {
@@ -64,15 +65,7 @@ namespace CourseProject
 
         public static Client GetClientById(Guid id)
         {
-            foreach (var client in Clients)
-            {
-                if (client.Id == id)
-                {
-                    return client;
-                }
-            }
-
-            return null;
+            return Clients.FirstOrDefault(client => client.Id == id);
         }
 
         public static bool IsClientWithLoginExists(string login)

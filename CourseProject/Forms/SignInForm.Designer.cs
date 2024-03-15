@@ -43,7 +43,7 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 120);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(776, 46);
@@ -54,7 +54,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(776, 46);
@@ -68,7 +68,7 @@
             this.signInButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signInButton.FlatAppearance.BorderSize = 0;
             this.signInButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.signInButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signInButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signInButton.ForeColor = System.Drawing.Color.White;
             this.signInButton.Location = new System.Drawing.Point(266, 431);
             this.signInButton.Name = "signInButton";
@@ -81,7 +81,7 @@
             // loginLabel
             // 
             this.loginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.loginLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginLabel.Location = new System.Drawing.Point(119, 205);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(165, 46);
@@ -92,7 +92,7 @@
             // passwordLabel
             // 
             this.passwordLabel.BackColor = System.Drawing.Color.Transparent;
-            this.passwordLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.Location = new System.Drawing.Point(119, 251);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(165, 46);
@@ -140,7 +140,7 @@
             this.runAsAdministratorButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.runAsAdministratorButton.FlatAppearance.BorderSize = 0;
             this.runAsAdministratorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runAsAdministratorButton.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runAsAdministratorButton.Font = new System.Drawing.Font("Roboto", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.runAsAdministratorButton.ForeColor = System.Drawing.Color.White;
             this.runAsAdministratorButton.Location = new System.Drawing.Point(623, 418);
             this.runAsAdministratorButton.Name = "runAsAdministratorButton";
@@ -153,9 +153,10 @@
             // signUpLinkLabel
             // 
             this.signUpLinkLabel.AutoSize = true;
+            this.signUpLinkLabel.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpLinkLabel.Location = new System.Drawing.Point(324, 473);
             this.signUpLinkLabel.Name = "signUpLinkLabel";
-            this.signUpLinkLabel.Size = new System.Drawing.Size(147, 16);
+            this.signUpLinkLabel.Size = new System.Drawing.Size(139, 17);
             this.signUpLinkLabel.TabIndex = 13;
             this.signUpLinkLabel.TabStop = true;
             this.signUpLinkLabel.Text = "Not registered? Sign up";

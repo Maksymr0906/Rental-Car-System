@@ -43,16 +43,16 @@
             // dateOfBirthTimePicker
             // 
             this.dateOfBirthTimePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateOfBirthTimePicker.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateOfBirthTimePicker.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateOfBirthTimePicker.Location = new System.Drawing.Point(285, 235);
             this.dateOfBirthTimePicker.Name = "dateOfBirthTimePicker";
-            this.dateOfBirthTimePicker.Size = new System.Drawing.Size(425, 39);
+            this.dateOfBirthTimePicker.Size = new System.Drawing.Size(425, 40);
             this.dateOfBirthTimePicker.TabIndex = 0;
             // 
             // surnameLabel
             // 
             this.surnameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.surnameLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.surnameLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.surnameLabel.Location = new System.Drawing.Point(42, 101);
             this.surnameLabel.Name = "surnameLabel";
             this.surnameLabel.Size = new System.Drawing.Size(237, 46);
@@ -63,7 +63,7 @@
             // nameLabel
             // 
             this.nameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.nameLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.Location = new System.Drawing.Point(42, 162);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(237, 46);
@@ -74,7 +74,7 @@
             // dateOfBirthLabel
             // 
             this.dateOfBirthLabel.BackColor = System.Drawing.Color.Transparent;
-            this.dateOfBirthLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateOfBirthLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateOfBirthLabel.Location = new System.Drawing.Point(42, 233);
             this.dateOfBirthLabel.Name = "dateOfBirthLabel";
             this.dateOfBirthLabel.Size = new System.Drawing.Size(237, 46);
@@ -85,7 +85,7 @@
             // rentToLabel
             // 
             this.rentToLabel.BackColor = System.Drawing.Color.Transparent;
-            this.rentToLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rentToLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rentToLabel.Location = new System.Drawing.Point(42, 299);
             this.rentToLabel.Name = "rentToLabel";
             this.rentToLabel.Size = new System.Drawing.Size(237, 46);
@@ -96,10 +96,10 @@
             // rentToTimePicker
             // 
             this.rentToTimePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentToTimePicker.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rentToTimePicker.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rentToTimePicker.Location = new System.Drawing.Point(285, 301);
             this.rentToTimePicker.Name = "rentToTimePicker";
-            this.rentToTimePicker.Size = new System.Drawing.Size(425, 39);
+            this.rentToTimePicker.Size = new System.Drawing.Size(425, 40);
             this.rentToTimePicker.TabIndex = 12;
             // 
             // createOrderButton
@@ -108,7 +108,7 @@
             this.createOrderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createOrderButton.FlatAppearance.BorderSize = 0;
             this.createOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createOrderButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createOrderButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createOrderButton.ForeColor = System.Drawing.Color.White;
             this.createOrderButton.Location = new System.Drawing.Point(262, 404);
             this.createOrderButton.Name = "createOrderButton";
@@ -157,7 +157,7 @@
             // userLoginLabel
             // 
             this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLoginLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
             this.userLoginLabel.Location = new System.Drawing.Point(491, 23);
             this.userLoginLabel.Name = "userLoginLabel";

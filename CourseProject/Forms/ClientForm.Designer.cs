@@ -64,7 +64,7 @@
             this.createOrderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createOrderButton.FlatAppearance.BorderSize = 0;
             this.createOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createOrderButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createOrderButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createOrderButton.ForeColor = System.Drawing.Color.White;
             this.createOrderButton.Location = new System.Drawing.Point(421, 531);
             this.createOrderButton.Name = "createOrderButton";
@@ -77,7 +77,7 @@
             // userLoginLabel
             // 
             this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userLoginLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLoginLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
             this.userLoginLabel.Location = new System.Drawing.Point(798, 21);
             this.userLoginLabel.Name = "userLoginLabel";
@@ -90,6 +90,7 @@
             // 
             this.tabControl.Controls.Add(this.availableCarsTabPage);
             this.tabControl.Controls.Add(this.myOrdersTabPage);
+            this.tabControl.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(0, 90);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -100,10 +101,10 @@
             // 
             this.availableCarsTabPage.Controls.Add(this.availableCarsDataGridView);
             this.availableCarsTabPage.Controls.Add(this.createOrderButton);
-            this.availableCarsTabPage.Location = new System.Drawing.Point(4, 25);
+            this.availableCarsTabPage.Location = new System.Drawing.Point(4, 26);
             this.availableCarsTabPage.Name = "availableCarsTabPage";
             this.availableCarsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.availableCarsTabPage.Size = new System.Drawing.Size(1111, 571);
+            this.availableCarsTabPage.Size = new System.Drawing.Size(1111, 570);
             this.availableCarsTabPage.TabIndex = 0;
             this.availableCarsTabPage.Text = "Available Cars";
             this.availableCarsTabPage.UseVisualStyleBackColor = true;
@@ -216,10 +217,10 @@
             // myOrdersTabPage
             // 
             this.myOrdersTabPage.Controls.Add(this.orderedCarsDataGridView);
-            this.myOrdersTabPage.Location = new System.Drawing.Point(4, 25);
+            this.myOrdersTabPage.Location = new System.Drawing.Point(4, 26);
             this.myOrdersTabPage.Name = "myOrdersTabPage";
             this.myOrdersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.myOrdersTabPage.Size = new System.Drawing.Size(1111, 571);
+            this.myOrdersTabPage.Size = new System.Drawing.Size(1111, 570);
             this.myOrdersTabPage.TabIndex = 1;
             this.myOrdersTabPage.Text = "My Orders";
             this.myOrdersTabPage.UseVisualStyleBackColor = true;

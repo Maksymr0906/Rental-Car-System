@@ -213,7 +213,7 @@
             // colorComboBox
             // 
             this.colorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.colorComboBox.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorComboBox.Font = new System.Drawing.Font("Roboto", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.colorComboBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.colorComboBox.FormattingEnabled = true;
             this.colorComboBox.Items.AddRange(new object[] {
@@ -229,7 +229,7 @@
             "Brown"});
             this.colorComboBox.Location = new System.Drawing.Point(217, 380);
             this.colorComboBox.Name = "colorComboBox";
-            this.colorComboBox.Size = new System.Drawing.Size(268, 28);
+            this.colorComboBox.Size = new System.Drawing.Size(268, 31);
             this.colorComboBox.TabIndex = 36;
             // 
             // addCarButton

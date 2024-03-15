@@ -61,7 +61,7 @@
             this.sendApplicationButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sendApplicationButton.FlatAppearance.BorderSize = 0;
             this.sendApplicationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.sendApplicationButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendApplicationButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sendApplicationButton.ForeColor = System.Drawing.Color.White;
             this.sendApplicationButton.Location = new System.Drawing.Point(258, 404);
             this.sendApplicationButton.Name = "sendApplicationButton";
@@ -93,7 +93,7 @@
             // rejectionCommentLabel
             // 
             this.rejectionCommentLabel.BackColor = System.Drawing.Color.Transparent;
-            this.rejectionCommentLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rejectionCommentLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rejectionCommentLabel.Location = new System.Drawing.Point(12, 243);
             this.rejectionCommentLabel.Name = "rejectionCommentLabel";
             this.rejectionCommentLabel.Size = new System.Drawing.Size(287, 46);
@@ -105,7 +105,7 @@
             // clientSurnameLabel
             // 
             this.clientSurnameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.clientSurnameLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clientSurnameLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clientSurnameLabel.Location = new System.Drawing.Point(12, 74);
             this.clientSurnameLabel.Name = "clientSurnameLabel";
             this.clientSurnameLabel.Size = new System.Drawing.Size(776, 46);
@@ -116,7 +116,7 @@
             // carModelLabel
             // 
             this.carModelLabel.BackColor = System.Drawing.Color.Transparent;
-            this.carModelLabel.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.carModelLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.carModelLabel.Location = new System.Drawing.Point(12, 132);
             this.carModelLabel.Name = "carModelLabel";
             this.carModelLabel.Size = new System.Drawing.Size(776, 46);
@@ -130,7 +130,7 @@
             this.confirmOrderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.confirmOrderButton.FlatAppearance.BorderSize = 0;
             this.confirmOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.confirmOrderButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmOrderButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmOrderButton.ForeColor = System.Drawing.Color.White;
             this.confirmOrderButton.Location = new System.Drawing.Point(118, 404);
             this.confirmOrderButton.Name = "confirmOrderButton";
@@ -147,7 +147,7 @@
             this.cancelOrderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelOrderButton.FlatAppearance.BorderSize = 0;
             this.cancelOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelOrderButton.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelOrderButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelOrderButton.ForeColor = System.Drawing.Color.White;
             this.cancelOrderButton.Location = new System.Drawing.Point(401, 404);
             this.cancelOrderButton.Name = "cancelOrderButton";
