@@ -65,12 +65,10 @@ namespace CourseProject
 
         public static void UpdateCar(Car car)
         {
-            for (int i = 0; i < Cars.Count; i++)
+            var index = Cars.FindIndex(c => c.Id == car.Id);
+            if (index != -1)
             {
-                if (Cars[i].Id == car.Id)
-                {
-                    Cars[i] = car;
-                }
+                Cars[index] = car;
             }
         }
 

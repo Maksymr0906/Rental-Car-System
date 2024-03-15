@@ -54,12 +54,10 @@ namespace CourseProject
 
         public static void UpdateApplication(Application application)
         {
-            for (int i = 0; i < Applications.Count; i++)
+            var index = Applications.FindIndex(a => a.Id == application.Id);
+            if (index != -1)
             {
-                if (Applications[i].Id == application.Id)
-                {
-                    Applications[i] = application;
-                }
+                Applications[index] = application;
             }
         }
 
@@ -70,15 +68,7 @@ namespace CourseProject
 
         public static string GetCommentForOrder(Guid orderId)
         {
-            foreach (var application in Applications)
-            {
-                if (application.OrderId == orderId)
-                {
-                    return application.RejectionComment;
-                }
-            }
-
-            return string.Empty;
+            return Applications.FirstOrDefault(application => application.OrderId == orderId)?.RejectionComment ?? string.Empty;
         }
 
         public static Application CreateApplication(Order order)

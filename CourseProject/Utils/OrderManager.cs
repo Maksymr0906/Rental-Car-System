@@ -56,12 +56,10 @@ namespace CourseProject
 
         public static void UpdateOrder(Order order)
         {
-            for (int i = 0; i < Orders.Count; i++)
+            var index = Orders.FindIndex(o => o.Id == order.Id);
+            if (index != -1)
             {
-                if (Orders[i].Id == order.Id)
-                {
-                    Orders[i] = order;
-                }
+                Orders[index] = order;
             }
         }
 

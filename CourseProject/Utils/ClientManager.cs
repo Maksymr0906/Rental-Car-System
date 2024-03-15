@@ -54,12 +54,10 @@ namespace CourseProject
 
         public static void UpdateClient(Client client)
         {
-            for(int i = 0; i < Clients.Count ; i++)
+            var index = Clients.FindIndex(c => c.Id == client.Id);
+            if (index != -1)
             {
-                if (Clients[i].Id == client.Id)
-                {
-                    Clients[i] = client;
-                }
+                Clients[index] = client;
             }
         }
 
@@ -70,15 +68,7 @@ namespace CourseProject
 
         public static bool IsClientWithLoginExists(string login)
         {
-            foreach(var client in Clients)
-            {
-                if(client.Login == login)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return Clients.FirstOrDefault(client => client.Login == login) == null? false : true;
         }
 
         public static void UpdateClientPersonalData(Client client, string surname, string name, DateTime dateOfBirthday)
