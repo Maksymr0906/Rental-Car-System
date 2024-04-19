@@ -33,7 +33,7 @@ namespace Rental_Car_System.Data.Repositories.Implementation
             return entity;
         }
 
-        public  IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = entities;
 
@@ -69,7 +69,7 @@ namespace Rental_Car_System.Data.Repositories.Implementation
             return entity;
         }
 
-        public  TEntity? GetByFilter(Expression<Func<TEntity, bool>> filter)
+        public TEntity? GetByFilter(Expression<Func<TEntity, bool>> filter)
         {
             return entities.FirstOrDefault(filter);
         }

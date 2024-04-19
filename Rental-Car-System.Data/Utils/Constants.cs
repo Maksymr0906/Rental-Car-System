@@ -13,7 +13,7 @@
         public static readonly int daysToSkip = 2;
         public static readonly int maxNumberOfLetters = 25;
         public static readonly int maxMonthToRent = 1;
-
+        public static readonly string pathToCarImages = "../../../Assets/";
         static Constants()
         {
             maxYearOfManufacture = DateTime.Now.Year;
