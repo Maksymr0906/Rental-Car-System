@@ -2,6 +2,7 @@
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Utils;
+using System.Windows.Forms;
 
 namespace Rental_Car_System.Forms
 {
@@ -22,10 +23,9 @@ namespace Rental_Car_System.Forms
             colorLabel.Text = "Color: " + car.Color;
             priceLabel.Text = "Price: " + car.Price;
             fuelConsumptionLabel.Text = "Fuel Consumption: " + car.FuelConsumption;
+            carPictureBox.BorderStyle = BorderStyle.FixedSingle;
             carPictureBox.Image = Image.FromFile(Constants.pathToCarImages + car.ImgPath);
-            carPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            carPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
         }
-
-
     }
 }

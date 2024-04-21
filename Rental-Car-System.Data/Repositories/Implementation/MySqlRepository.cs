@@ -19,13 +19,9 @@ namespace Rental_Car_System.Data.Repositories.Implementation
 
         public static MySqlRepository<TEntity> GetInstance(RentalCarContext context)
         {
-            if(instance == null)
-            {
-                instance = new MySqlRepository<TEntity>(context);
-            }
-
-            return instance;
+            return instance ??= new MySqlRepository<TEntity>(context);
         }
+
         public TEntity Create(TEntity entity)
         {
             entities.Add(entity);
@@ -42,7 +38,7 @@ namespace Rental_Car_System.Data.Repositories.Implementation
                 query = query.Where(filter);
             }
 
-            return query.ToList();
+            return [.. query]; // ToList()
         }
 
         public TEntity? GetById(Guid id)

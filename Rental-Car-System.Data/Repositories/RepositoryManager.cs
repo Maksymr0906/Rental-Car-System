@@ -6,14 +6,9 @@ namespace Rental_Car_System.Data.Repositories
 {
     public static class RepositoryManager
     {
-        private static readonly RentalCarContext context;
-        
-        static RepositoryManager()
-        {
-            context = new RentalCarContext();
-        }
         public static IRepository<TEntity> GetRepo<TEntity>() where TEntity : Entity
         {
+            var context = new RentalCarContext();
             var repository = MySqlRepository<TEntity>.GetInstance(context);
             return repository;
         }

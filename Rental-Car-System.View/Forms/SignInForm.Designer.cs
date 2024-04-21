@@ -28,181 +28,184 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.signInButton = new System.Windows.Forms.Button();
-            this.loginLabel = new System.Windows.Forms.Label();
-            this.passwordLabel = new System.Windows.Forms.Label();
-            this.loginTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.passwordTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.signUpLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.seePasswordCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
-            this.iAmAdminCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
-            this.SuspendLayout();
+            label1 = new Label();
+            label2 = new Label();
+            signInButton = new Button();
+            loginLabel = new Label();
+            passwordLabel = new Label();
+            loginTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            passwordTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            signUpLinkLabel = new LinkLabel();
+            seePasswordCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
+            amIAdminCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 120);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(776, 46);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Choose the way to run a program:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Roboto", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 150);
+            label1.Name = "label1";
+            label1.Size = new Size(776, 58);
+            label1.TabIndex = 4;
+            label1.Text = "Choose the way to run a program:";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(776, 46);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Welcome to the Car Rental System.";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Roboto", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(12, 92);
+            label2.Name = "label2";
+            label2.Size = new Size(776, 58);
+            label2.TabIndex = 5;
+            label2.Text = "Welcome to the Car Rental System.";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // signInButton
             // 
-            this.signInButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.signInButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.signInButton.FlatAppearance.BorderSize = 0;
-            this.signInButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.signInButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signInButton.ForeColor = System.Drawing.Color.White;
-            this.signInButton.Location = new System.Drawing.Point(266, 431);
-            this.signInButton.Name = "signInButton";
-            this.signInButton.Size = new System.Drawing.Size(268, 34);
-            this.signInButton.TabIndex = 6;
-            this.signInButton.Text = "Sign in";
-            this.signInButton.UseVisualStyleBackColor = false;
-            this.signInButton.Click += new System.EventHandler(this.signInButton_Click);
+            signInButton.BackColor = Color.DarkSlateGray;
+            signInButton.Cursor = Cursors.Hand;
+            signInButton.FlatAppearance.BorderSize = 0;
+            signInButton.FlatStyle = FlatStyle.Flat;
+            signInButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            signInButton.ForeColor = Color.White;
+            signInButton.Location = new Point(266, 539);
+            signInButton.Margin = new Padding(3, 4, 3, 4);
+            signInButton.Name = "signInButton";
+            signInButton.Size = new Size(268, 42);
+            signInButton.TabIndex = 6;
+            signInButton.Text = "Sign in";
+            signInButton.UseVisualStyleBackColor = false;
+            signInButton.Click += signInButton_Click;
             // 
             // loginLabel
             // 
-            this.loginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.loginLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginLabel.Location = new System.Drawing.Point(119, 205);
-            this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(165, 46);
-            this.loginLabel.TabIndex = 7;
-            this.loginLabel.Text = "Login:";
-            this.loginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            loginLabel.BackColor = Color.Transparent;
+            loginLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            loginLabel.Location = new Point(119, 256);
+            loginLabel.Name = "loginLabel";
+            loginLabel.Size = new Size(165, 58);
+            loginLabel.TabIndex = 7;
+            loginLabel.Text = "Login:";
+            loginLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // passwordLabel
             // 
-            this.passwordLabel.BackColor = System.Drawing.Color.Transparent;
-            this.passwordLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLabel.Location = new System.Drawing.Point(119, 251);
-            this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(165, 46);
-            this.passwordLabel.TabIndex = 9;
-            this.passwordLabel.Text = "Password:";
-            this.passwordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            passwordLabel.BackColor = Color.Transparent;
+            passwordLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passwordLabel.Location = new Point(119, 314);
+            passwordLabel.Name = "passwordLabel";
+            passwordLabel.Size = new Size(165, 58);
+            passwordLabel.TabIndex = 9;
+            passwordLabel.Text = "Password:";
+            passwordLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // loginTextField
             // 
-            this.loginTextField.Depth = 0;
-            this.loginTextField.Hint = "";
-            this.loginTextField.Location = new System.Drawing.Point(266, 220);
-            this.loginTextField.MaxLength = 32767;
-            this.loginTextField.MouseState = MaterialSkin.MouseState.HOVER;
-            this.loginTextField.Name = "loginTextField";
-            this.loginTextField.PasswordChar = '\0';
-            this.loginTextField.SelectedText = "";
-            this.loginTextField.SelectionLength = 0;
-            this.loginTextField.SelectionStart = 0;
-            this.loginTextField.Size = new System.Drawing.Size(268, 28);
-            this.loginTextField.TabIndex = 10;
-            this.loginTextField.TabStop = false;
-            this.loginTextField.UseSystemPasswordChar = false;
+            loginTextField.Depth = 0;
+            loginTextField.Hint = "";
+            loginTextField.Location = new Point(266, 275);
+            loginTextField.Margin = new Padding(3, 4, 3, 4);
+            loginTextField.MaxLength = 32767;
+            loginTextField.MouseState = MaterialSkin.MouseState.HOVER;
+            loginTextField.Name = "loginTextField";
+            loginTextField.PasswordChar = '\0';
+            loginTextField.SelectedText = "";
+            loginTextField.SelectionLength = 0;
+            loginTextField.SelectionStart = 0;
+            loginTextField.Size = new Size(268, 28);
+            loginTextField.TabIndex = 10;
+            loginTextField.TabStop = false;
+            loginTextField.UseSystemPasswordChar = false;
             // 
             // passwordTextField
             // 
-            this.passwordTextField.Depth = 0;
-            this.passwordTextField.Hint = "";
-            this.passwordTextField.Location = new System.Drawing.Point(266, 269);
-            this.passwordTextField.MaxLength = 32767;
-            this.passwordTextField.MouseState = MaterialSkin.MouseState.HOVER;
-            this.passwordTextField.Name = "passwordTextField";
-            this.passwordTextField.PasswordChar = '*';
-            this.passwordTextField.SelectedText = "";
-            this.passwordTextField.SelectionLength = 0;
-            this.passwordTextField.SelectionStart = 0;
-            this.passwordTextField.Size = new System.Drawing.Size(268, 28);
-            this.passwordTextField.TabIndex = 11;
-            this.passwordTextField.TabStop = false;
-            this.passwordTextField.UseSystemPasswordChar = false;
+            passwordTextField.Depth = 0;
+            passwordTextField.Hint = "";
+            passwordTextField.Location = new Point(266, 336);
+            passwordTextField.Margin = new Padding(3, 4, 3, 4);
+            passwordTextField.MaxLength = 32767;
+            passwordTextField.MouseState = MaterialSkin.MouseState.HOVER;
+            passwordTextField.Name = "passwordTextField";
+            passwordTextField.PasswordChar = '*';
+            passwordTextField.SelectedText = "";
+            passwordTextField.SelectionLength = 0;
+            passwordTextField.SelectionStart = 0;
+            passwordTextField.Size = new Size(268, 28);
+            passwordTextField.TabIndex = 11;
+            passwordTextField.TabStop = false;
+            passwordTextField.UseSystemPasswordChar = false;
             // 
             // signUpLinkLabel
             // 
-            this.signUpLinkLabel.AutoSize = true;
-            this.signUpLinkLabel.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signUpLinkLabel.Location = new System.Drawing.Point(324, 473);
-            this.signUpLinkLabel.Name = "signUpLinkLabel";
-            this.signUpLinkLabel.Size = new System.Drawing.Size(139, 17);
-            this.signUpLinkLabel.TabIndex = 13;
-            this.signUpLinkLabel.TabStop = true;
-            this.signUpLinkLabel.Text = "Not registered? Sign up";
-            this.signUpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signUpLinkLabel_LinkClicked);
+            signUpLinkLabel.AutoSize = true;
+            signUpLinkLabel.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            signUpLinkLabel.Location = new Point(324, 591);
+            signUpLinkLabel.Name = "signUpLinkLabel";
+            signUpLinkLabel.Size = new Size(139, 17);
+            signUpLinkLabel.TabIndex = 13;
+            signUpLinkLabel.TabStop = true;
+            signUpLinkLabel.Text = "Not registered? Sign up";
+            signUpLinkLabel.LinkClicked += signUpLinkLabel_LinkClicked;
             // 
             // seePasswordCheckBox
             // 
-            this.seePasswordCheckBox.AutoSize = true;
-            this.seePasswordCheckBox.Depth = 0;
-            this.seePasswordCheckBox.Font = new System.Drawing.Font("Roboto", 10F);
-            this.seePasswordCheckBox.Location = new System.Drawing.Point(266, 315);
-            this.seePasswordCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.seePasswordCheckBox.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.seePasswordCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.seePasswordCheckBox.Name = "seePasswordCheckBox";
-            this.seePasswordCheckBox.Ripple = true;
-            this.seePasswordCheckBox.Size = new System.Drawing.Size(139, 30);
-            this.seePasswordCheckBox.TabIndex = 23;
-            this.seePasswordCheckBox.Text = "See password";
-            this.seePasswordCheckBox.UseVisualStyleBackColor = true;
-            this.seePasswordCheckBox.CheckedChanged += new System.EventHandler(this.seePasswordCheckBox_CheckedChanged);
+            seePasswordCheckBox.AutoSize = true;
+            seePasswordCheckBox.Depth = 0;
+            seePasswordCheckBox.Font = new Font("Roboto", 10F);
+            seePasswordCheckBox.Location = new Point(266, 394);
+            seePasswordCheckBox.Margin = new Padding(0);
+            seePasswordCheckBox.MouseLocation = new Point(-1, -1);
+            seePasswordCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
+            seePasswordCheckBox.Name = "seePasswordCheckBox";
+            seePasswordCheckBox.Ripple = true;
+            seePasswordCheckBox.Size = new Size(139, 30);
+            seePasswordCheckBox.TabIndex = 23;
+            seePasswordCheckBox.Text = "See password";
+            seePasswordCheckBox.UseVisualStyleBackColor = true;
+            seePasswordCheckBox.CheckedChanged += seePasswordCheckBox_CheckedChanged;
             // 
-            // iAmAdminCheckBox
+            // amIAdminCheckBox
             // 
-            this.iAmAdminCheckBox.AutoSize = true;
-            this.iAmAdminCheckBox.Depth = 0;
-            this.iAmAdminCheckBox.Font = new System.Drawing.Font("Roboto", 10F);
-            this.iAmAdminCheckBox.Location = new System.Drawing.Point(266, 355);
-            this.iAmAdminCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.iAmAdminCheckBox.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.iAmAdminCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.iAmAdminCheckBox.Name = "iAmAdminCheckBox";
-            this.iAmAdminCheckBox.Ripple = true;
-            this.iAmAdminCheckBox.Size = new System.Drawing.Size(117, 30);
-            this.iAmAdminCheckBox.TabIndex = 24;
-            this.iAmAdminCheckBox.Text = "I am admin";
-            this.iAmAdminCheckBox.UseVisualStyleBackColor = true;
+            amIAdminCheckBox.AutoSize = true;
+            amIAdminCheckBox.Depth = 0;
+            amIAdminCheckBox.Font = new Font("Roboto", 10F);
+            amIAdminCheckBox.Location = new Point(266, 444);
+            amIAdminCheckBox.Margin = new Padding(0);
+            amIAdminCheckBox.MouseLocation = new Point(-1, -1);
+            amIAdminCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
+            amIAdminCheckBox.Name = "amIAdminCheckBox";
+            amIAdminCheckBox.Ripple = true;
+            amIAdminCheckBox.Size = new Size(117, 30);
+            amIAdminCheckBox.TabIndex = 24;
+            amIAdminCheckBox.Text = "I am admin";
+            amIAdminCheckBox.UseVisualStyleBackColor = true;
             // 
             // SignInForm
             // 
-            this.AcceptButton = this.signInButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 498);
-            this.Controls.Add(this.iAmAdminCheckBox);
-            this.Controls.Add(this.seePasswordCheckBox);
-            this.Controls.Add(this.signUpLinkLabel);
-            this.Controls.Add(this.passwordTextField);
-            this.Controls.Add(this.loginTextField);
-            this.Controls.Add(this.passwordLabel);
-            this.Controls.Add(this.loginLabel);
-            this.Controls.Add(this.signInButton);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.MaximumSize = new System.Drawing.Size(800, 498);
-            this.Name = "SignInForm";
-            this.Sizable = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sign In";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AcceptButton = signInButton;
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 622);
+            Controls.Add(amIAdminCheckBox);
+            Controls.Add(seePasswordCheckBox);
+            Controls.Add(signUpLinkLabel);
+            Controls.Add(passwordTextField);
+            Controls.Add(loginTextField);
+            Controls.Add(passwordLabel);
+            Controls.Add(loginLabel);
+            Controls.Add(signInButton);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(800, 622);
+            Name = "SignInForm";
+            Sizable = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Sign In";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -215,7 +218,7 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField passwordTextField;
         private System.Windows.Forms.LinkLabel signUpLinkLabel;
         private MaterialSkin.Controls.MaterialCheckBox seePasswordCheckBox;
-        private MaterialSkin.Controls.MaterialCheckBox iAmAdminCheckBox;
+        private MaterialSkin.Controls.MaterialCheckBox amIAdminCheckBox;
     }
 }
 

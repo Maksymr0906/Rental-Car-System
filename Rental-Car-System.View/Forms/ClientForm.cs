@@ -9,28 +9,43 @@ namespace Rental_Car_System.Forms
     public partial class ClientForm : MaterialForm
     {
         private Client loggedClient;
+        private int currentImgIndex = 0;
         public ClientForm()
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
         }
 
-        public ClientForm(Client client) :this()
+        public ClientForm(Client client) : this()
         {
             loggedClient = client;
             userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
+            balanceLabel.Text = $"Balance: {loggedClient.Balance}";
             PrintAvailableCars();
             PrintClientOrders();
-        } 
+        }
 
         private void PrintAvailableCars()
         {
-            availableCarsDataGridView.Rows.Clear();
-
             var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            foreach (var car in cars)
+            if(cars.Count <= 0)
             {
-                availableCarsDataGridView.Rows.Add(car.Id, car.Model, car.Country, car.Brand, car.Color, car.YearOfManufacture, car.FuelConsumption, car.Price, car.IsDamaged);
+                MessageBox.Show("We have not any available car now.");
+                return;
+            }
+            for (int i = 0; i < Constants.numberOfCarsCards; i++)
+            {
+                string pictureBoxName = "carPictureBox" + (i + 1);
+                if (availableCarsTabPage.Controls[pictureBoxName] is PictureBox pictureBox)
+                {
+                    pictureBox.Image = Image.FromFile(Constants.pathToCarImages + cars[(currentImgIndex + i) % cars.Count].ImgPath);
+                }
+
+                string buttonName = "carModelButton" + (i + 1);
+                if (availableCarsTabPage.Controls[buttonName] is Button button)
+                {
+                    button.Text = cars[(currentImgIndex + i) % cars.Count].Model;
+                }
             }
         }
 
@@ -49,16 +64,67 @@ namespace Rental_Car_System.Forms
             }
         }
 
-        private void CreateOrderButton_Click(object sender, EventArgs e)
+        private void prevButton_Click(object sender, EventArgs e)
         {
+            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+            if(cars.Count <= 0)
+            {
+                return;
+            }
+            currentImgIndex = (currentImgIndex - 1 + cars.Count) % cars.Count;
+            PrintAvailableCars();
+        }
+
+        private void nextButton_Click(object sender, EventArgs e)
+        {
+            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+            if (cars.Count <= 0)
+            {
+                return;
+            }
+            currentImgIndex = (currentImgIndex + 1) % cars.Count;
+            PrintAvailableCars();
+        }
+
+        private void carPictureBox_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            int pictureNumber = Convert.ToInt32(pictureBox.Tag);
+            OpenAdditionalCarInfo(pictureNumber);
+        }
+
+        private void OpenAdditionalCarInfo(int pictureNumber)
+        {
+            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+            if (cars.Count <= 0)
+            {
+                return;
+            }
+
             Hide();
 
-            var carId = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[0].Value.ToString());
-            var car = RepositoryManager.GetRepo<Car>()
-                .GetByFilter(c => c.Id == carId);
-            var orderForm = new OrderForm(loggedClient, car);
-            
-            orderForm.FormClosed += (s, args) =>
+            var additionalInfoForm = new AdditionalCarInfoForm(cars[(currentImgIndex + pictureNumber) % cars.Count]);
+            additionalInfoForm.FormClosed += (s, arg) =>
+            {
+                PrintAvailableCars();
+                Show();
+            };
+            additionalInfoForm.Show();
+        }
+
+        private void carModelButton_Click(object sender, EventArgs e)
+        {
+            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+            if (cars.Count <= 0)
+            {
+                return;
+            }
+            Hide();
+            Button button = (Button)sender;
+            int buttonNumber = Convert.ToInt32(button.Tag);
+            var orderForm = new OrderForm(loggedClient, cars[(currentImgIndex + buttonNumber) % cars.Count]);
+
+            orderForm.FormClosed += (s, arg) =>
             {
                 PrintAvailableCars();
                 PrintClientOrders();
@@ -66,16 +132,6 @@ namespace Rental_Car_System.Forms
             };
 
             orderForm.Show();
-        }
-
-        private void availableCarsDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var carId = Guid.Parse(availableCarsDataGridView.CurrentRow.Cells[0].Value.ToString());
-            var car = RepositoryManager.GetRepo<Car>()
-                .GetByFilter(c => c.Id == carId);
-
-            var addititionalCarInfoForm = new AdditionalCarInfoForm(car);
-            addititionalCarInfoForm.Show();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Rental_Car_System.Data
 
         public RentalCarContext()
         {
-
+            
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

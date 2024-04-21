@@ -21,6 +21,7 @@ namespace Rental_Car_System.Forms
             {
                 loginTextField.Text = string.Empty;
                 passwordTextField.Text = string.Empty;
+                amIAdminCheckBox.Checked = false;
                 Show();
             };
             form.Show();
@@ -45,7 +46,7 @@ namespace Rental_Car_System.Forms
                 return;
             }
 
-            if(iAmAdminCheckBox.Checked)
+            if(amIAdminCheckBox.Checked)
             {
                 var foundAdmin = RepositoryManager.GetRepo<Admin>()
                 .GetByFilter(a => a.Login == currentPerson.Login);
