@@ -28,155 +28,173 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.isCarDamagedCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
-            this.sendApplicationButton = new System.Windows.Forms.Button();
-            this.rejectionCommentTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.rejectionCommentLabel = new System.Windows.Forms.Label();
-            this.clientSurnameLabel = new System.Windows.Forms.Label();
-            this.carModelLabel = new System.Windows.Forms.Label();
-            this.confirmOrderButton = new System.Windows.Forms.Button();
-            this.cancelOrderButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            isCarDamagedCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
+            sendApplicationButton = new Button();
+            rejectionCommentTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            rejectionCommentLabel = new Label();
+            clientSurnameLabel = new Label();
+            carModelLabel = new Label();
+            confirmOrderButton = new Button();
+            cancelOrderButton = new Button();
+            carDamageFeeLabel = new Label();
+            SuspendLayout();
             // 
             // isCarDamagedCheckBox
             // 
-            this.isCarDamagedCheckBox.AutoSize = true;
-            this.isCarDamagedCheckBox.Depth = 0;
-            this.isCarDamagedCheckBox.Font = new System.Drawing.Font("Roboto", 10F);
-            this.isCarDamagedCheckBox.Location = new System.Drawing.Point(18, 325);
-            this.isCarDamagedCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.isCarDamagedCheckBox.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.isCarDamagedCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.isCarDamagedCheckBox.Name = "isCarDamagedCheckBox";
-            this.isCarDamagedCheckBox.Ripple = true;
-            this.isCarDamagedCheckBox.Size = new System.Drawing.Size(149, 30);
-            this.isCarDamagedCheckBox.TabIndex = 0;
-            this.isCarDamagedCheckBox.Text = "Is car damaged";
-            this.isCarDamagedCheckBox.UseVisualStyleBackColor = true;
-            this.isCarDamagedCheckBox.Visible = false;
+            isCarDamagedCheckBox.AutoSize = true;
+            isCarDamagedCheckBox.Depth = 0;
+            isCarDamagedCheckBox.Font = new Font("Roboto", 10F);
+            isCarDamagedCheckBox.Location = new Point(18, 406);
+            isCarDamagedCheckBox.Margin = new Padding(0);
+            isCarDamagedCheckBox.MouseLocation = new Point(-1, -1);
+            isCarDamagedCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
+            isCarDamagedCheckBox.Name = "isCarDamagedCheckBox";
+            isCarDamagedCheckBox.Ripple = true;
+            isCarDamagedCheckBox.Size = new Size(149, 30);
+            isCarDamagedCheckBox.TabIndex = 0;
+            isCarDamagedCheckBox.Text = "Is car damaged";
+            isCarDamagedCheckBox.UseVisualStyleBackColor = true;
+            isCarDamagedCheckBox.Visible = false;
             // 
             // sendApplicationButton
             // 
-            this.sendApplicationButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.sendApplicationButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sendApplicationButton.FlatAppearance.BorderSize = 0;
-            this.sendApplicationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.sendApplicationButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendApplicationButton.ForeColor = System.Drawing.Color.White;
-            this.sendApplicationButton.Location = new System.Drawing.Point(258, 404);
-            this.sendApplicationButton.Name = "sendApplicationButton";
-            this.sendApplicationButton.Size = new System.Drawing.Size(268, 34);
-            this.sendApplicationButton.TabIndex = 17;
-            this.sendApplicationButton.Text = "Send Application";
-            this.sendApplicationButton.UseVisualStyleBackColor = false;
-            this.sendApplicationButton.Visible = false;
-            this.sendApplicationButton.Click += new System.EventHandler(this.sendApplicationButton_Click);
+            sendApplicationButton.BackColor = Color.DarkSlateGray;
+            sendApplicationButton.Cursor = Cursors.Hand;
+            sendApplicationButton.FlatAppearance.BorderSize = 0;
+            sendApplicationButton.FlatStyle = FlatStyle.Flat;
+            sendApplicationButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            sendApplicationButton.ForeColor = Color.White;
+            sendApplicationButton.Location = new Point(258, 505);
+            sendApplicationButton.Margin = new Padding(3, 4, 3, 4);
+            sendApplicationButton.Name = "sendApplicationButton";
+            sendApplicationButton.Size = new Size(268, 42);
+            sendApplicationButton.TabIndex = 17;
+            sendApplicationButton.Text = "Send Application";
+            sendApplicationButton.UseVisualStyleBackColor = false;
+            sendApplicationButton.Visible = false;
+            sendApplicationButton.Click += sendApplicationButton_Click;
             // 
             // rejectionCommentTextField
             // 
-            this.rejectionCommentTextField.Depth = 0;
-            this.rejectionCommentTextField.Hint = "";
-            this.rejectionCommentTextField.Location = new System.Drawing.Point(305, 252);
-            this.rejectionCommentTextField.MaxLength = 32767;
-            this.rejectionCommentTextField.MouseState = MaterialSkin.MouseState.HOVER;
-            this.rejectionCommentTextField.Name = "rejectionCommentTextField";
-            this.rejectionCommentTextField.PasswordChar = '\0';
-            this.rejectionCommentTextField.SelectedText = "";
-            this.rejectionCommentTextField.SelectionLength = 0;
-            this.rejectionCommentTextField.SelectionStart = 0;
-            this.rejectionCommentTextField.Size = new System.Drawing.Size(453, 28);
-            this.rejectionCommentTextField.TabIndex = 22;
-            this.rejectionCommentTextField.TabStop = false;
-            this.rejectionCommentTextField.UseSystemPasswordChar = false;
-            this.rejectionCommentTextField.Visible = false;
+            rejectionCommentTextField.Depth = 0;
+            rejectionCommentTextField.Hint = "";
+            rejectionCommentTextField.Location = new Point(305, 315);
+            rejectionCommentTextField.Margin = new Padding(3, 4, 3, 4);
+            rejectionCommentTextField.MaxLength = 32767;
+            rejectionCommentTextField.MouseState = MaterialSkin.MouseState.HOVER;
+            rejectionCommentTextField.Name = "rejectionCommentTextField";
+            rejectionCommentTextField.PasswordChar = '\0';
+            rejectionCommentTextField.SelectedText = "";
+            rejectionCommentTextField.SelectionLength = 0;
+            rejectionCommentTextField.SelectionStart = 0;
+            rejectionCommentTextField.Size = new Size(453, 28);
+            rejectionCommentTextField.TabIndex = 22;
+            rejectionCommentTextField.TabStop = false;
+            rejectionCommentTextField.UseSystemPasswordChar = false;
+            rejectionCommentTextField.Visible = false;
             // 
             // rejectionCommentLabel
             // 
-            this.rejectionCommentLabel.BackColor = System.Drawing.Color.Transparent;
-            this.rejectionCommentLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rejectionCommentLabel.Location = new System.Drawing.Point(12, 243);
-            this.rejectionCommentLabel.Name = "rejectionCommentLabel";
-            this.rejectionCommentLabel.Size = new System.Drawing.Size(287, 46);
-            this.rejectionCommentLabel.TabIndex = 21;
-            this.rejectionCommentLabel.Text = "Rejection comment:";
-            this.rejectionCommentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rejectionCommentLabel.Visible = false;
+            rejectionCommentLabel.BackColor = Color.Transparent;
+            rejectionCommentLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rejectionCommentLabel.Location = new Point(12, 304);
+            rejectionCommentLabel.Name = "rejectionCommentLabel";
+            rejectionCommentLabel.Size = new Size(287, 58);
+            rejectionCommentLabel.TabIndex = 21;
+            rejectionCommentLabel.Text = "Rejection comment:";
+            rejectionCommentLabel.TextAlign = ContentAlignment.MiddleLeft;
+            rejectionCommentLabel.Visible = false;
             // 
             // clientSurnameLabel
             // 
-            this.clientSurnameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.clientSurnameLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clientSurnameLabel.Location = new System.Drawing.Point(12, 74);
-            this.clientSurnameLabel.Name = "clientSurnameLabel";
-            this.clientSurnameLabel.Size = new System.Drawing.Size(776, 46);
-            this.clientSurnameLabel.TabIndex = 23;
-            this.clientSurnameLabel.Text = "Client surname:";
-            this.clientSurnameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            clientSurnameLabel.BackColor = Color.Transparent;
+            clientSurnameLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            clientSurnameLabel.Location = new Point(12, 92);
+            clientSurnameLabel.Name = "clientSurnameLabel";
+            clientSurnameLabel.Size = new Size(776, 58);
+            clientSurnameLabel.TabIndex = 23;
+            clientSurnameLabel.Text = "Client surname:";
+            clientSurnameLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // carModelLabel
             // 
-            this.carModelLabel.BackColor = System.Drawing.Color.Transparent;
-            this.carModelLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.carModelLabel.Location = new System.Drawing.Point(12, 132);
-            this.carModelLabel.Name = "carModelLabel";
-            this.carModelLabel.Size = new System.Drawing.Size(776, 46);
-            this.carModelLabel.TabIndex = 24;
-            this.carModelLabel.Text = "Car model:";
-            this.carModelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            carModelLabel.BackColor = Color.Transparent;
+            carModelLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            carModelLabel.Location = new Point(12, 165);
+            carModelLabel.Name = "carModelLabel";
+            carModelLabel.Size = new Size(776, 58);
+            carModelLabel.TabIndex = 24;
+            carModelLabel.Text = "Car model:";
+            carModelLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // confirmOrderButton
             // 
-            this.confirmOrderButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.confirmOrderButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.confirmOrderButton.FlatAppearance.BorderSize = 0;
-            this.confirmOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.confirmOrderButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.confirmOrderButton.ForeColor = System.Drawing.Color.White;
-            this.confirmOrderButton.Location = new System.Drawing.Point(118, 404);
-            this.confirmOrderButton.Name = "confirmOrderButton";
-            this.confirmOrderButton.Size = new System.Drawing.Size(268, 34);
-            this.confirmOrderButton.TabIndex = 25;
-            this.confirmOrderButton.Text = "Confirm Order";
-            this.confirmOrderButton.UseVisualStyleBackColor = false;
-            this.confirmOrderButton.Visible = false;
-            this.confirmOrderButton.Click += new System.EventHandler(this.confirmOrderButton_Click);
+            confirmOrderButton.BackColor = Color.DarkSlateGray;
+            confirmOrderButton.Cursor = Cursors.Hand;
+            confirmOrderButton.FlatAppearance.BorderSize = 0;
+            confirmOrderButton.FlatStyle = FlatStyle.Flat;
+            confirmOrderButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            confirmOrderButton.ForeColor = Color.White;
+            confirmOrderButton.Location = new Point(118, 505);
+            confirmOrderButton.Margin = new Padding(3, 4, 3, 4);
+            confirmOrderButton.Name = "confirmOrderButton";
+            confirmOrderButton.Size = new Size(268, 42);
+            confirmOrderButton.TabIndex = 25;
+            confirmOrderButton.Text = "Confirm Order";
+            confirmOrderButton.UseVisualStyleBackColor = false;
+            confirmOrderButton.Visible = false;
+            confirmOrderButton.Click += confirmOrderButton_Click;
             // 
             // cancelOrderButton
             // 
-            this.cancelOrderButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.cancelOrderButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cancelOrderButton.FlatAppearance.BorderSize = 0;
-            this.cancelOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelOrderButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelOrderButton.ForeColor = System.Drawing.Color.White;
-            this.cancelOrderButton.Location = new System.Drawing.Point(401, 404);
-            this.cancelOrderButton.Name = "cancelOrderButton";
-            this.cancelOrderButton.Size = new System.Drawing.Size(268, 34);
-            this.cancelOrderButton.TabIndex = 26;
-            this.cancelOrderButton.Text = "Cancel Order";
-            this.cancelOrderButton.UseVisualStyleBackColor = false;
-            this.cancelOrderButton.Visible = false;
-            this.cancelOrderButton.Click += new System.EventHandler(this.cancelOrderButton_Click);
+            cancelOrderButton.BackColor = Color.DarkSlateGray;
+            cancelOrderButton.Cursor = Cursors.Hand;
+            cancelOrderButton.FlatAppearance.BorderSize = 0;
+            cancelOrderButton.FlatStyle = FlatStyle.Flat;
+            cancelOrderButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cancelOrderButton.ForeColor = Color.White;
+            cancelOrderButton.Location = new Point(401, 505);
+            cancelOrderButton.Margin = new Padding(3, 4, 3, 4);
+            cancelOrderButton.Name = "cancelOrderButton";
+            cancelOrderButton.Size = new Size(268, 42);
+            cancelOrderButton.TabIndex = 26;
+            cancelOrderButton.Text = "Cancel Order";
+            cancelOrderButton.UseVisualStyleBackColor = false;
+            cancelOrderButton.Visible = false;
+            cancelOrderButton.Click += cancelOrderButton_Click;
+            // 
+            // carDamageFeeLabel
+            // 
+            carDamageFeeLabel.BackColor = Color.Transparent;
+            carDamageFeeLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            carDamageFeeLabel.Location = new Point(12, 304);
+            carDamageFeeLabel.Name = "carDamageFeeLabel";
+            carDamageFeeLabel.Size = new Size(287, 58);
+            carDamageFeeLabel.TabIndex = 27;
+            carDamageFeeLabel.Text = "Fee for car damage: ";
+            carDamageFeeLabel.TextAlign = ContentAlignment.MiddleLeft;
+            carDamageFeeLabel.Visible = false;
             // 
             // ApplicationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.cancelOrderButton);
-            this.Controls.Add(this.confirmOrderButton);
-            this.Controls.Add(this.carModelLabel);
-            this.Controls.Add(this.clientSurnameLabel);
-            this.Controls.Add(this.rejectionCommentTextField);
-            this.Controls.Add(this.rejectionCommentLabel);
-            this.Controls.Add(this.sendApplicationButton);
-            this.Controls.Add(this.isCarDamagedCheckBox);
-            this.Name = "ApplicationForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Application";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 562);
+            Controls.Add(carDamageFeeLabel);
+            Controls.Add(cancelOrderButton);
+            Controls.Add(confirmOrderButton);
+            Controls.Add(carModelLabel);
+            Controls.Add(clientSurnameLabel);
+            Controls.Add(rejectionCommentTextField);
+            Controls.Add(rejectionCommentLabel);
+            Controls.Add(sendApplicationButton);
+            Controls.Add(isCarDamagedCheckBox);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "ApplicationForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Application";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -189,5 +207,6 @@
         private System.Windows.Forms.Label carModelLabel;
         private System.Windows.Forms.Button confirmOrderButton;
         private System.Windows.Forms.Button cancelOrderButton;
+        private Label carDamageFeeLabel;
     }
 }

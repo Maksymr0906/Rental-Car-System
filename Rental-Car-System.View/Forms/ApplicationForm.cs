@@ -54,6 +54,7 @@ namespace Rental_Car_System.Forms
         {
             isCarDamagedCheckBox.Visible = true;
             sendApplicationButton.Visible = true;
+            carDamageFeeLabel.Visible = true;
         }
 
         private void UpdateLabels()
@@ -62,10 +63,11 @@ namespace Rental_Car_System.Forms
             Text = $"Application: {currentApplication.Type}";
             var clientSurname = RepositoryManager.GetRepo<Client>()
                 .GetByFilter(c => c.Id == order.ClientId).Surname;
-            var carModel = RepositoryManager.GetRepo<Car>()
-                .GetByFilter(c => c.Id == order.CarId).Model;
+            var car = RepositoryManager.GetRepo<Car>()
+                .GetByFilter(c => c.Id == order.CarId);
             clientSurnameLabel.Text += $"{clientSurname}";
-            carModelLabel.Text += $"{carModel}";
+            carModelLabel.Text += $"{car.Model}";
+            carDamageFeeLabel.Text += $"{car.Price / Constants.coefficientForCarDamage}";
         }
 
         private void sendApplicationButton_Click(object sender, EventArgs e)

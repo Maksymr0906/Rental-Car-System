@@ -335,7 +335,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1118, 878);
+            ClientSize = new Size(1118, 840);
             Controls.Add(balanceLabel);
             Controls.Add(userLoginLabel);
             Controls.Add(tabControl);

@@ -2,7 +2,7 @@
 {
     public static class Constants
     {
-        public static readonly double coefficientForCarDamage = 30;
+        public static readonly double coefficientForCarDamage = 30.0;
         public static readonly int minYearOfManufacture = 2000;
         public static readonly int maxYearOfManufacture;
         public static readonly int minPrice = 1000;

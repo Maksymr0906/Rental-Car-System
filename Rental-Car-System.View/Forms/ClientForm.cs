@@ -20,7 +20,7 @@ namespace Rental_Car_System.Forms
         {
             loggedClient = client;
             userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
-            balanceLabel.Text = $"Balance: {loggedClient.Balance}";
+            PrintBalance();
             PrintAvailableCars();
             PrintClientOrders();
         }
@@ -119,6 +119,7 @@ namespace Rental_Car_System.Forms
             {
                 return;
             }
+
             Hide();
             Button button = (Button)sender;
             int buttonNumber = Convert.ToInt32(button.Tag);
@@ -128,10 +129,16 @@ namespace Rental_Car_System.Forms
             {
                 PrintAvailableCars();
                 PrintClientOrders();
+                PrintBalance();
                 Show();
             };
 
             orderForm.Show();
+        }
+
+        private void PrintBalance()
+        {
+            balanceLabel.Text = $"Balance: {loggedClient.Balance:F2}";
         }
     }
 }

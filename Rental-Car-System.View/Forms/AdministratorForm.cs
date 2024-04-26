@@ -45,12 +45,19 @@ namespace Rental_Car_System.Forms
 
         private void CreateApplicationButton_Click(object sender, EventArgs e)
         {
+            if(ordersDataGridView.RowCount <= 0)
+            {
+                MessageBox.Show("There are no available orders.");
+                return;
+            }
+
             var order = RepositoryManager.GetRepo<Order>()
                 .GetByFilter(o => o.Id == Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString()));
+
             var application = new RentalApplication 
             {
                 OrderId = order.Id,
-                Type = order.Status == Order.OrderStatus.Processing? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded,
+                Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded,
                 RejectionComment = string.Empty
             };
 

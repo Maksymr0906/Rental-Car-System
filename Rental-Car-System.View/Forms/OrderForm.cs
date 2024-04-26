@@ -47,6 +47,12 @@ namespace Rental_Car_System.Forms
                 return;
             }
 
+            if(loggedClient.Balance < carToOrder.Price / Constants.priceDivisor)
+            {
+                MessageBox.Show("You don't have enough money.");
+                return;
+            }
+
             UpdateClientInfo();
 
             CreateOrder();
@@ -74,9 +80,10 @@ namespace Rental_Car_System.Forms
                 ClientId = loggedClient.Id,
                 CarId = carToOrder.Id,
                 EndRentDate = DateTime.Parse(rentToTimePicker.Text),
-                Price = carToOrder.Price / Constants.coefficientForCarDamage,
+                Price = carToOrder.Price / Constants.priceDivisor,
                 Status = Order.OrderStatus.Processing
             };
+
             RepositoryManager.GetRepo<Order>().Create(order);
         }
 
