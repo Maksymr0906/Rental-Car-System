@@ -15,6 +15,7 @@
         public static readonly int maxMonthToRent = 1;
         public static readonly string pathToCarImages = "../../../Assets/";
         public static readonly int numberOfCarsCards = 3;
+        public static readonly int startingClientBalance = 100000;
         static Constants()
         {
             maxYearOfManufacture = DateTime.Now.Year;
