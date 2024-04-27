@@ -63,6 +63,16 @@ namespace Rental_Car_System.View.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap car_icon1 {
+            get {
+                object obj = ResourceManager.GetObject("car_icon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap left_arrow_button {
             get {
                 object obj = ResourceManager.GetObject("left_arrow_button", resourceCulture);
@@ -76,6 +86,16 @@ namespace Rental_Car_System.View.Properties {
         internal static System.Drawing.Bitmap right_arrow_button {
             get {
                 object obj = ResourceManager.GetObject("right_arrow_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_icon {
+            get {
+                object obj = ResourceManager.GetObject("user_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
