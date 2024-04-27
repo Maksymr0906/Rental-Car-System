@@ -53,12 +53,12 @@
             CreateApplicationButton.Cursor = Cursors.Hand;
             CreateApplicationButton.FlatAppearance.BorderSize = 0;
             CreateApplicationButton.FlatStyle = FlatStyle.Flat;
-            CreateApplicationButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CreateApplicationButton.Font = new Font("Roboto", 12F);
             CreateApplicationButton.ForeColor = Color.White;
-            CreateApplicationButton.Location = new Point(316, 621);
+            CreateApplicationButton.Location = new Point(298, 499);
             CreateApplicationButton.Margin = new Padding(3, 4, 3, 4);
             CreateApplicationButton.Name = "CreateApplicationButton";
-            CreateApplicationButton.Size = new Size(268, 42);
+            CreateApplicationButton.Size = new Size(187, 42);
             CreateApplicationButton.TabIndex = 17;
             CreateApplicationButton.Text = "Create Application";
             CreateApplicationButton.UseVisualStyleBackColor = false;
@@ -70,9 +70,9 @@
             addCarButton.Cursor = Cursors.Hand;
             addCarButton.FlatAppearance.BorderSize = 0;
             addCarButton.FlatStyle = FlatStyle.Flat;
-            addCarButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            addCarButton.Font = new Font("Roboto", 12F);
             addCarButton.ForeColor = Color.White;
-            addCarButton.Location = new Point(828, 621);
+            addCarButton.Location = new Point(596, 499);
             addCarButton.Margin = new Padding(3, 4, 3, 4);
             addCarButton.Name = "addCarButton";
             addCarButton.Size = new Size(111, 42);
@@ -91,7 +91,7 @@
             ordersDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -101,7 +101,7 @@
             ordersDataGridView.Columns.AddRange(new DataGridViewColumn[] { orderIdColumn, clientNameColumn, clientSurnameColumn, carModelColumn, carColorColumn, CreateDateColumn, endRentDateColumn, priceColumn });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -115,7 +115,7 @@
             ordersDataGridView.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
@@ -123,12 +123,12 @@
             ordersDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             ordersDataGridView.RowHeadersVisible = false;
             ordersDataGridView.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ordersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             ordersDataGridView.RowTemplate.Height = 24;
             ordersDataGridView.RowTemplate.ReadOnly = true;
             ordersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ordersDataGridView.Size = new Size(930, 511);
+            ordersDataGridView.Size = new Size(714, 389);
             ordersDataGridView.TabIndex = 19;
             // 
             // orderIdColumn
@@ -203,12 +203,12 @@
             skipOrderTimeButton.Cursor = Cursors.Hand;
             skipOrderTimeButton.FlatAppearance.BorderSize = 0;
             skipOrderTimeButton.FlatStyle = FlatStyle.Flat;
-            skipOrderTimeButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            skipOrderTimeButton.Font = new Font("Roboto", 12F);
             skipOrderTimeButton.ForeColor = Color.White;
-            skipOrderTimeButton.Location = new Point(12, 621);
+            skipOrderTimeButton.Location = new Point(12, 499);
             skipOrderTimeButton.Margin = new Padding(3, 4, 3, 4);
             skipOrderTimeButton.Name = "skipOrderTimeButton";
-            skipOrderTimeButton.Size = new Size(249, 42);
+            skipOrderTimeButton.Size = new Size(167, 42);
             skipOrderTimeButton.TabIndex = 20;
             skipOrderTimeButton.Text = "Skip Order Time";
             skipOrderTimeButton.UseVisualStyleBackColor = false;
@@ -217,13 +217,14 @@
             // AdministratorForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(949, 679);
+            ClientSize = new Size(727, 554);
             Controls.Add(skipOrderTimeButton);
             Controls.Add(ordersDataGridView);
             Controls.Add(addCarButton);
             Controls.Add(CreateApplicationButton);
             Margin = new Padding(3, 4, 3, 4);
             Name = "AdministratorForm";
+            Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Administrator";
             ((System.ComponentModel.ISupportInitialize)ordersDataGridView).EndInit();

@@ -41,9 +41,9 @@
             // 
             countryLabel.BackColor = Color.Transparent;
             countryLabel.Font = new Font("Roboto", 12F);
-            countryLabel.Location = new Point(201, 477);
+            countryLabel.Location = new Point(201, 361);
             countryLabel.Name = "countryLabel";
-            countryLabel.Size = new Size(208, 58);
+            countryLabel.Size = new Size(190, 35);
             countryLabel.TabIndex = 9;
             countryLabel.Text = "Country:";
             countryLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -52,9 +52,9 @@
             // 
             colorLabel.BackColor = Color.Transparent;
             colorLabel.Font = new Font("Roboto", 12F);
-            colorLabel.Location = new Point(12, 372);
+            colorLabel.Location = new Point(12, 305);
             colorLabel.Name = "colorLabel";
-            colorLabel.Size = new Size(183, 58);
+            colorLabel.Size = new Size(183, 35);
             colorLabel.TabIndex = 10;
             colorLabel.Text = "Color: ";
             colorLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -63,9 +63,9 @@
             // 
             brandLabel.BackColor = Color.Transparent;
             brandLabel.Font = new Font("Roboto", 12F);
-            brandLabel.Location = new Point(12, 477);
+            brandLabel.Location = new Point(12, 361);
             brandLabel.Name = "brandLabel";
-            brandLabel.Size = new Size(183, 58);
+            brandLabel.Size = new Size(183, 35);
             brandLabel.TabIndex = 11;
             brandLabel.Text = "Brand:";
             brandLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -74,9 +74,9 @@
             // 
             priceLabel.BackColor = Color.Transparent;
             priceLabel.Font = new Font("Roboto", 12F);
-            priceLabel.Location = new Point(201, 372);
+            priceLabel.Location = new Point(201, 305);
             priceLabel.Name = "priceLabel";
-            priceLabel.Size = new Size(208, 58);
+            priceLabel.Size = new Size(190, 35);
             priceLabel.TabIndex = 12;
             priceLabel.Text = "Price:";
             priceLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -85,9 +85,9 @@
             // 
             fuelConsumptionLabel.BackColor = Color.Transparent;
             fuelConsumptionLabel.Font = new Font("Roboto", 12F);
-            fuelConsumptionLabel.Location = new Point(12, 291);
+            fuelConsumptionLabel.Location = new Point(12, 254);
             fuelConsumptionLabel.Name = "fuelConsumptionLabel";
-            fuelConsumptionLabel.Size = new Size(291, 58);
+            fuelConsumptionLabel.Size = new Size(291, 36);
             fuelConsumptionLabel.TabIndex = 13;
             fuelConsumptionLabel.Text = "Fuel Consumption:";
             fuelConsumptionLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -95,16 +95,16 @@
             // carPictureBox
             // 
             carPictureBox.BackgroundImageLayout = ImageLayout.None;
-            carPictureBox.Location = new Point(12, 91);
+            carPictureBox.Location = new Point(12, 69);
             carPictureBox.Name = "carPictureBox";
-            carPictureBox.Size = new Size(397, 182);
+            carPictureBox.Size = new Size(379, 182);
             carPictureBox.TabIndex = 14;
             carPictureBox.TabStop = false;
             // 
             // AdditionalCarInfoForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(421, 540);
+            ClientSize = new Size(404, 406);
             Controls.Add(carPictureBox);
             Controls.Add(fuelConsumptionLabel);
             Controls.Add(priceLabel);
@@ -112,6 +112,7 @@
             Controls.Add(colorLabel);
             Controls.Add(countryLabel);
             Name = "AdditionalCarInfoForm";
+            Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdditionalCarInfoForm";
             ((System.ComponentModel.ISupportInitialize)carPictureBox).EndInit();

@@ -17,6 +17,7 @@ namespace Rental_Car_System.Forms
         private void addCarButton_Click(object sender, EventArgs e)
         {
             var car = CreateCar();
+
             if (!IsCarDataValid(car))
             {
                 return;
@@ -48,6 +49,12 @@ namespace Rental_Car_System.Forms
                 return false;
             }
 
+            if(!File.Exists(Constants.pathToCarImages + car.ImgPath))
+            {
+                MessageBox.Show($"Add {car.ImgPath} image to Assets folder.");
+                return false;
+            }
+
             return true;
         }
 
@@ -62,8 +69,15 @@ namespace Rental_Car_System.Forms
                 Price = Convert.ToDouble(priceTextField.Text),
                 Color = colorComboBox.Text,
                 YearOfManufacture = Convert.ToInt32(yearOfManufactureTextField.Text),
-                ImgPath = string.Empty
+                ImgPath = ConvertToImageFileName(modelTextField.Text)
             };
+        }
+
+        private string ConvertToImageFileName(string input)
+        {
+            string fileName = input.ToLower().Replace(" ", "_");
+            fileName += ".jpg";
+            return fileName;
         }
 
         private void priceTextField_KeyPress(object sender, KeyPressEventArgs e)

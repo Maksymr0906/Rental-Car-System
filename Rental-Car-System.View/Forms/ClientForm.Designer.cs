@@ -62,7 +62,7 @@
             // 
             tabControl.Controls.Add(availableCarsTabPage);
             tabControl.Controls.Add(myOrdersTabPage);
-            tabControl.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tabControl.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tabControl.Location = new Point(0, 67);
             tabControl.Margin = new Padding(3, 4, 3, 4);
             tabControl.Name = "tabControl";
@@ -80,10 +80,10 @@
             availableCarsTabPage.Controls.Add(nextButton);
             availableCarsTabPage.Controls.Add(prevButton);
             availableCarsTabPage.Controls.Add(carPictureBox1);
-            availableCarsTabPage.Location = new Point(4, 37);
+            availableCarsTabPage.Location = new Point(4, 34);
             availableCarsTabPage.Name = "availableCarsTabPage";
             availableCarsTabPage.Padding = new Padding(3);
-            availableCarsTabPage.Size = new Size(1112, 501);
+            availableCarsTabPage.Size = new Size(1112, 504);
             availableCarsTabPage.TabIndex = 2;
             availableCarsTabPage.Text = "Available Cars";
             availableCarsTabPage.UseVisualStyleBackColor = true;
@@ -217,11 +217,11 @@
             // myOrdersTabPage
             // 
             myOrdersTabPage.Controls.Add(orderedCarsDataGridView);
-            myOrdersTabPage.Location = new Point(4, 37);
+            myOrdersTabPage.Location = new Point(4, 34);
             myOrdersTabPage.Margin = new Padding(3, 4, 3, 4);
             myOrdersTabPage.Name = "myOrdersTabPage";
             myOrdersTabPage.Padding = new Padding(3, 4, 3, 4);
-            myOrdersTabPage.Size = new Size(1112, 501);
+            myOrdersTabPage.Size = new Size(1112, 504);
             myOrdersTabPage.TabIndex = 1;
             myOrdersTabPage.Text = "My Orders";
             myOrdersTabPage.UseVisualStyleBackColor = true;
@@ -345,6 +345,7 @@
             Controls.Add(balanceLabel);
             Controls.Add(tabControl);
             Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(1118, 605);
             Name = "ClientForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

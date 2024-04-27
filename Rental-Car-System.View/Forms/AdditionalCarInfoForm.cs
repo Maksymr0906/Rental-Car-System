@@ -17,7 +17,6 @@ namespace Rental_Car_System.Forms
         public AdditionalCarInfoForm(Car car) : this()
         {
             Text = car.Model;
-
             countryLabel.Text = "Country: " + car.Country;
             brandLabel.Text = "Brand: " + car.Brand;
             colorLabel.Text = "Color: " + car.Color;
@@ -25,7 +24,7 @@ namespace Rental_Car_System.Forms
             fuelConsumptionLabel.Text = "Fuel Consumption: " + car.FuelConsumption;
             carPictureBox.BorderStyle = BorderStyle.FixedSingle;
             carPictureBox.Image = Image.FromFile(Constants.pathToCarImages + car.ImgPath);
-            carPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            carPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }
 }

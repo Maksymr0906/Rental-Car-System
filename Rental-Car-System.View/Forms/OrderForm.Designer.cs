@@ -28,177 +28,142 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateOfBirthTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.surnameLabel = new System.Windows.Forms.Label();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.dateOfBirthLabel = new System.Windows.Forms.Label();
-            this.rentToLabel = new System.Windows.Forms.Label();
-            this.rentToTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.CreateOrderButton = new System.Windows.Forms.Button();
-            this.surnameTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.nameTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.userLoginLabel = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // dateOfBirthTimePicker
-            // 
-            this.dateOfBirthTimePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateOfBirthTimePicker.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateOfBirthTimePicker.Location = new System.Drawing.Point(285, 235);
-            this.dateOfBirthTimePicker.Name = "dateOfBirthTimePicker";
-            this.dateOfBirthTimePicker.Size = new System.Drawing.Size(425, 40);
-            this.dateOfBirthTimePicker.TabIndex = 0;
-            // 
-            // surnameLabel
-            // 
-            this.surnameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.surnameLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.surnameLabel.Location = new System.Drawing.Point(42, 101);
-            this.surnameLabel.Name = "surnameLabel";
-            this.surnameLabel.Size = new System.Drawing.Size(237, 46);
-            this.surnameLabel.TabIndex = 8;
-            this.surnameLabel.Text = "Surname:";
-            this.surnameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nameLabel
-            // 
-            this.nameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.nameLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(42, 162);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(237, 46);
-            this.nameLabel.TabIndex = 9;
-            this.nameLabel.Text = "Name: ";
-            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dateOfBirthLabel
-            // 
-            this.dateOfBirthLabel.BackColor = System.Drawing.Color.Transparent;
-            this.dateOfBirthLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateOfBirthLabel.Location = new System.Drawing.Point(42, 233);
-            this.dateOfBirthLabel.Name = "dateOfBirthLabel";
-            this.dateOfBirthLabel.Size = new System.Drawing.Size(237, 46);
-            this.dateOfBirthLabel.TabIndex = 10;
-            this.dateOfBirthLabel.Text = "Date of birth:";
-            this.dateOfBirthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            rentToLabel = new Label();
+            rentToTimePicker = new DateTimePicker();
+            CreateOrderButton = new Button();
+            balanceLabel = new Label();
+            priceLabel = new Label();
+            modelLabel = new Label();
+            brandLabel = new Label();
+            carPictureBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)carPictureBox).BeginInit();
+            SuspendLayout();
             // 
             // rentToLabel
             // 
-            this.rentToLabel.BackColor = System.Drawing.Color.Transparent;
-            this.rentToLabel.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentToLabel.Location = new System.Drawing.Point(42, 299);
-            this.rentToLabel.Name = "rentToLabel";
-            this.rentToLabel.Size = new System.Drawing.Size(237, 46);
-            this.rentToLabel.TabIndex = 11;
-            this.rentToLabel.Text = "Rent to: ";
-            this.rentToLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            rentToLabel.BackColor = Color.Transparent;
+            rentToLabel.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rentToLabel.Location = new Point(12, 395);
+            rentToLabel.Name = "rentToLabel";
+            rentToLabel.Size = new Size(97, 32);
+            rentToLabel.TabIndex = 11;
+            rentToLabel.Text = "Rent to: ";
+            rentToLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // rentToTimePicker
             // 
-            this.rentToTimePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentToTimePicker.Font = new System.Drawing.Font("Roboto", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentToTimePicker.Location = new System.Drawing.Point(285, 301);
-            this.rentToTimePicker.Name = "rentToTimePicker";
-            this.rentToTimePicker.Size = new System.Drawing.Size(425, 40);
-            this.rentToTimePicker.TabIndex = 12;
+            rentToTimePicker.CalendarFont = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rentToTimePicker.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rentToTimePicker.Location = new Point(109, 395);
+            rentToTimePicker.Margin = new Padding(3, 4, 3, 4);
+            rentToTimePicker.Name = "rentToTimePicker";
+            rentToTimePicker.Size = new Size(254, 32);
+            rentToTimePicker.TabIndex = 12;
+            rentToTimePicker.ValueChanged += rentToTimePicker_ValueChanged;
             // 
             // CreateOrderButton
             // 
-            this.CreateOrderButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.CreateOrderButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CreateOrderButton.FlatAppearance.BorderSize = 0;
-            this.CreateOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreateOrderButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateOrderButton.ForeColor = System.Drawing.Color.White;
-            this.CreateOrderButton.Location = new System.Drawing.Point(262, 404);
-            this.CreateOrderButton.Name = "CreateOrderButton";
-            this.CreateOrderButton.Size = new System.Drawing.Size(268, 34);
-            this.CreateOrderButton.TabIndex = 17;
-            this.CreateOrderButton.Text = "Create Order";
-            this.CreateOrderButton.UseVisualStyleBackColor = false;
-            this.CreateOrderButton.Click += new System.EventHandler(this.CreateOrderButton_Click);
+            CreateOrderButton.BackColor = Color.DarkSlateGray;
+            CreateOrderButton.Cursor = Cursors.Hand;
+            CreateOrderButton.FlatAppearance.BorderSize = 0;
+            CreateOrderButton.FlatStyle = FlatStyle.Flat;
+            CreateOrderButton.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CreateOrderButton.ForeColor = Color.White;
+            CreateOrderButton.Location = new Point(52, 477);
+            CreateOrderButton.Margin = new Padding(3, 4, 3, 4);
+            CreateOrderButton.Name = "CreateOrderButton";
+            CreateOrderButton.Size = new Size(268, 42);
+            CreateOrderButton.TabIndex = 17;
+            CreateOrderButton.Text = "Create Order";
+            CreateOrderButton.UseVisualStyleBackColor = false;
+            CreateOrderButton.Click += CreateOrderButton_Click;
             // 
-            // surnameTextField
+            // balanceLabel
             // 
-            this.surnameTextField.Depth = 0;
-            this.surnameTextField.Hint = "";
-            this.surnameTextField.Location = new System.Drawing.Point(285, 110);
-            this.surnameTextField.MaxLength = 32767;
-            this.surnameTextField.MouseState = MaterialSkin.MouseState.HOVER;
-            this.surnameTextField.Name = "surnameTextField";
-            this.surnameTextField.PasswordChar = '\0';
-            this.surnameTextField.SelectedText = "";
-            this.surnameTextField.SelectionLength = 0;
-            this.surnameTextField.SelectionStart = 0;
-            this.surnameTextField.Size = new System.Drawing.Size(503, 28);
-            this.surnameTextField.TabIndex = 20;
-            this.surnameTextField.TabStop = false;
-            this.surnameTextField.UseSystemPasswordChar = false;
-            this.surnameTextField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.surnameTextField_KeyPress);
+            balanceLabel.BackColor = Color.White;
+            balanceLabel.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            balanceLabel.ForeColor = SystemColors.ControlText;
+            balanceLabel.Location = new Point(12, 66);
+            balanceLabel.Name = "balanceLabel";
+            balanceLabel.Size = new Size(221, 33);
+            balanceLabel.TabIndex = 26;
+            balanceLabel.Text = "Balance:";
+            balanceLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // nameTextField
+            // priceLabel
             // 
-            this.nameTextField.Depth = 0;
-            this.nameTextField.Hint = "";
-            this.nameTextField.Location = new System.Drawing.Point(285, 180);
-            this.nameTextField.MaxLength = 32767;
-            this.nameTextField.MouseState = MaterialSkin.MouseState.HOVER;
-            this.nameTextField.Name = "nameTextField";
-            this.nameTextField.PasswordChar = '\0';
-            this.nameTextField.SelectedText = "";
-            this.nameTextField.SelectionLength = 0;
-            this.nameTextField.SelectionStart = 0;
-            this.nameTextField.Size = new System.Drawing.Size(503, 28);
-            this.nameTextField.TabIndex = 21;
-            this.nameTextField.TabStop = false;
-            this.nameTextField.UseSystemPasswordChar = false;
-            this.nameTextField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nameTextField_KeyPress);
+            priceLabel.BackColor = Color.Transparent;
+            priceLabel.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            priceLabel.Location = new Point(52, 441);
+            priceLabel.Name = "priceLabel";
+            priceLabel.Size = new Size(268, 32);
+            priceLabel.TabIndex = 27;
+            priceLabel.Text = "Price: ";
+            priceLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // userLoginLabel
+            // modelLabel
             // 
-            this.userLoginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userLoginLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLoginLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.userLoginLabel.Location = new System.Drawing.Point(491, 23);
-            this.userLoginLabel.Name = "userLoginLabel";
-            this.userLoginLabel.Size = new System.Drawing.Size(308, 46);
-            this.userLoginLabel.TabIndex = 22;
-            this.userLoginLabel.Text = "Logged as: ";
-            this.userLoginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            modelLabel.BackColor = Color.Transparent;
+            modelLabel.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            modelLabel.Location = new Point(12, 309);
+            modelLabel.Name = "modelLabel";
+            modelLabel.Size = new Size(421, 32);
+            modelLabel.TabIndex = 28;
+            modelLabel.Text = "Model:";
+            modelLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // brandLabel
+            // 
+            brandLabel.BackColor = Color.Transparent;
+            brandLabel.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            brandLabel.Location = new Point(12, 353);
+            brandLabel.Name = "brandLabel";
+            brandLabel.Size = new Size(421, 32);
+            brandLabel.TabIndex = 29;
+            brandLabel.Text = "Brand:";
+            brandLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // carPictureBox
+            // 
+            carPictureBox.BorderStyle = BorderStyle.FixedSingle;
+            carPictureBox.Location = new Point(92, 102);
+            carPictureBox.Name = "carPictureBox";
+            carPictureBox.Size = new Size(205, 205);
+            carPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            carPictureBox.TabIndex = 30;
+            carPictureBox.TabStop = false;
+            carPictureBox.Tag = "0";
             // 
             // OrderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.userLoginLabel);
-            this.Controls.Add(this.nameTextField);
-            this.Controls.Add(this.surnameTextField);
-            this.Controls.Add(this.CreateOrderButton);
-            this.Controls.Add(this.rentToTimePicker);
-            this.Controls.Add(this.rentToLabel);
-            this.Controls.Add(this.dateOfBirthLabel);
-            this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.surnameLabel);
-            this.Controls.Add(this.dateOfBirthTimePicker);
-            this.Name = "OrderForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Order";
-            this.ResumeLayout(false);
-
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(379, 533);
+            Controls.Add(carPictureBox);
+            Controls.Add(brandLabel);
+            Controls.Add(modelLabel);
+            Controls.Add(priceLabel);
+            Controls.Add(balanceLabel);
+            Controls.Add(CreateOrderButton);
+            Controls.Add(rentToTimePicker);
+            Controls.Add(rentToLabel);
+            Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(800, 562);
+            Name = "OrderForm";
+            Sizable = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Order";
+            ((System.ComponentModel.ISupportInitialize)carPictureBox).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
-
-        private System.Windows.Forms.DateTimePicker dateOfBirthTimePicker;
-        private System.Windows.Forms.Label surnameLabel;
-        private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label dateOfBirthLabel;
         private System.Windows.Forms.Label rentToLabel;
         private System.Windows.Forms.DateTimePicker rentToTimePicker;
         private System.Windows.Forms.Button CreateOrderButton;
-        private MaterialSkin.Controls.MaterialSingleLineTextField surnameTextField;
-        private MaterialSkin.Controls.MaterialSingleLineTextField nameTextField;
-        private System.Windows.Forms.Label userLoginLabel;
+        private Label balanceLabel;
+        private Label priceLabel;
+        private Label modelLabel;
+        private Label brandLabel;
+        private PictureBox carPictureBox;
     }
 }

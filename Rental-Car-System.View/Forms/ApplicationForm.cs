@@ -4,6 +4,7 @@ using Rental_Car_System.ApplicationFormStates;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
+using System.Text.RegularExpressions;
 
 #nullable disable
 namespace Rental_Car_System.Forms
@@ -23,7 +24,7 @@ namespace Rental_Car_System.Forms
             currentApplication = application;
             SetState();
             ShowUIElements();
-            UpdateLabels();
+            UpdateFields();
         }
 
         private void SetState()
@@ -57,7 +58,7 @@ namespace Rental_Car_System.Forms
             carDamageFeeLabel.Visible = true;
         }
 
-        private void UpdateLabels()
+        private void UpdateFields()
         {
             var order = GetCurrentOrder();
             Text = $"Application: {currentApplication.Type}";

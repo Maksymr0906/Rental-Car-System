@@ -226,6 +226,7 @@
             Controls.Add(modelTextField);
             Margin = new Padding(3, 4, 3, 4);
             Name = "AddCarForm";
+            Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add Car";
             ((System.ComponentModel.ISupportInitialize)userPictureBox).EndInit();

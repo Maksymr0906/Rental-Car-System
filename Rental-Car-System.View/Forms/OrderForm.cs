@@ -3,72 +3,66 @@ using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
+using System.Windows.Forms;
 
 namespace Rental_Car_System.Forms
 {
     public partial class OrderForm : MaterialForm
     {
-        private Car carToOrder;
-        private Client loggedClient;
+        private Car selectedCar;
+        private Client currentClient;
+        private double rentPrice;
         public OrderForm()
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
-            SetUpDateTimePickers();
         }
 
-        private void SetUpDateTimePickers()
+        public OrderForm(Client client, Car car) : this()
+        {
+            selectedCar = car;
+            currentClient = client;
+            SetUpDateTimePicker();
+            CalculateRentPrice();
+            SetUpFields();
+        }
+
+        private void SetUpDateTimePicker()
         {
             rentToTimePicker.MinDate = DateTime.Now.AddDays(1);
             rentToTimePicker.MaxDate = DateTime.Now.AddMonths(Constants.maxMonthToRent);
-            dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18);
         }
 
-        public OrderForm(Client client, Car car) :this()
+        private void CalculateRentPrice()
         {
-            carToOrder = car;
-            loggedClient = client;
-            SetUpFields();
+            var days = (rentToTimePicker.Value.Date - DateTime.Today).Days;
+            rentPrice = (selectedCar.Price / Constants.priceDivisor) * days;
         }
 
         private void SetUpFields()
         {
-            Text = $"Order car: {carToOrder.Model}";
-            userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
-            surnameTextField.Text = loggedClient.Surname;
-            nameTextField.Text = loggedClient.Name;
+            Text = $"Logged as: {currentClient.Login}";
+            modelLabel.Text = $"Model: {selectedCar.Model}";
+            brandLabel.Text = $"Brand: {selectedCar.Brand}";
+            balanceLabel.Text = $"Balance: {currentClient.Balance:F2}";
+            priceLabel.Text = $"Price: {rentPrice}";
+            carPictureBox.Image = Image.FromFile(Constants.pathToCarImages + selectedCar.ImgPath);
+            carPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            if(surnameTextField.Text == string.Empty || nameTextField.Text == string.Empty)
-            {
-                MessageBox.Show("Fill in all fields.");
-                return;
-            }
-
-            if(loggedClient.Balance < carToOrder.Price / Constants.priceDivisor)
+            if (currentClient.Balance < rentPrice)
             {
                 MessageBox.Show("You don't have enough money.");
                 return;
             }
 
-            UpdateClientInfo();
-
             CreateOrder();
-
             UpdateCarInfo();
 
             MessageBox.Show("Your order adressed to the administrator. Please wait.");
             Close();
-        }
-
-        private void UpdateClientInfo()
-        {
-            loggedClient.Surname = surnameTextField.Text;
-            loggedClient.Name = nameTextField.Text;
-            loggedClient.DateOfBirthday = Convert.ToDateTime(dateOfBirthTimePicker.Text);
-            RepositoryManager.GetRepo<Client>().Update(loggedClient);
         }
 
         private void CreateOrder()
@@ -77,10 +71,10 @@ namespace Rental_Car_System.Forms
             {
                 Id = Guid.NewGuid(),
                 DateCreated = DateTime.Now,
-                ClientId = loggedClient.Id,
-                CarId = carToOrder.Id,
+                ClientId = currentClient.Id,
+                CarId = selectedCar.Id,
                 EndRentDate = DateTime.Parse(rentToTimePicker.Text),
-                Price = carToOrder.Price / Constants.priceDivisor,
+                Price = rentPrice,
                 Status = Order.OrderStatus.Processing
             };
 
@@ -89,28 +83,14 @@ namespace Rental_Car_System.Forms
 
         private void UpdateCarInfo()
         {
-            carToOrder.IsAvailable = false;
-            RepositoryManager.GetRepo<Car>().Update(carToOrder);
+            selectedCar.IsAvailable = false;
+            RepositoryManager.GetRepo<Car>().Update(selectedCar);
         }
 
-        private void surnameTextField_KeyPress(object sender, KeyPressEventArgs e)
+        private void rentToTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            ValidateTextField(surnameTextField, e);
-        }
-
-        private void nameTextField_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ValidateTextField(nameTextField, e);
-        }
-
-        private void ValidateTextField(MaterialSingleLineTextField textField, KeyPressEventArgs e)
-        {
-            char inputChar = e.KeyChar;
-
-            if ((!char.IsLetter(inputChar) && !char.IsWhiteSpace(inputChar) && inputChar != '\b') || (textField.Text.Length >= Constants.maxNumberOfLetters && inputChar != '\b'))
-            {
-                e.Handled = true;
-            }
+            CalculateRentPrice();
+            priceLabel.Text = $"Price: {rentPrice}";
         }
     }
 }

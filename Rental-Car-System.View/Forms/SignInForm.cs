@@ -21,15 +21,11 @@ namespace Rental_Car_System.Forms
             {
                 loginTextField.Text = string.Empty;
                 passwordTextField.Text = string.Empty;
+                seePasswordCheckBox.Checked = false;
                 amIAdminCheckBox.Checked = false;
                 Show();
             };
             form.Show();
-        }
-
-        private void runAsAdministratorButton_Click(object sender, EventArgs e)
-        {
-            SwitchToForm(new AdministratorForm());
         }
 
         private void signInButton_Click(object sender, EventArgs e)

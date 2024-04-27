@@ -43,7 +43,7 @@
             isCarDamagedCheckBox.AutoSize = true;
             isCarDamagedCheckBox.Depth = 0;
             isCarDamagedCheckBox.Font = new Font("Roboto", 10F);
-            isCarDamagedCheckBox.Location = new Point(18, 406);
+            isCarDamagedCheckBox.Location = new Point(12, 240);
             isCarDamagedCheckBox.Margin = new Padding(0);
             isCarDamagedCheckBox.MouseLocation = new Point(-1, -1);
             isCarDamagedCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
@@ -61,12 +61,12 @@
             sendApplicationButton.Cursor = Cursors.Hand;
             sendApplicationButton.FlatAppearance.BorderSize = 0;
             sendApplicationButton.FlatStyle = FlatStyle.Flat;
-            sendApplicationButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            sendApplicationButton.Font = new Font("Roboto", 12F);
             sendApplicationButton.ForeColor = Color.White;
-            sendApplicationButton.Location = new Point(258, 505);
+            sendApplicationButton.Location = new Point(146, 291);
             sendApplicationButton.Margin = new Padding(3, 4, 3, 4);
             sendApplicationButton.Name = "sendApplicationButton";
-            sendApplicationButton.Size = new Size(268, 42);
+            sendApplicationButton.Size = new Size(176, 37);
             sendApplicationButton.TabIndex = 17;
             sendApplicationButton.Text = "Send Application";
             sendApplicationButton.UseVisualStyleBackColor = false;
@@ -77,7 +77,7 @@
             // 
             rejectionCommentTextField.Depth = 0;
             rejectionCommentTextField.Hint = "Rejection comment";
-            rejectionCommentTextField.Location = new Point(280, 324);
+            rejectionCommentTextField.Location = new Point(12, 189);
             rejectionCommentTextField.Margin = new Padding(3, 4, 3, 4);
             rejectionCommentTextField.MaxLength = 32767;
             rejectionCommentTextField.MouseState = MaterialSkin.MouseState.HOVER;
@@ -86,7 +86,7 @@
             rejectionCommentTextField.SelectedText = "";
             rejectionCommentTextField.SelectionLength = 0;
             rejectionCommentTextField.SelectionStart = 0;
-            rejectionCommentTextField.Size = new Size(453, 28);
+            rejectionCommentTextField.Size = new Size(374, 28);
             rejectionCommentTextField.TabIndex = 22;
             rejectionCommentTextField.TabStop = false;
             rejectionCommentTextField.UseSystemPasswordChar = false;
@@ -95,10 +95,10 @@
             // clientSurnameLabel
             // 
             clientSurnameLabel.BackColor = Color.Transparent;
-            clientSurnameLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            clientSurnameLabel.Location = new Point(12, 92);
+            clientSurnameLabel.Font = new Font("Roboto", 12F);
+            clientSurnameLabel.Location = new Point(12, 71);
             clientSurnameLabel.Name = "clientSurnameLabel";
-            clientSurnameLabel.Size = new Size(776, 58);
+            clientSurnameLabel.Size = new Size(374, 38);
             clientSurnameLabel.TabIndex = 23;
             clientSurnameLabel.Text = "Client surname:";
             clientSurnameLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -106,10 +106,10 @@
             // carModelLabel
             // 
             carModelLabel.BackColor = Color.Transparent;
-            carModelLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            carModelLabel.Location = new Point(12, 165);
+            carModelLabel.Font = new Font("Roboto", 12F);
+            carModelLabel.Location = new Point(12, 126);
             carModelLabel.Name = "carModelLabel";
-            carModelLabel.Size = new Size(776, 58);
+            carModelLabel.Size = new Size(374, 41);
             carModelLabel.TabIndex = 24;
             carModelLabel.Text = "Car model:";
             carModelLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -120,12 +120,12 @@
             confirmOrderButton.Cursor = Cursors.Hand;
             confirmOrderButton.FlatAppearance.BorderSize = 0;
             confirmOrderButton.FlatStyle = FlatStyle.Flat;
-            confirmOrderButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            confirmOrderButton.Font = new Font("Roboto", 12F);
             confirmOrderButton.ForeColor = Color.White;
-            confirmOrderButton.Location = new Point(118, 505);
+            confirmOrderButton.Location = new Point(6, 291);
             confirmOrderButton.Margin = new Padding(3, 4, 3, 4);
             confirmOrderButton.Name = "confirmOrderButton";
-            confirmOrderButton.Size = new Size(268, 42);
+            confirmOrderButton.Size = new Size(176, 37);
             confirmOrderButton.TabIndex = 25;
             confirmOrderButton.Text = "Confirm Order";
             confirmOrderButton.UseVisualStyleBackColor = false;
@@ -138,12 +138,12 @@
             cancelOrderButton.Cursor = Cursors.Hand;
             cancelOrderButton.FlatAppearance.BorderSize = 0;
             cancelOrderButton.FlatStyle = FlatStyle.Flat;
-            cancelOrderButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cancelOrderButton.Font = new Font("Roboto", 12F);
             cancelOrderButton.ForeColor = Color.White;
-            cancelOrderButton.Location = new Point(401, 505);
+            cancelOrderButton.Location = new Point(289, 291);
             cancelOrderButton.Margin = new Padding(3, 4, 3, 4);
             cancelOrderButton.Name = "cancelOrderButton";
-            cancelOrderButton.Size = new Size(268, 42);
+            cancelOrderButton.Size = new Size(176, 37);
             cancelOrderButton.TabIndex = 26;
             cancelOrderButton.Text = "Cancel Order";
             cancelOrderButton.UseVisualStyleBackColor = false;
@@ -153,10 +153,10 @@
             // carDamageFeeLabel
             // 
             carDamageFeeLabel.BackColor = Color.Transparent;
-            carDamageFeeLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            carDamageFeeLabel.Location = new Point(12, 304);
+            carDamageFeeLabel.Font = new Font("Roboto", 12F);
+            carDamageFeeLabel.Location = new Point(12, 179);
             carDamageFeeLabel.Name = "carDamageFeeLabel";
-            carDamageFeeLabel.Size = new Size(746, 58);
+            carDamageFeeLabel.Size = new Size(374, 38);
             carDamageFeeLabel.TabIndex = 27;
             carDamageFeeLabel.Text = "Fee for car damage: ";
             carDamageFeeLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -165,7 +165,7 @@
             // ApplicationForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(800, 562);
+            ClientSize = new Size(478, 342);
             Controls.Add(cancelOrderButton);
             Controls.Add(confirmOrderButton);
             Controls.Add(carModelLabel);
@@ -176,6 +176,7 @@
             Controls.Add(carDamageFeeLabel);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ApplicationForm";
+            Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Application";
             ResumeLayout(false);
