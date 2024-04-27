@@ -22,6 +22,7 @@ namespace Rental_Car_System.View.Forms
             currentClient = client;
             surnameTextField.Text = currentClient.Surname;
             nameTextField.Text = currentClient.Name;
+            dateOfBirthTimePicker.Value = currentClient.DateOfBirthday;
             Text = $"Logged as: {currentClient.Login}";
         }
 
@@ -66,9 +67,7 @@ namespace Rental_Car_System.View.Forms
         {
             Hide();
             var clientOrdersForm = new ClientOrdersForm(currentClient);
-
             clientOrdersForm.FormClosed += (s, arg) => Show();
-
             clientOrdersForm.Show();
         }
     }

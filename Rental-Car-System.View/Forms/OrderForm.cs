@@ -9,9 +9,10 @@ namespace Rental_Car_System.Forms
 {
     public partial class OrderForm : MaterialForm
     {
+        private readonly Client currentClient;
         private Car selectedCar;
-        private Client currentClient;
         private double rentPrice;
+
         public OrderForm()
         {
             InitializeComponent();

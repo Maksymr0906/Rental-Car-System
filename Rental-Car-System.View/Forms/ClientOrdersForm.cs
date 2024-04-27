@@ -29,7 +29,5 @@ namespace Rental_Car_System.View.Forms
                 orderedCarsDataGridView.Rows.Add(car.Id, car.Model, car.Brand, car.Color, order.Price, order.Status, application?.RejectionComment ?? string.Empty);
             }
         }
-
-
     }
 }

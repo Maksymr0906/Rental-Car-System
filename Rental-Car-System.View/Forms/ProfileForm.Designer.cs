@@ -108,7 +108,7 @@
             updateProfileButton.FlatStyle = FlatStyle.Flat;
             updateProfileButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             updateProfileButton.ForeColor = Color.White;
-            updateProfileButton.Location = new Point(140, 235);
+            updateProfileButton.Location = new Point(267, 236);
             updateProfileButton.Margin = new Padding(3, 4, 3, 4);
             updateProfileButton.Name = "updateProfileButton";
             updateProfileButton.Size = new Size(248, 42);

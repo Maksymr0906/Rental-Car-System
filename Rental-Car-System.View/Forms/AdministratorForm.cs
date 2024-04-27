@@ -12,7 +12,7 @@ namespace Rental_Car_System.Forms
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
-            PrintOrders();
+            ShowOrders();
         }
 
         public AdministratorForm(Admin admin) : this()
@@ -20,7 +20,7 @@ namespace Rental_Car_System.Forms
 
         }
 
-        private void PrintOrders()
+        private void ShowOrders()
         {
             ordersDataGridView.Rows.Clear();
             var orders = RepositoryManager.GetRepo<Order>().GetAll().ToList();
@@ -69,7 +69,7 @@ namespace Rental_Car_System.Forms
 
             applicationForm.FormClosed += (s, arg) =>
             {
-                PrintOrders();
+                ShowOrders();
                 Show();
             };
 
@@ -87,7 +87,7 @@ namespace Rental_Car_System.Forms
                 }
             }
 
-            PrintOrders();
+            ShowOrders();
         }
     }
 }

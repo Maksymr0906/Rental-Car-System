@@ -10,7 +10,7 @@ namespace Rental_Car_System.Forms
     public partial class ClientForm : MaterialForm
     {
         private Client currentClient;
-        private int currentImgIndex = 0;
+        private int currentDisplayedCarIndex;
         public ClientForm()
         {
             InitializeComponent();
@@ -21,55 +21,62 @@ namespace Rental_Car_System.Forms
         {
             currentClient = client;
             Text = $"Logged as: {currentClient.Login}";
-            PrintBalance();
-            PrintAvailableCars();
+            ShowBalance();
+            ShowAvailableCars();
         }
 
-        private void PrintAvailableCars()
+        private void ShowAvailableCars()
         {
-            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (cars.Count <= 0)
+            var availableCars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+
+            if (!availableCars.Any())
             {
-                MessageBox.Show("We have not any available car now.");
+                MessageBox.Show("We don't have any available cars now.");
                 return;
             }
+
             for (int i = 0; i < Constants.numberOfCarsCards; i++)
             {
-                string pictureBoxName = "carPictureBox" + (i + 1);
-                if (Controls[pictureBoxName] is PictureBox pictureBox)
-                {
-                    pictureBox.Image = Image.FromFile(Constants.pathToCarImages + cars[(currentImgIndex + i) % cars.Count].ImgPath);
-                    pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                }
+                UpdateCarCard(availableCars, i);
+            }
+        }
 
-                string buttonName = "carModelButton" + (i + 1);
-                if (Controls[buttonName] is Button button)
-                {
-                    button.Text = cars[(currentImgIndex + i) % cars.Count].Model;
-                }
+        private void UpdateCarCard(List<Car> availableCars, int index)
+        {
+            string pictureBoxName = $"carPictureBox{index + 1}";
+            if (Controls[pictureBoxName] is PictureBox pictureBox)
+            {
+                pictureBox.Image = Image.FromFile(Constants.pathToCarImages + 
+                    availableCars[(currentDisplayedCarIndex + index) % availableCars.Count].ImgPath);
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+
+            string buttonName = $"carModelButton{index + 1}";
+            if (Controls[buttonName] is Button button)
+            {
+                button.Text = availableCars[(currentDisplayedCarIndex + index) % availableCars.Count].Model;
             }
         }
 
         private void prevButton_Click(object sender, EventArgs e)
         {
-            UpdateCurrentImgIndex(-1);
+            UpdatecurrentDisplayedCarIndex(-1);
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            UpdateCurrentImgIndex(1);
+            UpdatecurrentDisplayedCarIndex(1);
         }
 
-        private void UpdateCurrentImgIndex(int increment)
+        private void UpdatecurrentDisplayedCarIndex(int increment)
         {
             var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (cars.Count == 0)
+            if (!cars.Any())
             {
                 return;
             }
-
-            currentImgIndex = (currentImgIndex + increment + cars.Count) % cars.Count;
-            PrintAvailableCars();
+            currentDisplayedCarIndex = (currentDisplayedCarIndex + increment + cars.Count) % cars.Count;
+            ShowAvailableCars();
         }
 
         private void carPictureBox_Click(object sender, EventArgs e)
@@ -82,17 +89,17 @@ namespace Rental_Car_System.Forms
         private void OpenAdditionalCarInfo(int pictureNumber)
         {
             var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (cars.Count <= 0)
+            if (!cars.Any())
             {
                 return;
             }
 
             Hide();
 
-            var additionalInfoForm = new AdditionalCarInfoForm(cars[(currentImgIndex + pictureNumber) % cars.Count]);
+            var additionalInfoForm = new AdditionalCarInfoForm(cars[(currentDisplayedCarIndex + pictureNumber) % cars.Count]);
             additionalInfoForm.FormClosed += (s, arg) =>
             {
-                PrintAvailableCars();
+                ShowAvailableCars();
                 Show();
             };
             additionalInfoForm.Show();
@@ -115,20 +122,20 @@ namespace Rental_Car_System.Forms
             Hide();
             Button button = (Button)sender;
             int buttonNumber = Convert.ToInt32(button.Tag);
-            var orderForm = new OrderForm(currentClient, cars[(currentImgIndex + buttonNumber) % cars.Count]);
+            var orderForm = new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count]);
 
             orderForm.FormClosed += (s, arg) =>
             {
                 ClearFields();
-                PrintAvailableCars();
-                PrintBalance();
+                ShowAvailableCars();
+                ShowBalance();
                 Show();
             };
 
             orderForm.Show();
         }
 
-        private void PrintBalance()
+        private void ShowBalance()
         {
             balanceLabel.Text = $"Balance: {currentClient.Balance:F2}";
         }
