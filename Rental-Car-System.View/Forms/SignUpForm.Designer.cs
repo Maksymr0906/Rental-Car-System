@@ -43,7 +43,7 @@
             // 
             signInLinkLabel.AutoSize = true;
             signInLinkLabel.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            signInLinkLabel.Location = new Point(94, 416);
+            signInLinkLabel.Location = new Point(76, 316);
             signInLinkLabel.Name = "signInLinkLabel";
             signInLinkLabel.Size = new Size(157, 17);
             signInLinkLabel.TabIndex = 14;
@@ -59,10 +59,10 @@
             signUpButton.FlatStyle = FlatStyle.Flat;
             signUpButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             signUpButton.ForeColor = Color.White;
-            signUpButton.Location = new Point(20, 370);
+            signUpButton.Location = new Point(20, 270);
             signUpButton.Margin = new Padding(3, 4, 3, 4);
             signUpButton.Name = "signUpButton";
-            signUpButton.Size = new Size(284, 42);
+            signUpButton.Size = new Size(268, 42);
             signUpButton.TabIndex = 15;
             signUpButton.Text = "Sign up";
             signUpButton.UseVisualStyleBackColor = false;
@@ -72,7 +72,7 @@
             // 
             passwordTextField.Depth = 0;
             passwordTextField.Hint = "Password";
-            passwordTextField.Location = new Point(20, 154);
+            passwordTextField.Location = new Point(20, 116);
             passwordTextField.Margin = new Padding(3, 4, 3, 4);
             passwordTextField.MaxLength = 32767;
             passwordTextField.MouseState = MaterialSkin.MouseState.HOVER;
@@ -81,7 +81,7 @@
             passwordTextField.SelectedText = "";
             passwordTextField.SelectionLength = 0;
             passwordTextField.SelectionStart = 0;
-            passwordTextField.Size = new Size(326, 28);
+            passwordTextField.Size = new Size(268, 28);
             passwordTextField.TabIndex = 19;
             passwordTextField.TabStop = false;
             passwordTextField.UseSystemPasswordChar = false;
@@ -90,7 +90,7 @@
             // 
             loginTextField.Depth = 0;
             loginTextField.Hint = "Login";
-            loginTextField.Location = new Point(20, 93);
+            loginTextField.Location = new Point(20, 80);
             loginTextField.Margin = new Padding(3, 4, 3, 4);
             loginTextField.MaxLength = 32767;
             loginTextField.MouseState = MaterialSkin.MouseState.HOVER;
@@ -99,7 +99,7 @@
             loginTextField.SelectedText = "";
             loginTextField.SelectionLength = 0;
             loginTextField.SelectionStart = 0;
-            loginTextField.Size = new Size(326, 28);
+            loginTextField.Size = new Size(268, 28);
             loginTextField.TabIndex = 18;
             loginTextField.TabStop = false;
             loginTextField.UseSystemPasswordChar = false;
@@ -108,7 +108,7 @@
             // 
             repeatPasswordTextField.Depth = 0;
             repeatPasswordTextField.Hint = "Repeat Password";
-            repeatPasswordTextField.Location = new Point(20, 215);
+            repeatPasswordTextField.Location = new Point(20, 152);
             repeatPasswordTextField.Margin = new Padding(3, 4, 3, 4);
             repeatPasswordTextField.MaxLength = 32767;
             repeatPasswordTextField.MouseState = MaterialSkin.MouseState.HOVER;
@@ -117,7 +117,7 @@
             repeatPasswordTextField.SelectedText = "";
             repeatPasswordTextField.SelectionLength = 0;
             repeatPasswordTextField.SelectionStart = 0;
-            repeatPasswordTextField.Size = new Size(326, 28);
+            repeatPasswordTextField.Size = new Size(268, 28);
             repeatPasswordTextField.TabIndex = 21;
             repeatPasswordTextField.TabStop = false;
             repeatPasswordTextField.UseSystemPasswordChar = false;
@@ -127,7 +127,7 @@
             seePasswordCheckBox.AutoSize = true;
             seePasswordCheckBox.Depth = 0;
             seePasswordCheckBox.Font = new Font("Roboto", 10F);
-            seePasswordCheckBox.Location = new Point(20, 271);
+            seePasswordCheckBox.Location = new Point(20, 195);
             seePasswordCheckBox.Margin = new Padding(0);
             seePasswordCheckBox.MouseLocation = new Point(-1, -1);
             seePasswordCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
@@ -144,7 +144,7 @@
             iAmAdminCheckBox.AutoSize = true;
             iAmAdminCheckBox.Depth = 0;
             iAmAdminCheckBox.Font = new Font("Roboto", 10F);
-            iAmAdminCheckBox.Location = new Point(20, 310);
+            iAmAdminCheckBox.Location = new Point(20, 225);
             iAmAdminCheckBox.Margin = new Padding(0);
             iAmAdminCheckBox.MouseLocation = new Point(-1, -1);
             iAmAdminCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
@@ -160,9 +160,9 @@
             userPictureBox.BackColor = Color.Transparent;
             userPictureBox.BackgroundImage = View.Properties.Resources.user_icon;
             userPictureBox.Image = View.Properties.Resources.user_icon;
-            userPictureBox.Location = new Point(254, 38);
+            userPictureBox.Location = new Point(254, 24);
             userPictureBox.Name = "userPictureBox";
-            userPictureBox.Size = new Size(44, 42);
+            userPictureBox.Size = new Size(44, 40);
             userPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             userPictureBox.TabIndex = 26;
             userPictureBox.TabStop = false;
@@ -171,9 +171,8 @@
             // SignUpForm
             // 
             AcceptButton = signUpButton;
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(320, 438);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(310, 338);
             Controls.Add(userPictureBox);
             Controls.Add(iAmAdminCheckBox);
             Controls.Add(seePasswordCheckBox);
@@ -183,7 +182,7 @@
             Controls.Add(signUpButton);
             Controls.Add(signInLinkLabel);
             Margin = new Padding(3, 4, 3, 4);
-            MaximumSize = new Size(320, 438);
+            MaximumSize = new Size(310, 350);
             Name = "SignUpForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

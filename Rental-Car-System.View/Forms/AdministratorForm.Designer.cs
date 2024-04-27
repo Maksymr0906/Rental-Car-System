@@ -28,211 +28,206 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.CreateApplicationButton = new System.Windows.Forms.Button();
-            this.addCarButton = new System.Windows.Forms.Button();
-            this.ordersDataGridView = new System.Windows.Forms.DataGridView();
-            this.skipOrderTimeButton = new System.Windows.Forms.Button();
-            this.orderIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientSurnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.carModelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.carColorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreateDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endRentDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            CreateApplicationButton = new Button();
+            addCarButton = new Button();
+            ordersDataGridView = new DataGridView();
+            orderIdColumn = new DataGridViewTextBoxColumn();
+            clientNameColumn = new DataGridViewTextBoxColumn();
+            clientSurnameColumn = new DataGridViewTextBoxColumn();
+            carModelColumn = new DataGridViewTextBoxColumn();
+            carColorColumn = new DataGridViewTextBoxColumn();
+            CreateDateColumn = new DataGridViewTextBoxColumn();
+            endRentDateColumn = new DataGridViewTextBoxColumn();
+            priceColumn = new DataGridViewTextBoxColumn();
+            skipOrderTimeButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)ordersDataGridView).BeginInit();
+            SuspendLayout();
             // 
             // CreateApplicationButton
             // 
-            this.CreateApplicationButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.CreateApplicationButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CreateApplicationButton.FlatAppearance.BorderSize = 0;
-            this.CreateApplicationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreateApplicationButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateApplicationButton.ForeColor = System.Drawing.Color.White;
-            this.CreateApplicationButton.Location = new System.Drawing.Point(316, 497);
-            this.CreateApplicationButton.Name = "CreateApplicationButton";
-            this.CreateApplicationButton.Size = new System.Drawing.Size(268, 34);
-            this.CreateApplicationButton.TabIndex = 17;
-            this.CreateApplicationButton.Text = "Create Application";
-            this.CreateApplicationButton.UseVisualStyleBackColor = false;
-            this.CreateApplicationButton.Click += new System.EventHandler(this.CreateApplicationButton_Click);
+            CreateApplicationButton.BackColor = Color.DarkSlateGray;
+            CreateApplicationButton.Cursor = Cursors.Hand;
+            CreateApplicationButton.FlatAppearance.BorderSize = 0;
+            CreateApplicationButton.FlatStyle = FlatStyle.Flat;
+            CreateApplicationButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CreateApplicationButton.ForeColor = Color.White;
+            CreateApplicationButton.Location = new Point(316, 621);
+            CreateApplicationButton.Margin = new Padding(3, 4, 3, 4);
+            CreateApplicationButton.Name = "CreateApplicationButton";
+            CreateApplicationButton.Size = new Size(268, 42);
+            CreateApplicationButton.TabIndex = 17;
+            CreateApplicationButton.Text = "Create Application";
+            CreateApplicationButton.UseVisualStyleBackColor = false;
+            CreateApplicationButton.Click += CreateApplicationButton_Click;
             // 
             // addCarButton
             // 
-            this.addCarButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.addCarButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addCarButton.FlatAppearance.BorderSize = 0;
-            this.addCarButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCarButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addCarButton.ForeColor = System.Drawing.Color.White;
-            this.addCarButton.Location = new System.Drawing.Point(828, 497);
-            this.addCarButton.Name = "addCarButton";
-            this.addCarButton.Size = new System.Drawing.Size(111, 34);
-            this.addCarButton.TabIndex = 18;
-            this.addCarButton.Text = "Add Car";
-            this.addCarButton.UseVisualStyleBackColor = false;
-            this.addCarButton.Click += new System.EventHandler(this.addCarButton_Click);
+            addCarButton.BackColor = Color.DarkSlateGray;
+            addCarButton.Cursor = Cursors.Hand;
+            addCarButton.FlatAppearance.BorderSize = 0;
+            addCarButton.FlatStyle = FlatStyle.Flat;
+            addCarButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            addCarButton.ForeColor = Color.White;
+            addCarButton.Location = new Point(828, 621);
+            addCarButton.Margin = new Padding(3, 4, 3, 4);
+            addCarButton.Name = "addCarButton";
+            addCarButton.Size = new Size(111, 42);
+            addCarButton.TabIndex = 18;
+            addCarButton.Text = "Add Car";
+            addCarButton.UseVisualStyleBackColor = false;
+            addCarButton.Click += addCarButton_Click;
             // 
             // ordersDataGridView
             // 
-            this.ordersDataGridView.AllowUserToAddRows = false;
-            this.ordersDataGridView.AllowUserToResizeColumns = false;
-            this.ordersDataGridView.AllowUserToResizeRows = false;
-            this.ordersDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.ordersDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ordersDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ordersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.ordersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ordersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.orderIdColumn,
-            this.clientNameColumn,
-            this.clientSurnameColumn,
-            this.carModelColumn,
-            this.carColorColumn,
-            this.CreateDateColumn,
-            this.endRentDateColumn,
-            this.priceColumn});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ordersDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ordersDataGridView.GridColor = System.Drawing.SystemColors.Window;
-            this.ordersDataGridView.Location = new System.Drawing.Point(12, 82);
-            this.ordersDataGridView.MultiSelect = false;
-            this.ordersDataGridView.Name = "ordersDataGridView";
-            this.ordersDataGridView.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ordersDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.ordersDataGridView.RowHeadersVisible = false;
-            this.ordersDataGridView.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ordersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.ordersDataGridView.RowTemplate.Height = 24;
-            this.ordersDataGridView.RowTemplate.ReadOnly = true;
-            this.ordersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ordersDataGridView.Size = new System.Drawing.Size(930, 409);
-            this.ordersDataGridView.TabIndex = 19;
-            // 
-            // skipOrderTimeButton
-            // 
-            this.skipOrderTimeButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.skipOrderTimeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.skipOrderTimeButton.FlatAppearance.BorderSize = 0;
-            this.skipOrderTimeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.skipOrderTimeButton.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.skipOrderTimeButton.ForeColor = System.Drawing.Color.White;
-            this.skipOrderTimeButton.Location = new System.Drawing.Point(12, 497);
-            this.skipOrderTimeButton.Name = "skipOrderTimeButton";
-            this.skipOrderTimeButton.Size = new System.Drawing.Size(249, 34);
-            this.skipOrderTimeButton.TabIndex = 20;
-            this.skipOrderTimeButton.Text = "Skip Order Time";
-            this.skipOrderTimeButton.UseVisualStyleBackColor = false;
-            this.skipOrderTimeButton.Click += new System.EventHandler(this.skipOrderTimeButton_Click);
+            ordersDataGridView.AllowUserToAddRows = false;
+            ordersDataGridView.AllowUserToResizeColumns = false;
+            ordersDataGridView.AllowUserToResizeRows = false;
+            ordersDataGridView.BackgroundColor = SystemColors.Window;
+            ordersDataGridView.BorderStyle = BorderStyle.None;
+            ordersDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            ordersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            ordersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ordersDataGridView.Columns.AddRange(new DataGridViewColumn[] { orderIdColumn, clientNameColumn, clientSurnameColumn, carModelColumn, carColorColumn, CreateDateColumn, endRentDateColumn, priceColumn });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            ordersDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            ordersDataGridView.GridColor = SystemColors.Window;
+            ordersDataGridView.Location = new Point(12, 102);
+            ordersDataGridView.Margin = new Padding(3, 4, 3, 4);
+            ordersDataGridView.MultiSelect = false;
+            ordersDataGridView.Name = "ordersDataGridView";
+            ordersDataGridView.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            ordersDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            ordersDataGridView.RowHeadersVisible = false;
+            ordersDataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ordersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            ordersDataGridView.RowTemplate.Height = 24;
+            ordersDataGridView.RowTemplate.ReadOnly = true;
+            ordersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ordersDataGridView.Size = new Size(930, 511);
+            ordersDataGridView.TabIndex = 19;
             // 
             // orderIdColumn
             // 
-            this.orderIdColumn.HeaderText = "Order Id";
-            this.orderIdColumn.MinimumWidth = 6;
-            this.orderIdColumn.Name = "orderIdColumn";
-            this.orderIdColumn.ReadOnly = true;
-            this.orderIdColumn.Visible = false;
-            this.orderIdColumn.Width = 125;
+            orderIdColumn.HeaderText = "Order Id";
+            orderIdColumn.MinimumWidth = 6;
+            orderIdColumn.Name = "orderIdColumn";
+            orderIdColumn.ReadOnly = true;
+            orderIdColumn.Visible = false;
+            orderIdColumn.Width = 125;
             // 
             // clientNameColumn
             // 
-            this.clientNameColumn.HeaderText = "Client Name";
-            this.clientNameColumn.MinimumWidth = 6;
-            this.clientNameColumn.Name = "clientNameColumn";
-            this.clientNameColumn.ReadOnly = true;
-            this.clientNameColumn.Width = 125;
+            clientNameColumn.HeaderText = "Client Name";
+            clientNameColumn.MinimumWidth = 6;
+            clientNameColumn.Name = "clientNameColumn";
+            clientNameColumn.ReadOnly = true;
+            clientNameColumn.Width = 125;
             // 
             // clientSurnameColumn
             // 
-            this.clientSurnameColumn.HeaderText = "Client Surname";
-            this.clientSurnameColumn.MinimumWidth = 6;
-            this.clientSurnameColumn.Name = "clientSurnameColumn";
-            this.clientSurnameColumn.ReadOnly = true;
-            this.clientSurnameColumn.Width = 125;
+            clientSurnameColumn.HeaderText = "Client Surname";
+            clientSurnameColumn.MinimumWidth = 6;
+            clientSurnameColumn.Name = "clientSurnameColumn";
+            clientSurnameColumn.ReadOnly = true;
+            clientSurnameColumn.Width = 125;
             // 
             // carModelColumn
             // 
-            this.carModelColumn.HeaderText = "Car Model";
-            this.carModelColumn.MinimumWidth = 6;
-            this.carModelColumn.Name = "carModelColumn";
-            this.carModelColumn.ReadOnly = true;
-            this.carModelColumn.Width = 125;
+            carModelColumn.HeaderText = "Car Model";
+            carModelColumn.MinimumWidth = 6;
+            carModelColumn.Name = "carModelColumn";
+            carModelColumn.ReadOnly = true;
+            carModelColumn.Width = 125;
             // 
             // carColorColumn
             // 
-            this.carColorColumn.HeaderText = "Car Color";
-            this.carColorColumn.MinimumWidth = 6;
-            this.carColorColumn.Name = "carColorColumn";
-            this.carColorColumn.ReadOnly = true;
-            this.carColorColumn.Width = 125;
+            carColorColumn.HeaderText = "Car Color";
+            carColorColumn.MinimumWidth = 6;
+            carColorColumn.Name = "carColorColumn";
+            carColorColumn.ReadOnly = true;
+            carColorColumn.Width = 125;
             // 
             // CreateDateColumn
             // 
-            this.CreateDateColumn.HeaderText = "Created Date";
-            this.CreateDateColumn.MinimumWidth = 6;
-            this.CreateDateColumn.Name = "CreateDateColumn";
-            this.CreateDateColumn.ReadOnly = true;
-            this.CreateDateColumn.Width = 125;
+            CreateDateColumn.HeaderText = "Created Date";
+            CreateDateColumn.MinimumWidth = 6;
+            CreateDateColumn.Name = "CreateDateColumn";
+            CreateDateColumn.ReadOnly = true;
+            CreateDateColumn.Width = 125;
             // 
             // endRentDateColumn
             // 
-            this.endRentDateColumn.HeaderText = "End Rent Date";
-            this.endRentDateColumn.MinimumWidth = 6;
-            this.endRentDateColumn.Name = "endRentDateColumn";
-            this.endRentDateColumn.ReadOnly = true;
-            this.endRentDateColumn.Visible = false;
-            this.endRentDateColumn.Width = 125;
+            endRentDateColumn.HeaderText = "End Rent Date";
+            endRentDateColumn.MinimumWidth = 6;
+            endRentDateColumn.Name = "endRentDateColumn";
+            endRentDateColumn.ReadOnly = true;
+            endRentDateColumn.Visible = false;
+            endRentDateColumn.Width = 125;
             // 
             // priceColumn
             // 
-            this.priceColumn.HeaderText = "Price";
-            this.priceColumn.MinimumWidth = 70;
-            this.priceColumn.Name = "priceColumn";
-            this.priceColumn.ReadOnly = true;
-            this.priceColumn.Width = 70;
+            priceColumn.HeaderText = "Price";
+            priceColumn.MinimumWidth = 70;
+            priceColumn.Name = "priceColumn";
+            priceColumn.ReadOnly = true;
+            priceColumn.Width = 70;
+            // 
+            // skipOrderTimeButton
+            // 
+            skipOrderTimeButton.BackColor = Color.DarkSlateGray;
+            skipOrderTimeButton.Cursor = Cursors.Hand;
+            skipOrderTimeButton.FlatAppearance.BorderSize = 0;
+            skipOrderTimeButton.FlatStyle = FlatStyle.Flat;
+            skipOrderTimeButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            skipOrderTimeButton.ForeColor = Color.White;
+            skipOrderTimeButton.Location = new Point(12, 621);
+            skipOrderTimeButton.Margin = new Padding(3, 4, 3, 4);
+            skipOrderTimeButton.Name = "skipOrderTimeButton";
+            skipOrderTimeButton.Size = new Size(249, 42);
+            skipOrderTimeButton.TabIndex = 20;
+            skipOrderTimeButton.Text = "Skip Order Time";
+            skipOrderTimeButton.UseVisualStyleBackColor = false;
+            skipOrderTimeButton.Click += skipOrderTimeButton_Click;
             // 
             // AdministratorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 543);
-            this.Controls.Add(this.skipOrderTimeButton);
-            this.Controls.Add(this.ordersDataGridView);
-            this.Controls.Add(this.addCarButton);
-            this.Controls.Add(this.CreateApplicationButton);
-            this.Name = "AdministratorForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Administrator";
-            ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(949, 679);
+            Controls.Add(skipOrderTimeButton);
+            Controls.Add(ordersDataGridView);
+            Controls.Add(addCarButton);
+            Controls.Add(CreateApplicationButton);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "AdministratorForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Administrator";
+            ((System.ComponentModel.ISupportInitialize)ordersDataGridView).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

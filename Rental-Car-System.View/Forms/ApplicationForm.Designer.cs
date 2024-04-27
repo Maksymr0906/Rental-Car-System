@@ -31,7 +31,6 @@
             isCarDamagedCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             sendApplicationButton = new Button();
             rejectionCommentTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            rejectionCommentLabel = new Label();
             clientSurnameLabel = new Label();
             carModelLabel = new Label();
             confirmOrderButton = new Button();
@@ -77,8 +76,8 @@
             // rejectionCommentTextField
             // 
             rejectionCommentTextField.Depth = 0;
-            rejectionCommentTextField.Hint = "";
-            rejectionCommentTextField.Location = new Point(305, 315);
+            rejectionCommentTextField.Hint = "Rejection comment";
+            rejectionCommentTextField.Location = new Point(280, 324);
             rejectionCommentTextField.Margin = new Padding(3, 4, 3, 4);
             rejectionCommentTextField.MaxLength = 32767;
             rejectionCommentTextField.MouseState = MaterialSkin.MouseState.HOVER;
@@ -92,18 +91,6 @@
             rejectionCommentTextField.TabStop = false;
             rejectionCommentTextField.UseSystemPasswordChar = false;
             rejectionCommentTextField.Visible = false;
-            // 
-            // rejectionCommentLabel
-            // 
-            rejectionCommentLabel.BackColor = Color.Transparent;
-            rejectionCommentLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rejectionCommentLabel.Location = new Point(12, 304);
-            rejectionCommentLabel.Name = "rejectionCommentLabel";
-            rejectionCommentLabel.Size = new Size(287, 58);
-            rejectionCommentLabel.TabIndex = 21;
-            rejectionCommentLabel.Text = "Rejection comment:";
-            rejectionCommentLabel.TextAlign = ContentAlignment.MiddleLeft;
-            rejectionCommentLabel.Visible = false;
             // 
             // clientSurnameLabel
             // 
@@ -169,7 +156,7 @@
             carDamageFeeLabel.Font = new Font("Roboto", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             carDamageFeeLabel.Location = new Point(12, 304);
             carDamageFeeLabel.Name = "carDamageFeeLabel";
-            carDamageFeeLabel.Size = new Size(287, 58);
+            carDamageFeeLabel.Size = new Size(746, 58);
             carDamageFeeLabel.TabIndex = 27;
             carDamageFeeLabel.Text = "Fee for car damage: ";
             carDamageFeeLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -177,18 +164,16 @@
             // 
             // ApplicationForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(800, 562);
-            Controls.Add(carDamageFeeLabel);
             Controls.Add(cancelOrderButton);
             Controls.Add(confirmOrderButton);
             Controls.Add(carModelLabel);
             Controls.Add(clientSurnameLabel);
             Controls.Add(rejectionCommentTextField);
-            Controls.Add(rejectionCommentLabel);
             Controls.Add(sendApplicationButton);
             Controls.Add(isCarDamagedCheckBox);
+            Controls.Add(carDamageFeeLabel);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ApplicationForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -202,7 +187,6 @@
         private MaterialSkin.Controls.MaterialCheckBox isCarDamagedCheckBox;
         private System.Windows.Forms.Button sendApplicationButton;
         private MaterialSkin.Controls.MaterialSingleLineTextField rejectionCommentTextField;
-        private System.Windows.Forms.Label rejectionCommentLabel;
         private System.Windows.Forms.Label clientSurnameLabel;
         private System.Windows.Forms.Label carModelLabel;
         private System.Windows.Forms.Button confirmOrderButton;

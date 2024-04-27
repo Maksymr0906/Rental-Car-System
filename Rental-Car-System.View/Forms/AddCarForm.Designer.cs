@@ -57,7 +57,7 @@
             brandTextField.SelectedText = "";
             brandTextField.SelectionLength = 0;
             brandTextField.SelectionStart = 0;
-            brandTextField.Size = new Size(400, 28);
+            brandTextField.Size = new Size(351, 28);
             brandTextField.TabIndex = 27;
             brandTextField.TabStop = false;
             brandTextField.UseSystemPasswordChar = false;
@@ -75,7 +75,7 @@
             countryTextField.SelectedText = "";
             countryTextField.SelectionLength = 0;
             countryTextField.SelectionStart = 0;
-            countryTextField.Size = new Size(400, 28);
+            countryTextField.Size = new Size(351, 28);
             countryTextField.TabIndex = 25;
             countryTextField.TabStop = false;
             countryTextField.UseSystemPasswordChar = false;
@@ -94,7 +94,7 @@
             modelTextField.SelectedText = "";
             modelTextField.SelectionLength = 0;
             modelTextField.SelectionStart = 0;
-            modelTextField.Size = new Size(400, 28);
+            modelTextField.Size = new Size(351, 28);
             modelTextField.TabIndex = 24;
             modelTextField.TabStop = false;
             modelTextField.UseSystemPasswordChar = false;
@@ -112,7 +112,7 @@
             fuelConsumptionTextField.SelectedText = "";
             fuelConsumptionTextField.SelectionLength = 0;
             fuelConsumptionTextField.SelectionStart = 0;
-            fuelConsumptionTextField.Size = new Size(400, 28);
+            fuelConsumptionTextField.Size = new Size(351, 28);
             fuelConsumptionTextField.TabIndex = 33;
             fuelConsumptionTextField.TabStop = false;
             fuelConsumptionTextField.UseSystemPasswordChar = false;
@@ -131,7 +131,7 @@
             priceTextField.SelectedText = "";
             priceTextField.SelectionLength = 0;
             priceTextField.SelectionStart = 0;
-            priceTextField.Size = new Size(400, 28);
+            priceTextField.Size = new Size(351, 28);
             priceTextField.TabIndex = 35;
             priceTextField.TabStop = false;
             priceTextField.UseSystemPasswordChar = false;
@@ -181,7 +181,7 @@
             yearOfManufactureTextField.SelectedText = "";
             yearOfManufactureTextField.SelectionLength = 0;
             yearOfManufactureTextField.SelectionStart = 0;
-            yearOfManufactureTextField.Size = new Size(400, 28);
+            yearOfManufactureTextField.Size = new Size(351, 28);
             yearOfManufactureTextField.TabIndex = 39;
             yearOfManufactureTextField.TabStop = false;
             yearOfManufactureTextField.UseSystemPasswordChar = false;
@@ -212,8 +212,7 @@
             // 
             // AddCarForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(374, 461);
             Controls.Add(pictureBox1);
             Controls.Add(userPictureBox);

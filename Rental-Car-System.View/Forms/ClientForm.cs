@@ -3,6 +3,7 @@ using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Utils;
+using Rental_Car_System.View.Forms;
 
 namespace Rental_Car_System.Forms
 {
@@ -19,7 +20,7 @@ namespace Rental_Car_System.Forms
         public ClientForm(Client client) : this()
         {
             loggedClient = client;
-            userLoginLabel.Text = $"Logged as: {loggedClient.Login}";
+            Text = $"Logged as: {loggedClient.Login}";
             PrintBalance();
             PrintAvailableCars();
             PrintClientOrders();
@@ -28,7 +29,7 @@ namespace Rental_Car_System.Forms
         private void PrintAvailableCars()
         {
             var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if(cars.Count <= 0)
+            if (cars.Count <= 0)
             {
                 MessageBox.Show("We have not any available car now.");
                 return;
@@ -67,7 +68,7 @@ namespace Rental_Car_System.Forms
         private void prevButton_Click(object sender, EventArgs e)
         {
             var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if(cars.Count <= 0)
+            if (cars.Count <= 0)
             {
                 return;
             }
@@ -120,6 +121,11 @@ namespace Rental_Car_System.Forms
                 return;
             }
 
+            if (loggedClient.Surname == string.Empty || loggedClient.Name == string.Empty)
+            {
+                return;
+            }
+
             Hide();
             Button button = (Button)sender;
             int buttonNumber = Convert.ToInt32(button.Tag);
@@ -139,6 +145,17 @@ namespace Rental_Car_System.Forms
         private void PrintBalance()
         {
             balanceLabel.Text = $"Balance: {loggedClient.Balance:F2}";
+        }
+
+        private void myProfileButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+            var profileForm = new ProfileForm(loggedClient);
+            profileForm.FormClosed += (s, arg) =>
+            {
+                Show();
+            };
+            profileForm.Show();
         }
     }
 }

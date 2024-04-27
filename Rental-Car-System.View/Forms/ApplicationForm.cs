@@ -4,6 +4,7 @@ using Rental_Car_System.ApplicationFormStates;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
+
 #nullable disable
 namespace Rental_Car_System.Forms
 {
@@ -44,7 +45,6 @@ namespace Rental_Car_System.Forms
 
         public void ShowOrderCarUI()
         {
-            rejectionCommentLabel.Visible = true;
             rejectionCommentTextField.Visible = true;
             confirmOrderButton.Visible = true;
             cancelOrderButton.Visible = true;

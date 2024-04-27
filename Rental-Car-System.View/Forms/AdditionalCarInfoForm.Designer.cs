@@ -103,8 +103,7 @@
             // 
             // AdditionalCarInfoForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(421, 540);
             Controls.Add(carPictureBox);
             Controls.Add(fuelConsumptionLabel);
@@ -113,6 +112,7 @@
             Controls.Add(colorLabel);
             Controls.Add(countryLabel);
             Name = "AdditionalCarInfoForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AdditionalCarInfoForm";
             ((System.ComponentModel.ISupportInitialize)carPictureBox).EndInit();
             ResumeLayout(false);

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            userLoginLabel = new Label();
             tabControl = new TabControl();
             availableCarsTabPage = new TabPage();
             carModelButton3 = new Button();
@@ -49,6 +48,7 @@
             statusColumn = new DataGridViewTextBoxColumn();
             commentColumn = new DataGridViewTextBoxColumn();
             balanceLabel = new Label();
+            myProfileButton = new Button();
             tabControl.SuspendLayout();
             availableCarsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)carPictureBox3).BeginInit();
@@ -58,28 +58,16 @@
             ((System.ComponentModel.ISupportInitialize)orderedCarsDataGridView).BeginInit();
             SuspendLayout();
             // 
-            // userLoginLabel
-            // 
-            userLoginLabel.BackColor = Color.Transparent;
-            userLoginLabel.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            userLoginLabel.ForeColor = SystemColors.Window;
-            userLoginLabel.Location = new Point(798, 26);
-            userLoginLabel.Name = "userLoginLabel";
-            userLoginLabel.Size = new Size(308, 58);
-            userLoginLabel.TabIndex = 23;
-            userLoginLabel.Text = "Logged as: ";
-            userLoginLabel.TextAlign = ContentAlignment.MiddleRight;
-            // 
             // tabControl
             // 
             tabControl.Controls.Add(availableCarsTabPage);
             tabControl.Controls.Add(myOrdersTabPage);
-            tabControl.Font = new Font("Roboto", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tabControl.Location = new Point(2, 88);
+            tabControl.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tabControl.Location = new Point(0, 67);
             tabControl.Margin = new Padding(3, 4, 3, 4);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1119, 750);
+            tabControl.Size = new Size(1120, 542);
             tabControl.TabIndex = 24;
             // 
             // availableCarsTabPage
@@ -92,10 +80,10 @@
             availableCarsTabPage.Controls.Add(nextButton);
             availableCarsTabPage.Controls.Add(prevButton);
             availableCarsTabPage.Controls.Add(carPictureBox1);
-            availableCarsTabPage.Location = new Point(4, 26);
+            availableCarsTabPage.Location = new Point(4, 37);
             availableCarsTabPage.Name = "availableCarsTabPage";
             availableCarsTabPage.Padding = new Padding(3);
-            availableCarsTabPage.Size = new Size(1111, 720);
+            availableCarsTabPage.Size = new Size(1112, 501);
             availableCarsTabPage.TabIndex = 2;
             availableCarsTabPage.Text = "Available Cars";
             availableCarsTabPage.UseVisualStyleBackColor = true;
@@ -229,11 +217,11 @@
             // myOrdersTabPage
             // 
             myOrdersTabPage.Controls.Add(orderedCarsDataGridView);
-            myOrdersTabPage.Location = new Point(4, 26);
+            myOrdersTabPage.Location = new Point(4, 37);
             myOrdersTabPage.Margin = new Padding(3, 4, 3, 4);
             myOrdersTabPage.Name = "myOrdersTabPage";
             myOrdersTabPage.Padding = new Padding(3, 4, 3, 4);
-            myOrdersTabPage.Size = new Size(1111, 720);
+            myOrdersTabPage.Size = new Size(1112, 501);
             myOrdersTabPage.TabIndex = 1;
             myOrdersTabPage.Text = "My Orders";
             myOrdersTabPage.UseVisualStyleBackColor = true;
@@ -249,7 +237,7 @@
             orderedCarsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             orderedCarsDataGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3, Column1, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn9, statusColumn, commentColumn });
             orderedCarsDataGridView.GridColor = SystemColors.Window;
-            orderedCarsDataGridView.Location = new Point(8, 8);
+            orderedCarsDataGridView.Location = new Point(155, 4);
             orderedCarsDataGridView.Margin = new Padding(3, 4, 3, 4);
             orderedCarsDataGridView.MultiSelect = false;
             orderedCarsDataGridView.Name = "orderedCarsDataGridView";
@@ -259,7 +247,7 @@
             orderedCarsDataGridView.RowTemplate.Height = 24;
             orderedCarsDataGridView.RowTemplate.ReadOnly = true;
             orderedCarsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            orderedCarsDataGridView.Size = new Size(1094, 699);
+            orderedCarsDataGridView.Size = new Size(767, 489);
             orderedCarsDataGridView.TabIndex = 18;
             // 
             // dataGridViewTextBoxColumn1
@@ -322,25 +310,43 @@
             // balanceLabel
             // 
             balanceLabel.BackColor = Color.Transparent;
-            balanceLabel.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            balanceLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             balanceLabel.ForeColor = SystemColors.Window;
-            balanceLabel.Location = new Point(388, 26);
+            balanceLabel.Location = new Point(395, 26);
             balanceLabel.Name = "balanceLabel";
-            balanceLabel.Size = new Size(308, 58);
+            balanceLabel.Size = new Size(308, 37);
             balanceLabel.TabIndex = 25;
             balanceLabel.Text = "Balance:";
             balanceLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // myProfileButton
+            // 
+            myProfileButton.BackColor = Color.DarkSlateGray;
+            myProfileButton.Cursor = Cursors.Hand;
+            myProfileButton.FlatAppearance.BorderSize = 0;
+            myProfileButton.FlatStyle = FlatStyle.Flat;
+            myProfileButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            myProfileButton.ForeColor = Color.White;
+            myProfileButton.Location = new Point(849, 26);
+            myProfileButton.Margin = new Padding(3, 4, 3, 4);
+            myProfileButton.Name = "myProfileButton";
+            myProfileButton.Size = new Size(261, 33);
+            myProfileButton.TabIndex = 14;
+            myProfileButton.Tag = "2";
+            myProfileButton.Text = "My Profile";
+            myProfileButton.UseVisualStyleBackColor = false;
+            myProfileButton.Click += myProfileButton_Click;
+            // 
             // ClientForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1118, 840);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(1118, 605);
+            Controls.Add(myProfileButton);
             Controls.Add(balanceLabel);
-            Controls.Add(userLoginLabel);
             Controls.Add(tabControl);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ClientForm";
+            Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Client";
             tabControl.ResumeLayout(false);
@@ -355,7 +361,6 @@
 
         #endregion
         private System.Windows.Forms.Button CreateOrderButton;
-        private System.Windows.Forms.Label userLoginLabel;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage myOrdersTabPage;
         private System.Windows.Forms.DataGridView orderedCarsDataGridView;
@@ -385,5 +390,6 @@
         private Button carModelButton2;
         private Button carModelButton1;
         private Label balanceLabel;
+        private Button myProfileButton;
     }
 }
