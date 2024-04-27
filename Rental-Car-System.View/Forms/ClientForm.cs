@@ -23,7 +23,6 @@ namespace Rental_Car_System.Forms
             Text = $"Logged as: {currentClient.Login}";
             PrintBalance();
             PrintAvailableCars();
-            PrintClientOrders();
         }
 
         private void PrintAvailableCars()
@@ -37,54 +36,39 @@ namespace Rental_Car_System.Forms
             for (int i = 0; i < Constants.numberOfCarsCards; i++)
             {
                 string pictureBoxName = "carPictureBox" + (i + 1);
-                if (availableCarsTabPage.Controls[pictureBoxName] is PictureBox pictureBox)
+                if (Controls[pictureBoxName] is PictureBox pictureBox)
                 {
                     pictureBox.Image = Image.FromFile(Constants.pathToCarImages + cars[(currentImgIndex + i) % cars.Count].ImgPath);
                     pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 }
 
                 string buttonName = "carModelButton" + (i + 1);
-                if (availableCarsTabPage.Controls[buttonName] is Button button)
+                if (Controls[buttonName] is Button button)
                 {
                     button.Text = cars[(currentImgIndex + i) % cars.Count].Model;
                 }
             }
         }
 
-        private void PrintClientOrders()
-        {
-            orderedCarsDataGridView.Rows.Clear();
-
-            var orders = RepositoryManager.GetRepo<Order>().GetAll(o => o.ClientId == currentClient.Id).ToList();
-            foreach (var order in orders)
-            {
-                var orderId = order.Id;
-                var application = RepositoryManager.GetRepo<RentalApplication>().GetByFilter(a => a.OrderId == orderId);
-                var car = RepositoryManager.GetRepo<Car>()
-                    .GetByFilter(c => c.Id == order.CarId);
-                orderedCarsDataGridView.Rows.Add(car.Id, car.Model, car.Brand, car.Color, order.Price, order.Status, application?.RejectionComment ?? string.Empty);
-            }
-        }
-
         private void prevButton_Click(object sender, EventArgs e)
         {
-            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (cars.Count <= 0)
-            {
-                return;
-            }
-            currentImgIndex = (currentImgIndex - 1 + cars.Count) % cars.Count;
-            PrintAvailableCars();
+            UpdateCurrentImgIndex(-1);
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
+            UpdateCurrentImgIndex(1);
+        }
+
+        private void UpdateCurrentImgIndex(int increment)
+        {
             var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (cars.Count <= 0)
+            if (cars.Count == 0)
             {
                 return;
             }
-            currentImgIndex = (currentImgIndex + 1) % cars.Count;
+
+            currentImgIndex = (currentImgIndex + increment + cars.Count) % cars.Count;
             PrintAvailableCars();
         }
 
@@ -137,7 +121,6 @@ namespace Rental_Car_System.Forms
             {
                 ClearFields();
                 PrintAvailableCars();
-                PrintClientOrders();
                 PrintBalance();
                 Show();
             };

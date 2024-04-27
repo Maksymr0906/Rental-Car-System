@@ -47,7 +47,7 @@ namespace Rental_Car_System.View.Forms
 
         private void updateProfileButton_Click(object sender, EventArgs e)
         {
-            if(surnameTextField.Text == string.Empty || nameTextField.Text == string.Empty)
+            if (surnameTextField.Text == string.Empty || nameTextField.Text == string.Empty)
             {
                 MessageBox.Show("Fill in all fields.");
                 return;
@@ -60,6 +60,16 @@ namespace Rental_Car_System.View.Forms
 
             MessageBox.Show("Data updated.");
             Close();
+        }
+
+        private void myOrdersButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+            var clientOrdersForm = new ClientOrdersForm(currentClient);
+
+            clientOrdersForm.FormClosed += (s, arg) => Show();
+
+            clientOrdersForm.Show();
         }
     }
 }

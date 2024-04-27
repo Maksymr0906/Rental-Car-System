@@ -35,6 +35,7 @@
             dateOfBirthTimePicker = new DateTimePicker();
             updateProfileButton = new Button();
             profileToolTip = new ToolTip(components);
+            myOrdersButton = new Button();
             SuspendLayout();
             // 
             // nameTextField
@@ -117,10 +118,29 @@
             updateProfileButton.UseVisualStyleBackColor = false;
             updateProfileButton.Click += updateProfileButton_Click;
             // 
+            // myOrdersButton
+            // 
+            myOrdersButton.BackColor = Color.DarkSlateGray;
+            myOrdersButton.Cursor = Cursors.Hand;
+            myOrdersButton.FlatAppearance.BorderSize = 0;
+            myOrdersButton.FlatStyle = FlatStyle.Flat;
+            myOrdersButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            myOrdersButton.ForeColor = Color.White;
+            myOrdersButton.Location = new Point(12, 236);
+            myOrdersButton.Margin = new Padding(3, 4, 3, 4);
+            myOrdersButton.Name = "myOrdersButton";
+            myOrdersButton.Size = new Size(248, 42);
+            myOrdersButton.TabIndex = 26;
+            myOrdersButton.Tag = "1";
+            myOrdersButton.Text = "My Orders";
+            myOrdersButton.UseVisualStyleBackColor = false;
+            myOrdersButton.Click += myOrdersButton_Click;
+            // 
             // ProfileForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(532, 291);
+            Controls.Add(myOrdersButton);
             Controls.Add(updateProfileButton);
             Controls.Add(dateOfBirthTimePicker);
             Controls.Add(nameTextField);
@@ -141,5 +161,6 @@
         private DateTimePicker dateOfBirthTimePicker;
         private Button updateProfileButton;
         private ToolTip profileToolTip;
+        private Button myOrdersButton;
     }
 }
