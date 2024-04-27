@@ -53,7 +53,8 @@ namespace Rental_Car_System.Forms
 
         private Car CreateCar()
         {
-            return new Car {
+            return new Car
+            {
                 Model = modelTextField.Text,
                 Country = countryTextField.Text,
                 Brand = brandTextField.Text,
