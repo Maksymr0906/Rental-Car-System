@@ -3,36 +3,67 @@ using Rental_Car_System.Utils;
 using MaterialSkin.Controls;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
+using Rental_Car_System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Rental_Car_System.Forms
 {
     public partial class AdministratorForm : MaterialForm
     {
+        private readonly RentalCarContext context;
         public AdministratorForm()
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
-            ShowOrders();
         }
 
-        public AdministratorForm(Admin admin) : this()
+        public AdministratorForm(RentalCarContext context, Admin admin) : this()
         {
-
+            this.context = context;
+            ShowOrders();
         }
 
         private void ShowOrders()
         {
             ordersDataGridView.Rows.Clear();
-            var orders = RepositoryManager.GetRepo<Order>().GetAll().ToList();
-            foreach(var order in orders)
-            {
-                if(order.Status == Order.OrderStatus.Processing || order.Status == Order.OrderStatus.Ended)
+            //var orders = RepositoryManager.GetRepo<Order>().GetAll().ToList();
+            //foreach(var order in orders)
+            //{
+            //    if(order.Status == Order.OrderStatus.Processing || order.Status == Order.OrderStatus.Ended)
+            //    {
+            //        var car = RepositoryManager.GetRepo<Car>().GetByFilter(c => c.Id == order.CarId);
+            //        var client = RepositoryManager.GetRepo<Client>().GetByFilter(c => c.Id == order.ClientId);
+            //        ordersDataGridView.Rows.Add(order.Id, client.Name, client.Surname, car.Model, car.Color, order.DateCreated, order.EndRentDate, order.Price);
+            //    }
+            //}
+
+            var result = context.Orders.Where(o => o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Ended)
+                .Include(order => order.Car)
+                .Include(order => order.Client)
+                .OrderByDescending(it => it.DateCreated)
+                .Select(order => new
                 {
-                    var car = RepositoryManager.GetRepo<Car>().GetByFilter(c => c.Id == order.CarId);
-                    var client = RepositoryManager.GetRepo<Client>().GetByFilter(c => c.Id == order.ClientId);
-                    ordersDataGridView.Rows.Add(order.Id, client.Name, client.Surname, car.Model, car.Color, order.DateCreated, order.EndRentDate, order.Price);
-                }
-            }
+                    OrderId = order.Id,
+                    Client = new
+                    {
+                        order.Client.Name,
+                        order.Client.Surname,
+                    },
+                    Car = new
+                    {
+                        order.Car.Model,
+                        order.Car.Color,
+                    },
+                    order.DateCreated,
+                    order.EndRentDate,
+                    order.Price
+                }).ToList();
+
+            result.ForEach(it =>
+            {
+                ordersDataGridView.Rows.Add(it.OrderId, it.Client.Name, it.Client.Surname, it.Car.Model, 
+                    it.Car.Color, it.DateCreated, it.EndRentDate, it.Price);
+            });
         }
 
         private void addCarButton_Click(object sender, EventArgs e)

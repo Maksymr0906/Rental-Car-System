@@ -3,6 +3,7 @@ using Rental_Car_System.Utils;
 using MaterialSkin.Controls;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Utils;
+using Rental_Car_System.Data;
 
 namespace Rental_Car_System.Forms
 {
@@ -60,7 +61,7 @@ namespace Rental_Car_System.Forms
                 }
 
                 MessageBox.Show("You are successfuly logged in!");
-                SwitchToForm(new AdministratorForm(foundAdmin));
+                SwitchToForm(new AdministratorForm(new RentalCarContext(),foundAdmin));
             }
             else
             {
