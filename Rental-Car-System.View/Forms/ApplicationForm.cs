@@ -74,8 +74,7 @@ namespace Rental_Car_System.Forms
         private void sendApplicationButton_Click(object sender, EventArgs e)
         {
             var order = GetCurrentOrder();
-            order.Status = Order.OrderStatus.Closed;
-            RepositoryManager.GetRepo<Order>().Update(order);
+            UpdateOrderStatus(order, Order.OrderStatus.Closed);
 
             var car = RepositoryManager.GetRepo<Car>()
                 .GetByFilter(c => c.Id == order.CarId);
@@ -99,8 +98,7 @@ namespace Rental_Car_System.Forms
         private void confirmOrderButton_Click(object sender, EventArgs e)
         {
             var order = GetCurrentOrder();
-            order.Status = Order.OrderStatus.Accepted;
-            RepositoryManager.GetRepo<Order>().Update(order);
+            UpdateOrderStatus(order, Order.OrderStatus.Accepted);
 
             var client = RepositoryManager.GetRepo<Client>()
                 .GetByFilter(c => c.Id == order.ClientId);
@@ -120,8 +118,7 @@ namespace Rental_Car_System.Forms
             }
 
             var order = GetCurrentOrder();
-            order.Status = Order.OrderStatus.Declined;
-            RepositoryManager.GetRepo<Order>().Update(order);
+            UpdateOrderStatus(order, Order.OrderStatus.Declined);
 
             var car = RepositoryManager.GetRepo<Car>()
                 .GetByFilter(o => o.Id == order.CarId);
@@ -133,6 +130,12 @@ namespace Rental_Car_System.Forms
 
             MessageBox.Show("Order cancelled. Client will be notificated.");
             Close();
+        }
+
+        private void UpdateOrderStatus(Order order, Order.OrderStatus status)
+        {
+            order.Status = status;
+            RepositoryManager.GetRepo<Order>().Update(order);
         }
 
         private Order GetCurrentOrder()

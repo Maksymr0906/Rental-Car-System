@@ -54,15 +54,30 @@ namespace Rental_Car_System.Forms
             var order = RepositoryManager.GetRepo<Order>()
                 .GetByFilter(o => o.Id == Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString()));
 
-            var application = new RentalApplication 
+            var application = RepositoryManager.GetRepo<RentalApplication>().GetByFilter(x => x.OrderId == order.Id);
+
+            if (application == null)
             {
-                OrderId = order.Id,
-                Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded,
-                RejectionComment = string.Empty
-            };
+                application = new RentalApplication
+                {
+                    OrderId = order.Id,
+                    Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded,
+                    RejectionComment = string.Empty
+                };
 
-            RepositoryManager.GetRepo<RentalApplication>().Create(application);
+                RepositoryManager.GetRepo<RentalApplication>().Create(application);
+            }
+            else
+            {
+                application.Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded;
+                RepositoryManager.GetRepo<RentalApplication>().Update(application);
+            }
 
+            OpenApplicationForm(application);
+        }
+
+        private void OpenApplicationForm(RentalApplication application)
+        {
             Hide();
 
             var applicationForm = new ApplicationForm(application);
@@ -85,6 +100,7 @@ namespace Rental_Car_System.Forms
                 {
                     order.Status = Order.OrderStatus.Ended;
                 }
+                RepositoryManager.GetRepo<Order>().Update(order);
             }
 
             ShowOrders();

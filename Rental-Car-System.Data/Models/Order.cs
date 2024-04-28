@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace Rental_Car_System.Data.Models
+﻿namespace Rental_Car_System.Data.Models
 {
     public sealed class Order : Entity
     {
@@ -20,5 +17,6 @@ namespace Rental_Car_System.Data.Models
         public DateTime EndRentDate { get; set; }
         public double Price { get; set; }
         public OrderStatus Status { get; set; }
+        public RentalApplication RentalApplication { get; set; }
     }
 }

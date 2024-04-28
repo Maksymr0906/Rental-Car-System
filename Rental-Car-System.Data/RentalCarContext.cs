@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Data.Models;
+using System.Diagnostics;
 
 namespace Rental_Car_System.Data
 {
@@ -20,6 +21,7 @@ namespace Rental_Car_System.Data
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 3, 0));
             optionsBuilder.UseMySql("server=localhost;user=root;password=1111;database=rental_car_system",serverVersion);
+            optionsBuilder.LogTo(message => Debug.WriteLine(message));
         }
     }
 }
