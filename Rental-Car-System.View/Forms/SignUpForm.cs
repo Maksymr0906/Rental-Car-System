@@ -69,7 +69,8 @@ namespace Rental_Car_System.Forms
                     Password = person.Password,
                     Name = string.Empty,
                     Surname = string.Empty,
-                    Balance = Constants.startingClientBalance
+                    Balance = Constants.startingClientBalance,
+                    DateOfBirthday = DateTime.Now.AddYears(-100),
                 };
 
                 RepositoryManager.GetRepo<Client>().Create(client);

@@ -15,6 +15,7 @@ namespace Rental_Car_System.View.Forms
         {
             InitializeComponent();
             MaterialFormSkinManager.SetTheme(this);
+            dateOfBirthTimePicker.MinDate = DateTime.Now.AddYears(-101);
             dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18);
         }
 
