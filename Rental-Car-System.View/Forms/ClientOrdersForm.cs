@@ -47,13 +47,15 @@ namespace Rental_Car_System.View.Forms
                   },
                   order.Price,
                   order.Status,
-                  RejectionComment = order.RentalApplication.RejectionComment ?? string.Empty
+                  RejectionComment = order.RentalApplication.RejectionComment ?? string.Empty,
+                  order.DateCreated,
+                  order.EndRentDate
               }).ToList();
 
             query.ForEach(it =>
             {
                 orderedCarsDataGridView.Rows.Add(it.Car.Id, it.Car.Model, it.Car.Brand, 
-                    it.Car.Color, it.Price, it.Status, it.RejectionComment);
+                    it.Car.Color, it.Price, it.Status, it.RejectionComment, it.DateCreated.ToShortDateString(), it.EndRentDate.ToShortDateString());
             });
         }
     }

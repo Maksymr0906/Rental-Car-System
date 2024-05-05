@@ -36,6 +36,8 @@
             dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
             statusColumn = new DataGridViewTextBoxColumn();
             commentColumn = new DataGridViewTextBoxColumn();
+            createdDateColumn = new DataGridViewTextBoxColumn();
+            endRentDateColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)orderedCarsDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             orderedCarsDataGridView.BorderStyle = BorderStyle.None;
             orderedCarsDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             orderedCarsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            orderedCarsDataGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3, Column1, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn9, statusColumn, commentColumn });
+            orderedCarsDataGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3, Column1, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn9, statusColumn, commentColumn, createdDateColumn, endRentDateColumn });
             orderedCarsDataGridView.GridColor = SystemColors.Window;
             orderedCarsDataGridView.Location = new Point(12, 68);
             orderedCarsDataGridView.Margin = new Padding(3, 4, 3, 4);
@@ -60,7 +62,7 @@
             orderedCarsDataGridView.RowTemplate.Height = 24;
             orderedCarsDataGridView.RowTemplate.ReadOnly = true;
             orderedCarsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            orderedCarsDataGridView.Size = new Size(745, 471);
+            orderedCarsDataGridView.Size = new Size(998, 471);
             orderedCarsDataGridView.TabIndex = 19;
             // 
             // dataGridViewTextBoxColumn1
@@ -120,10 +122,26 @@
             commentColumn.ReadOnly = true;
             commentColumn.Width = 125;
             // 
+            // createdDateColumn
+            // 
+            createdDateColumn.HeaderText = "Created Date";
+            createdDateColumn.MinimumWidth = 6;
+            createdDateColumn.Name = "createdDateColumn";
+            createdDateColumn.ReadOnly = true;
+            createdDateColumn.Width = 125;
+            // 
+            // endRentDateColumn
+            // 
+            endRentDateColumn.HeaderText = "End Rent Date";
+            endRentDateColumn.MinimumWidth = 6;
+            endRentDateColumn.Name = "endRentDateColumn";
+            endRentDateColumn.ReadOnly = true;
+            endRentDateColumn.Width = 125;
+            // 
             // ClientOrdersForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(769, 552);
+            ClientSize = new Size(1022, 552);
             Controls.Add(orderedCarsDataGridView);
             Name = "ClientOrdersForm";
             Sizable = false;
@@ -143,5 +161,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private DataGridViewTextBoxColumn statusColumn;
         private DataGridViewTextBoxColumn commentColumn;
+        private DataGridViewTextBoxColumn createdDateColumn;
+        private DataGridViewTextBoxColumn endRentDateColumn;
     }
 }
