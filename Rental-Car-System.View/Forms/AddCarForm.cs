@@ -3,6 +3,7 @@ using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
+using Rental_Car_System.Data.Validators;
 
 namespace Rental_Car_System.Forms
 {
@@ -18,8 +19,16 @@ namespace Rental_Car_System.Forms
         {
             var car = CreateCar();
 
-            if (!IsCarDataValid(car))
+            var validator = new CarValidator();
+            var result = validator.Validate(car);
+
+            if (!result.IsValid)
             {
+                foreach (var error in result.Errors)
+                {
+                    MessageBox.Show(error.ErrorMessage);
+                }
+
                 return;
             }
 
@@ -27,35 +36,6 @@ namespace Rental_Car_System.Forms
 
             MessageBox.Show("Car added.");
             Close();
-        }
-
-        private bool IsCarDataValid(Car car)
-        {
-            if (car.YearOfManufacture > Constants.maxYearOfManufacture || car.YearOfManufacture < Constants.minYearOfManufacture)
-            {
-                MessageBox.Show($"Year must be in range: {Constants.minYearOfManufacture} - {Constants.minYearOfManufacture}");
-                return false;
-            }
-
-            if (car.FuelConsumption < Constants.minFuelConsumption || car.FuelConsumption > Constants.maxFuelConsumption)
-            {
-                MessageBox.Show($"Fuel consumption must be in range: {Constants.minFuelConsumption} - {Constants.maxFuelConsumption}");
-                return false;
-            }
-
-            if (car.Price < Constants.minPrice || car.Price > Constants.maxPrice)
-            {
-                MessageBox.Show($"Price must be in range: {Constants.minPrice} - {Constants.maxPrice}");
-                return false;
-            }
-
-            if(!File.Exists(Constants.pathToCarImages + car.ImgPath))
-            {
-                MessageBox.Show($"Add {car.ImgPath} image to Assets folder.");
-                return false;
-            }
-
-            return true;
         }
 
         private Car CreateCar()
@@ -88,6 +68,11 @@ namespace Rental_Car_System.Forms
         private void fuelConsumptionTextField_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidateNumericInput(fuelConsumptionTextField, e);
+        }
+
+        private void yearOfManufactureTextField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidateNumericInput(yearOfManufactureTextField, e);
         }
 
         private void ValidateNumericInput(MaterialSingleLineTextField textField, KeyPressEventArgs e)

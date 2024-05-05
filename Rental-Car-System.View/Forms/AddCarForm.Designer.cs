@@ -186,6 +186,7 @@
             yearOfManufactureTextField.TabIndex = 39;
             yearOfManufactureTextField.TabStop = false;
             yearOfManufactureTextField.UseSystemPasswordChar = false;
+            yearOfManufactureTextField.KeyPress += yearOfManufactureTextField_KeyPress;
             // 
             // userPictureBox
             // 
