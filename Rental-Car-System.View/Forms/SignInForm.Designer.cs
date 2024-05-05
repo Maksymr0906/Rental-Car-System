@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignInForm));
             signInButton = new Button();
             loginTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             passwordTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -145,6 +146,7 @@
             Controls.Add(passwordTextField);
             Controls.Add(loginTextField);
             Controls.Add(signInButton);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             MaximumSize = new Size(310, 337);
             Name = "SignInForm";

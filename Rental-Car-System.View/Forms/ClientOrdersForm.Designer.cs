@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientOrdersForm));
             orderedCarsDataGridView = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -143,6 +144,7 @@
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1022, 552);
             Controls.Add(orderedCarsDataGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClientOrdersForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

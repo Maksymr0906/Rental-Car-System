@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
             nameTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             surnameTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             dateOfBirthLabel = new Label();
@@ -36,6 +37,7 @@
             updateProfileButton = new Button();
             profileToolTip = new ToolTip(components);
             myOrdersButton = new Button();
+            depositButton = new Button();
             SuspendLayout();
             // 
             // nameTextField
@@ -51,7 +53,7 @@
             nameTextField.SelectedText = "";
             nameTextField.SelectionLength = 0;
             nameTextField.SelectionStart = 0;
-            nameTextField.Size = new Size(503, 28);
+            nameTextField.Size = new Size(404, 28);
             nameTextField.TabIndex = 23;
             nameTextField.TabStop = false;
             profileToolTip.SetToolTip(nameTextField, "Name");
@@ -71,7 +73,7 @@
             surnameTextField.SelectedText = "";
             surnameTextField.SelectionLength = 0;
             surnameTextField.SelectionStart = 0;
-            surnameTextField.Size = new Size(503, 28);
+            surnameTextField.Size = new Size(404, 28);
             surnameTextField.TabIndex = 22;
             surnameTextField.TabStop = false;
             profileToolTip.SetToolTip(surnameTextField, "Surname");
@@ -84,7 +86,7 @@
             dateOfBirthLabel.Font = new Font("Roboto", 12F);
             dateOfBirthLabel.Location = new Point(12, 182);
             dateOfBirthLabel.Name = "dateOfBirthLabel";
-            dateOfBirthLabel.Size = new Size(237, 32);
+            dateOfBirthLabel.Size = new Size(138, 32);
             dateOfBirthLabel.TabIndex = 25;
             dateOfBirthLabel.Text = "Date of birth:";
             dateOfBirthLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -93,10 +95,10 @@
             // 
             dateOfBirthTimePicker.CalendarFont = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dateOfBirthTimePicker.Font = new Font("Roboto", 12F);
-            dateOfBirthTimePicker.Location = new Point(221, 182);
+            dateOfBirthTimePicker.Location = new Point(156, 182);
             dateOfBirthTimePicker.Margin = new Padding(3, 4, 3, 4);
             dateOfBirthTimePicker.Name = "dateOfBirthTimePicker";
-            dateOfBirthTimePicker.Size = new Size(294, 32);
+            dateOfBirthTimePicker.Size = new Size(260, 32);
             dateOfBirthTimePicker.TabIndex = 24;
             profileToolTip.SetToolTip(dateOfBirthTimePicker, "Date of birth");
             // 
@@ -108,10 +110,10 @@
             updateProfileButton.FlatStyle = FlatStyle.Flat;
             updateProfileButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             updateProfileButton.ForeColor = Color.White;
-            updateProfileButton.Location = new Point(267, 236);
+            updateProfileButton.Location = new Point(12, 236);
             updateProfileButton.Margin = new Padding(3, 4, 3, 4);
             updateProfileButton.Name = "updateProfileButton";
-            updateProfileButton.Size = new Size(248, 42);
+            updateProfileButton.Size = new Size(114, 42);
             updateProfileButton.TabIndex = 1;
             updateProfileButton.Tag = "1";
             updateProfileButton.Text = "Update";
@@ -126,26 +128,46 @@
             myOrdersButton.FlatStyle = FlatStyle.Flat;
             myOrdersButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             myOrdersButton.ForeColor = Color.White;
-            myOrdersButton.Location = new Point(12, 236);
+            myOrdersButton.Location = new Point(132, 236);
             myOrdersButton.Margin = new Padding(3, 4, 3, 4);
             myOrdersButton.Name = "myOrdersButton";
-            myOrdersButton.Size = new Size(248, 42);
+            myOrdersButton.Size = new Size(164, 42);
             myOrdersButton.TabIndex = 26;
             myOrdersButton.Tag = "1";
             myOrdersButton.Text = "My Orders";
             myOrdersButton.UseVisualStyleBackColor = false;
             myOrdersButton.Click += myOrdersButton_Click;
             // 
+            // depositButton
+            // 
+            depositButton.BackColor = Color.DarkSlateGray;
+            depositButton.Cursor = Cursors.Hand;
+            depositButton.FlatAppearance.BorderSize = 0;
+            depositButton.FlatStyle = FlatStyle.Flat;
+            depositButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            depositButton.ForeColor = Color.White;
+            depositButton.Location = new Point(302, 236);
+            depositButton.Margin = new Padding(3, 4, 3, 4);
+            depositButton.Name = "depositButton";
+            depositButton.Size = new Size(114, 42);
+            depositButton.TabIndex = 27;
+            depositButton.Tag = "1";
+            depositButton.Text = "Deposit";
+            depositButton.UseVisualStyleBackColor = false;
+            depositButton.Click += depositButton_Click;
+            // 
             // ProfileForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(532, 291);
+            ClientSize = new Size(429, 291);
+            Controls.Add(depositButton);
             Controls.Add(myOrdersButton);
             Controls.Add(updateProfileButton);
             Controls.Add(dateOfBirthTimePicker);
             Controls.Add(nameTextField);
             Controls.Add(surnameTextField);
             Controls.Add(dateOfBirthLabel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ProfileForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -162,5 +184,6 @@
         private Button updateProfileButton;
         private ToolTip profileToolTip;
         private Button myOrdersButton;
+        private Button depositButton;
     }
 }

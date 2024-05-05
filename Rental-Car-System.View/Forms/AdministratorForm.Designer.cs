@@ -32,6 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministratorForm));
             CreateApplicationButton = new Button();
             addCarButton = new Button();
             ordersDataGridView = new DataGridView();
@@ -72,7 +73,7 @@
             addCarButton.FlatStyle = FlatStyle.Flat;
             addCarButton.Font = new Font("Roboto", 12F);
             addCarButton.ForeColor = Color.White;
-            addCarButton.Location = new Point(596, 499);
+            addCarButton.Location = new Point(604, 499);
             addCarButton.Margin = new Padding(3, 4, 3, 4);
             addCarButton.Name = "addCarButton";
             addCarButton.Size = new Size(111, 42);
@@ -222,6 +223,7 @@
             Controls.Add(ordersDataGridView);
             Controls.Add(addCarButton);
             Controls.Add(CreateApplicationButton);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "AdministratorForm";
             Sizable = false;

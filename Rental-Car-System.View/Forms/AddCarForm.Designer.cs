@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddCarForm));
             brandTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             countryTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             modelTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -224,6 +225,7 @@
             Controls.Add(brandTextField);
             Controls.Add(countryTextField);
             Controls.Add(modelTextField);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "AddCarForm";
             Sizable = false;

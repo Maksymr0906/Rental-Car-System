@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientForm));
             balanceLabel = new Label();
             myProfileButton = new Button();
             carModelButton3 = new Button();
@@ -213,6 +214,7 @@
             Controls.Add(carPictureBox1);
             Controls.Add(myProfileButton);
             Controls.Add(balanceLabel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             MaximumSize = new Size(1118, 605);
             Name = "ClientForm";

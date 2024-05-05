@@ -68,9 +68,17 @@ namespace Rental_Car_System.View.Forms
         private void myOrdersButton_Click(object sender, EventArgs e)
         {
             Hide();
-            var clientOrdersForm = new ClientOrdersForm(new RentalCarContext(),currentClient);
+            var clientOrdersForm = new ClientOrdersForm(new RentalCarContext(), currentClient);
             clientOrdersForm.FormClosed += (s, arg) => Show();
             clientOrdersForm.Show();
+        }
+
+        private void depositButton_Click(object sender, EventArgs e)
+        {
+            var depositForm = new DepositForm(currentClient);
+            Hide();
+            depositForm.FormClosed += (s, arg) => Show();
+            depositForm.Show();
         }
     }
 }

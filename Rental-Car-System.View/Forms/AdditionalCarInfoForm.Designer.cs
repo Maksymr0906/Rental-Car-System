@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdditionalCarInfoForm));
             countryLabel = new Label();
             colorLabel = new Label();
             brandLabel = new Label();
@@ -111,6 +112,7 @@
             Controls.Add(brandLabel);
             Controls.Add(colorLabel);
             Controls.Add(countryLabel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdditionalCarInfoForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

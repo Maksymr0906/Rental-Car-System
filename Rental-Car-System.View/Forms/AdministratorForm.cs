@@ -62,7 +62,7 @@ namespace Rental_Car_System.Forms
             result.ForEach(it =>
             {
                 ordersDataGridView.Rows.Add(it.OrderId, it.Client.Name, it.Client.Surname, it.Car.Model, 
-                    it.Car.Color, it.DateCreated, it.EndRentDate, it.Price);
+                    it.Car.Color, it.DateCreated.ToShortDateString(), it.EndRentDate.ToShortDateString(), it.Price);
             });
         }
 

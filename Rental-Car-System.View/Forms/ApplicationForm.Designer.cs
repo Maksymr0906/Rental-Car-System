@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApplicationForm));
             isCarDamagedCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             sendApplicationButton = new Button();
             rejectionCommentTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -100,7 +101,7 @@
             clientSurnameLabel.Name = "clientSurnameLabel";
             clientSurnameLabel.Size = new Size(374, 38);
             clientSurnameLabel.TabIndex = 23;
-            clientSurnameLabel.Text = "Client surname:";
+            clientSurnameLabel.Text = "Client surname: ";
             clientSurnameLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // carModelLabel
@@ -111,7 +112,7 @@
             carModelLabel.Name = "carModelLabel";
             carModelLabel.Size = new Size(374, 41);
             carModelLabel.TabIndex = 24;
-            carModelLabel.Text = "Car model:";
+            carModelLabel.Text = "Car model: ";
             carModelLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // confirmOrderButton
@@ -174,6 +175,7 @@
             Controls.Add(sendApplicationButton);
             Controls.Add(isCarDamagedCheckBox);
             Controls.Add(carDamageFeeLabel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "ApplicationForm";
             Sizable = false;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderForm));
             rentToLabel = new Label();
             rentToTimePicker = new DateTimePicker();
             CreateOrderButton = new Button();
@@ -146,6 +147,7 @@
             Controls.Add(CreateOrderButton);
             Controls.Add(rentToTimePicker);
             Controls.Add(rentToLabel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             MaximumSize = new Size(800, 562);
             Name = "OrderForm";

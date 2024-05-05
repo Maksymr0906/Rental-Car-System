@@ -60,15 +60,15 @@ namespace Rental_Car_System.Forms
 
         private void prevButton_Click(object sender, EventArgs e)
         {
-            UpdatecurrentDisplayedCarIndex(-1);
+            UpdateCurrentDisplayedCarIndex(-1);
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            UpdatecurrentDisplayedCarIndex(1);
+            UpdateCurrentDisplayedCarIndex(1);
         }
 
-        private void UpdatecurrentDisplayedCarIndex(int increment)
+        private void UpdateCurrentDisplayedCarIndex(int increment)
         {
             var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
             if (!cars.Any())
@@ -146,6 +146,7 @@ namespace Rental_Car_System.Forms
             var profileForm = new ProfileForm(currentClient);
             profileForm.FormClosed += (s, arg) =>
             {
+                ShowBalance();
                 Show();
             };
             profileForm.Show();
