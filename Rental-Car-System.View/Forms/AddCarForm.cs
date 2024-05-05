@@ -76,7 +76,7 @@ namespace Rental_Car_System.Forms
         private string ConvertToImageFileName(string input)
         {
             string fileName = input.ToLower().Replace(" ", "_");
-            fileName += ".jpg";
+            fileName += ".png";
             return fileName;
         }
 

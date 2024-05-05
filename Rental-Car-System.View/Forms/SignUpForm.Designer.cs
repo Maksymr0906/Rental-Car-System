@@ -35,8 +35,6 @@
             repeatPasswordTextField = new MaterialSkin.Controls.MaterialSingleLineTextField();
             seePasswordCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             iAmAdminCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
-            userPictureBox = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)userPictureBox).BeginInit();
             SuspendLayout();
             // 
             // signInLinkLabel
@@ -155,25 +153,11 @@
             iAmAdminCheckBox.Text = "I am admin";
             iAmAdminCheckBox.UseVisualStyleBackColor = true;
             // 
-            // userPictureBox
-            // 
-            userPictureBox.BackColor = Color.Transparent;
-            userPictureBox.BackgroundImage = View.Properties.Resources.user_icon;
-            userPictureBox.Image = View.Properties.Resources.user_icon;
-            userPictureBox.Location = new Point(254, 24);
-            userPictureBox.Name = "userPictureBox";
-            userPictureBox.Size = new Size(44, 40);
-            userPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            userPictureBox.TabIndex = 26;
-            userPictureBox.TabStop = false;
-            userPictureBox.Tag = "1";
-            // 
             // SignUpForm
             // 
             AcceptButton = signUpButton;
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(310, 338);
-            Controls.Add(userPictureBox);
             Controls.Add(iAmAdminCheckBox);
             Controls.Add(seePasswordCheckBox);
             Controls.Add(repeatPasswordTextField);
@@ -187,7 +171,6 @@
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sign Up";
-            ((System.ComponentModel.ISupportInitialize)userPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -201,6 +184,5 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField repeatPasswordTextField;
         private MaterialSkin.Controls.MaterialCheckBox seePasswordCheckBox;
         private MaterialSkin.Controls.MaterialCheckBox iAmAdminCheckBox;
-        private PictureBox userPictureBox;
     }
 }

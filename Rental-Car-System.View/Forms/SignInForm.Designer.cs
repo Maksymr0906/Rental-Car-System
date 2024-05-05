@@ -34,8 +34,6 @@
             signUpLinkLabel = new LinkLabel();
             seePasswordCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
             amIAdminCheckBox = new MaterialSkin.Controls.MaterialCheckBox();
-            userPictureBox = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)userPictureBox).BeginInit();
             SuspendLayout();
             // 
             // signInButton
@@ -136,25 +134,11 @@
             amIAdminCheckBox.Text = "I am admin";
             amIAdminCheckBox.UseVisualStyleBackColor = true;
             // 
-            // userPictureBox
-            // 
-            userPictureBox.BackColor = Color.Transparent;
-            userPictureBox.BackgroundImage = View.Properties.Resources.user_icon;
-            userPictureBox.Image = View.Properties.Resources.user_icon;
-            userPictureBox.Location = new Point(254, 24);
-            userPictureBox.Name = "userPictureBox";
-            userPictureBox.Size = new Size(44, 40);
-            userPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            userPictureBox.TabIndex = 25;
-            userPictureBox.TabStop = false;
-            userPictureBox.Tag = "1";
-            // 
             // SignInForm
             // 
             AcceptButton = signInButton;
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(310, 337);
-            Controls.Add(userPictureBox);
             Controls.Add(amIAdminCheckBox);
             Controls.Add(seePasswordCheckBox);
             Controls.Add(signUpLinkLabel);
@@ -167,7 +151,6 @@
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sign In";
-            ((System.ComponentModel.ISupportInitialize)userPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -179,7 +162,6 @@
         private System.Windows.Forms.LinkLabel signUpLinkLabel;
         private MaterialSkin.Controls.MaterialCheckBox seePasswordCheckBox;
         private MaterialSkin.Controls.MaterialCheckBox amIAdminCheckBox;
-        private PictureBox userPictureBox;
     }
 }
 
