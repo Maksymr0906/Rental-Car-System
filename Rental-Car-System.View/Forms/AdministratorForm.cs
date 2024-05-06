@@ -1,16 +1,17 @@
 ﻿using Rental_Car_System.Data.Models;
 using Rental_Car_System.Utils;
 using MaterialSkin.Controls;
-using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data;
 using Microsoft.EntityFrameworkCore;
+using Rental_Car_System.Exceptions;
 
 namespace Rental_Car_System.Forms
 {
     public partial class AdministratorForm : MaterialForm
     {
         private readonly RentalCarContext context;
+        private readonly Admin admin;
         public AdministratorForm()
         {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace Rental_Car_System.Forms
 
         public AdministratorForm(RentalCarContext context, Admin admin) : this()
         {
+            this.admin = admin;
             this.context = context;
             ShowOrders();
         }
@@ -47,7 +49,8 @@ namespace Rental_Car_System.Forms
                     order.DateCreated,
                     order.EndRentDate,
                     order.Price
-                }).ToList();
+                }
+            ).ToList();
 
             result.ForEach(it =>
             {
@@ -60,68 +63,82 @@ namespace Rental_Car_System.Forms
         {
             Hide();
             var addCarForm = new AddCarForm();
-            addCarForm.FormClosed += (s, args) => Show();
+            addCarForm.FormClosed += (s, arg) => Show();
             addCarForm.Show();
         }
 
         private void CreateApplicationButton_Click(object sender, EventArgs e)
         {
-            if(ordersDataGridView.RowCount <= 0)
+            try
             {
-                MessageBox.Show("There are no available orders.");
-                return;
+                var selectedOrderId = GetSelectedOrderId();
+                var application = GetOrCreateApplication(selectedOrderId);
+                OpenApplicationForm(application);
             }
+            catch (NoAvailableOrdersException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
 
-            var order = RepositoryManager.GetRepo<Order>()
-                .GetByFilter(o => o.Id == Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString()));
+        private Guid GetSelectedOrderId()
+        {
+            if (ordersDataGridView.CurrentRow is null)
+            {
+                throw new NoAvailableOrdersException();
+            }
+            return Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString());
+        }
 
-            var application = RepositoryManager.GetRepo<RentalApplication>().GetByFilter(x => x.OrderId == order.Id);
+        private RentalApplication GetOrCreateApplication(Guid orderId)
+        {
+            var applicationRepo = RepositoryManager.GetRepo<RentalApplication>();
+            var orderRepo = RepositoryManager.GetRepo<Order>();
 
-            if (application == null)
+            var order = orderRepo.GetByFilter(o => o.Id == orderId);
+            var application = applicationRepo.GetByFilter(x => x.OrderId == order.Id);
+
+            if (application is null)
             {
                 application = new RentalApplication
                 {
                     OrderId = order.Id,
-                    Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded,
                     RejectionComment = string.Empty
                 };
 
-                RepositoryManager.GetRepo<RentalApplication>().Create(application);
-            }
-            else
-            {
-                application.Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded;
-                RepositoryManager.GetRepo<RentalApplication>().Update(application);
+                applicationRepo.Create(application);
             }
 
-            OpenApplicationForm(application);
+            application.Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded;
+            applicationRepo.Update(application);
+
+            return application;
         }
 
         private void OpenApplicationForm(RentalApplication application)
         {
             Hide();
-
             var applicationForm = new ApplicationForm(application);
-
             applicationForm.FormClosed += (s, arg) =>
             {
                 ShowOrders();
                 Show();
             };
-
             applicationForm.Show();
         }
+
         private void skipOrderTimeButton_Click(object sender, EventArgs e)
         {
-            var orders = RepositoryManager.GetRepo<Order>().GetAll(o => o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Accepted).ToList();
-            foreach (var order in orders)
+            var repo = RepositoryManager.GetRepo<Order>();
+            var acceptedOrders = repo.GetAll(o => o.Status == Order.OrderStatus.Accepted).ToList();
+            foreach (var order in acceptedOrders)
             {
-                order.EndRentDate = order.EndRentDate.AddDays(-Constants.daysToSkip);
-                if (order.EndRentDate <= order.DateCreated)
-                {
-                    order.Status = Order.OrderStatus.Ended;
-                }
-                RepositoryManager.GetRepo<Order>().Update(order);
+                order.Status = Order.OrderStatus.Ended;
+                repo.Update(order);
             }
 
             ShowOrders();

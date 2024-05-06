@@ -1,8 +1,6 @@
 using Rental_Car_System.Forms;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Models;
-using Rental_Car_System.Data.Utils;
-using Rental_Car_System.Data.Repositories.Implementation;
 
 namespace Rental_Car_System
 {
@@ -16,16 +14,15 @@ namespace Rental_Car_System
         {
             UpdateOrders();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            System.Windows.Forms.Application.Run(new SignInForm());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new SignInForm());
         }
 
         private static void UpdateOrders()
         {
-
-            var orders = RepositoryManager.GetRepo<Order>()
-                .GetAll(o => o.Status == Order.OrderStatus.Accepted || o.Status == Order.OrderStatus.Processing).ToList();
+            var repo = RepositoryManager.GetRepo<Order>();
+            var orders = repo.GetAll(o => o.Status == Order.OrderStatus.Accepted).ToList();
 
             foreach (var order in orders)
             {
@@ -33,6 +30,8 @@ namespace Rental_Car_System
                 {
                     order.Status = Order.OrderStatus.Ended;
                 }
+
+                repo.Update(order);
             }
         }
     }
