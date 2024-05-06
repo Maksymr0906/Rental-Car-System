@@ -20,16 +20,6 @@ namespace Rental_Car_System.View.Forms
         {
             currentClient = client;
 
-            //var orders = RepositoryManager.GetRepo<Order>().GetAll(o => o.ClientId == currentClient.Id).ToList();
-            //foreach (var order in orders)
-            //{
-            //    var orderId = order.Id;
-            //    var application = RepositoryManager.GetRepo<RentalApplication>().GetByFilter(a => a.OrderId == orderId);
-            //    var car = RepositoryManager.GetRepo<Car>()
-            //        .GetByFilter(c => c.Id == order.CarId);
-            //    orderedCarsDataGridView.Rows.Add(car.Id, car.Model, car.Brand, car.Color, order.Price, order.Status, application?.RejectionComment ?? string.Empty);
-            //}
-
             var query = context.Orders
               .Where(order => order.ClientId == currentClient.Id)
               .Include(order => order.Car)

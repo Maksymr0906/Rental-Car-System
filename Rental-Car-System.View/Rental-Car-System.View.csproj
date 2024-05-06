@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rental-Car-System.Data\Rental-Car-System.Data.csproj" />
+    <ProjectReference Include="..\Rental-Car-System.Exceptions\Rental-Car-System.Exceptions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

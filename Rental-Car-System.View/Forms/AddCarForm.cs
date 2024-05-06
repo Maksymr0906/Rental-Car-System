@@ -4,6 +4,7 @@ using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Validators;
+using Rental_Car_System.Exceptions;
 
 namespace Rental_Car_System.Forms
 {
@@ -12,30 +13,40 @@ namespace Rental_Car_System.Forms
         public AddCarForm()
         {
             InitializeComponent();
+            colorComboBox.SelectedIndex = 0;
             MaterialFormSkinManager.SetTheme(this);
         }
 
         private void addCarButton_Click(object sender, EventArgs e)
         {
-            var car = CreateCar();
-
-            var validator = new CarValidator();
-            var result = validator.Validate(car);
-
-            if (!result.IsValid)
+            try
             {
-                foreach (var error in result.Errors)
+                var car = CreateCar();
+
+                var validator = new CarValidator();
+                var result = validator.Validate(car);
+
+                if (!result.IsValid)
                 {
-                    MessageBox.Show(error.ErrorMessage);
+                    throw new CarValidationException(result.Errors.Select(error => error.ErrorMessage));
                 }
 
-                return;
+                RepositoryManager.GetRepo<Car>().Create(car);
+                MessageBox.Show("Car added.");
+                Close();
             }
-
-            RepositoryManager.GetRepo<Car>().Create(car);
-
-            MessageBox.Show("Car added.");
-            Close();
+            catch (CarValidationException ex)
+            {
+                MessageBox.Show(string.Join(Environment.NewLine, ex.Errors), "Validation Errors");
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Fill in all fields");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private Car CreateCar()
@@ -45,10 +56,10 @@ namespace Rental_Car_System.Forms
                 Model = modelTextField.Text,
                 Country = countryTextField.Text,
                 Brand = brandTextField.Text,
-                FuelConsumption = Convert.ToDouble(fuelConsumptionTextField.Text),
-                Price = Convert.ToDouble(priceTextField.Text),
+                FuelConsumption = double.Parse(fuelConsumptionTextField.Text),
+                Price = double.Parse(priceTextField.Text),
                 Color = colorComboBox.Text,
-                YearOfManufacture = Convert.ToInt32(yearOfManufactureTextField.Text),
+                YearOfManufacture = int.Parse(yearOfManufactureTextField.Text),
                 ImgPath = ConvertToImageFileName(modelTextField.Text)
             };
         }

@@ -26,16 +26,6 @@ namespace Rental_Car_System.Forms
         private void ShowOrders()
         {
             ordersDataGridView.Rows.Clear();
-            //var orders = RepositoryManager.GetRepo<Order>().GetAll().ToList();
-            //foreach(var order in orders)
-            //{
-            //    if(order.Status == Order.OrderStatus.Processing || order.Status == Order.OrderStatus.Ended)
-            //    {
-            //        var car = RepositoryManager.GetRepo<Car>().GetByFilter(c => c.Id == order.CarId);
-            //        var client = RepositoryManager.GetRepo<Client>().GetByFilter(c => c.Id == order.ClientId);
-            //        ordersDataGridView.Rows.Add(order.Id, client.Name, client.Surname, car.Model, car.Color, order.DateCreated, order.EndRentDate, order.Price);
-            //    }
-            //}
 
             var result = context.Orders.Where(o => o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Ended)
                 .Include(order => order.Car)
