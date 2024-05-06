@@ -4,6 +4,7 @@ using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.View.Forms;
+using Rental_Car_System.Exceptions;
 
 namespace Rental_Car_System.Forms
 {
@@ -27,34 +28,44 @@ namespace Rental_Car_System.Forms
 
         private void ShowAvailableCars()
         {
-            var availableCars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-
-            if (!availableCars.Any())
+            try
             {
-                MessageBox.Show("We don't have any available cars now.");
-                return;
+                var availableCars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+
+                if (!availableCars.Any())
+                {
+                    throw new NoAvailableCarsException();
+                }
+
+                for (int i = 0; i < Constants.numberOfCarsCards; i++)
+                {
+                    UpdateCarCard(availableCars, i);
+                }
             }
-
-            for (int i = 0; i < Constants.numberOfCarsCards; i++)
+            catch (NoAvailableCarsException ex)
             {
-                UpdateCarCard(availableCars, i);
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void UpdateCarCard(List<Car> availableCars, int index)
         {
+            var currentCar = availableCars[(currentDisplayedCarIndex + index) % availableCars.Count];
+
             string pictureBoxName = $"carPictureBox{index + 1}";
             if (Controls[pictureBoxName] is PictureBox pictureBox)
             {
-                pictureBox.Image = Image.FromFile(Constants.pathToCarImages + 
-                    availableCars[(currentDisplayedCarIndex + index) % availableCars.Count].ImgPath);
-                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.Image = Image.FromFile(Constants.pathToCarImages + currentCar.ImgPath);
             }
 
             string buttonName = $"carModelButton{index + 1}";
             if (Controls[buttonName] is Button button)
             {
-                button.Text = availableCars[(currentDisplayedCarIndex + index) % availableCars.Count].Model;
+                button.Text = currentCar.Model;
             }
         }
 
@@ -70,13 +81,24 @@ namespace Rental_Car_System.Forms
 
         private void UpdateCurrentDisplayedCarIndex(int increment)
         {
-            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (!cars.Any())
+            try
             {
-                return;
+                var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+                if (!cars.Any())
+                {
+                    throw new NoAvailableCarsException();
+                }
+                currentDisplayedCarIndex = (currentDisplayedCarIndex + increment + cars.Count) % cars.Count;
+                ShowAvailableCars();
             }
-            currentDisplayedCarIndex = (currentDisplayedCarIndex + increment + cars.Count) % cars.Count;
-            ShowAvailableCars();
+            catch (NoAvailableCarsException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void carPictureBox_Click(object sender, EventArgs e)
@@ -88,51 +110,76 @@ namespace Rental_Car_System.Forms
 
         private void OpenAdditionalCarInfo(int pictureNumber)
         {
-            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (!cars.Any())
+            try
             {
-                return;
+                var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+                if (!cars.Any())
+                {
+                    throw new NoAvailableCarsException();
+                }
+
+                Hide();
+
+                var additionalInfoForm = new AdditionalCarInfoForm(cars[(currentDisplayedCarIndex + pictureNumber) % cars.Count]);
+                additionalInfoForm.FormClosed += (s, arg) =>
+                {
+                    ShowAvailableCars();
+                    Show();
+                };
+                additionalInfoForm.Show();
             }
-
-            Hide();
-
-            var additionalInfoForm = new AdditionalCarInfoForm(cars[(currentDisplayedCarIndex + pictureNumber) % cars.Count]);
-            additionalInfoForm.FormClosed += (s, arg) =>
+            catch (NoAvailableCarsException ex)
             {
-                ShowAvailableCars();
-                Show();
-            };
-            additionalInfoForm.Show();
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void carModelButton_Click(object sender, EventArgs e)
         {
-            var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-            if (cars.Count <= 0)
+            try
             {
-                return;
+                var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+                if (!cars.Any())
+                {
+                    throw new NoAvailableCarsException();
+                }
+
+                if (currentClient.Surname == string.Empty || currentClient.Name == string.Empty)
+                {
+                    throw new MissingClientDataException();
+                }
+
+                Hide();
+                Button button = (Button)sender;
+                int buttonNumber = Convert.ToInt32(button.Tag);
+                var orderForm = new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count]);
+
+                orderForm.FormClosed += (s, arg) =>
+                {
+                    ClearFields();
+                    ShowAvailableCars();
+                    ShowBalance();
+                    Show();
+                };
+
+                orderForm.Show();
             }
-
-            if (currentClient.Surname == string.Empty || currentClient.Name == string.Empty)
+            catch(NoAvailableCarsException ex)
             {
-                MessageBox.Show("Fill in your personal data in profile before ordering.");
-                return;
+                MessageBox.Show(ex.Message);
             }
-
-            Hide();
-            Button button = (Button)sender;
-            int buttonNumber = Convert.ToInt32(button.Tag);
-            var orderForm = new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count]);
-
-            orderForm.FormClosed += (s, arg) =>
+            catch(MissingClientDataException ex)
             {
-                ClearFields();
-                ShowAvailableCars();
-                ShowBalance();
-                Show();
-            };
-
-            orderForm.Show();
+                MessageBox.Show(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ShowBalance()

@@ -18,7 +18,7 @@ namespace Rental_Car_System.Forms
         private void SwitchToForm(Form form)
         {
             Hide();
-            form.FormClosed += (s, args) => 
+            form.FormClosed += (s, arg) => 
             {
                 loginTextField.Text = string.Empty;
                 passwordTextField.Text = string.Empty;

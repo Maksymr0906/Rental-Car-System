@@ -132,7 +132,7 @@
             carPictureBox3.Location = new Point(747, 128);
             carPictureBox3.Name = "carPictureBox3";
             carPictureBox3.Size = new Size(300, 300);
-            carPictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            carPictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             carPictureBox3.TabIndex = 30;
             carPictureBox3.TabStop = false;
             carPictureBox3.Tag = "2";
@@ -145,7 +145,7 @@
             carPictureBox2.Location = new Point(409, 128);
             carPictureBox2.Name = "carPictureBox2";
             carPictureBox2.Size = new Size(300, 300);
-            carPictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            carPictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             carPictureBox2.TabIndex = 29;
             carPictureBox2.TabStop = false;
             carPictureBox2.Tag = "1";
@@ -194,7 +194,7 @@
             carPictureBox1.Location = new Point(68, 128);
             carPictureBox1.Name = "carPictureBox1";
             carPictureBox1.Size = new Size(300, 300);
-            carPictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            carPictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             carPictureBox1.TabIndex = 26;
             carPictureBox1.TabStop = false;
             carPictureBox1.Tag = "0";
