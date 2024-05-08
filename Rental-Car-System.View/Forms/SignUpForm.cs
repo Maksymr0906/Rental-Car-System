@@ -1,5 +1,5 @@
 ﻿using Rental_Car_System.Data.Models;
-using Rental_Car_System.Utils;
+using Rental_Car_System.View.Utils;
 using MaterialSkin.Controls;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Utils;
@@ -11,7 +11,7 @@ namespace Rental_Car_System.Forms
         public SignUpForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
         private void signInLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

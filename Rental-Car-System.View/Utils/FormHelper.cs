@@ -1,10 +1,19 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
 
-namespace Rental_Car_System.Utils
+namespace Rental_Car_System.View.Utils
 {
-    public static class MaterialFormSkinManager
+    public static class FormHelper
     {
+        public static void ShowForm(MaterialForm currentForm, MaterialForm formToOpen, Action<FormClosedEventArgs> formClosedHandler)
+        {
+            currentForm.Hide();
+
+            formToOpen.FormClosed += (s, arg) => formClosedHandler(arg);
+
+            formToOpen.Show();
+        }
+
         public static void SetTheme(MaterialForm form)
         {
             var materialSkinManager = MaterialSkinManager.Instance;

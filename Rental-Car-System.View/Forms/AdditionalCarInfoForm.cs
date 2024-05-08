@@ -1,7 +1,7 @@
 ﻿using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
-using Rental_Car_System.Utils;
+using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.Forms
 {
@@ -10,7 +10,7 @@ namespace Rental_Car_System.Forms
         public AdditionalCarInfoForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
 
         public AdditionalCarInfoForm(Car car) : this()

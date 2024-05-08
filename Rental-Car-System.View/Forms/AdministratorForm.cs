@@ -1,5 +1,5 @@
 ﻿using Rental_Car_System.Data.Models;
-using Rental_Car_System.Utils;
+using Rental_Car_System.View.Utils;
 using MaterialSkin.Controls;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data;
@@ -15,7 +15,7 @@ namespace Rental_Car_System.Forms
         public AdministratorForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
 
         public AdministratorForm(RentalCarContext context, Admin admin) : this()
@@ -29,6 +29,7 @@ namespace Rental_Car_System.Forms
         {
             ordersDataGridView.Rows.Clear();
 
+            //add pagination
             var result = context.Orders.Where(o => o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Ended)
                 .Include(order => order.Car)
                 .Include(order => order.Client)
@@ -61,10 +62,10 @@ namespace Rental_Car_System.Forms
 
         private void addCarButton_Click(object sender, EventArgs e)
         {
-            Hide();
-            var addCarForm = new AddCarForm();
-            addCarForm.FormClosed += (s, arg) => Show();
-            addCarForm.Show();
+            FormHelper.ShowForm(this, new AddCarForm(), (e) =>
+            {
+                Show();
+            });
         }
 
         private void CreateApplicationButton_Click(object sender, EventArgs e)
@@ -73,7 +74,11 @@ namespace Rental_Car_System.Forms
             {
                 var selectedOrderId = GetSelectedOrderId();
                 var application = GetOrCreateApplication(selectedOrderId);
-                OpenApplicationForm(application);
+                FormHelper.ShowForm(this, new ApplicationForm(application), (e) =>
+                {
+                    ShowOrders();
+                    Show();
+                });
             }
             catch (NoAvailableOrdersException ex)
             {
@@ -117,18 +122,6 @@ namespace Rental_Car_System.Forms
             applicationRepo.Update(application);
 
             return application;
-        }
-
-        private void OpenApplicationForm(RentalApplication application)
-        {
-            Hide();
-            var applicationForm = new ApplicationForm(application);
-            applicationForm.FormClosed += (s, arg) =>
-            {
-                ShowOrders();
-                Show();
-            };
-            applicationForm.Show();
         }
 
         private void skipOrderTimeButton_Click(object sender, EventArgs e)

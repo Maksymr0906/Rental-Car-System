@@ -1,9 +1,8 @@
-﻿using Rental_Car_System.Utils;
+﻿using Rental_Car_System.View.Utils;
 using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
-using System.Windows.Forms;
 
 namespace Rental_Car_System.Forms
 {
@@ -16,7 +15,7 @@ namespace Rental_Car_System.Forms
         public OrderForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
 
         public OrderForm(Client client, Car car) : this()

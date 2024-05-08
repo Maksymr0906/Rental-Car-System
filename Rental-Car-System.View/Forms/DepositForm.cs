@@ -1,7 +1,7 @@
 ﻿using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Repositories;
-using Rental_Car_System.Utils;
+using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.View.Forms
 {
@@ -12,7 +12,7 @@ namespace Rental_Car_System.View.Forms
         public DepositForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
 
         public DepositForm(Client currentClient) : this()

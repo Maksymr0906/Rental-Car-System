@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Data;
 using Rental_Car_System.Data.Models;
-using Rental_Car_System.Utils;
+using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.View.Forms
 {
@@ -12,7 +12,7 @@ namespace Rental_Car_System.View.Forms
         public ClientOrdersForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
 
         public ClientOrdersForm(RentalCarContext context, Client client) : this()

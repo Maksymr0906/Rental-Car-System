@@ -3,7 +3,7 @@ using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Utils;
-using Rental_Car_System.Utils;
+using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.View.Forms
 {
@@ -14,7 +14,7 @@ namespace Rental_Car_System.View.Forms
         public ProfileForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
             dateOfBirthTimePicker.MinDate = DateTime.Now.AddYears(-101);
             dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18);
         }
@@ -67,18 +67,18 @@ namespace Rental_Car_System.View.Forms
 
         private void myOrdersButton_Click(object sender, EventArgs e)
         {
-            Hide();
-            var clientOrdersForm = new ClientOrdersForm(new RentalCarContext(), currentClient);
-            clientOrdersForm.FormClosed += (s, arg) => Show();
-            clientOrdersForm.Show();
+            FormHelper.ShowForm(this, new ClientOrdersForm(new RentalCarContext(), currentClient), (e) =>
+            {
+                Show();
+            });
         }
 
         private void depositButton_Click(object sender, EventArgs e)
         {
-            var depositForm = new DepositForm(currentClient);
-            Hide();
-            depositForm.FormClosed += (s, arg) => Show();
-            depositForm.Show();
+            FormHelper.ShowForm(this, new DepositForm(currentClient), (e) =>
+            {
+                Show();
+            });
         }
     }
 }

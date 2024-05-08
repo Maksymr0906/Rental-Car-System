@@ -1,10 +1,10 @@
-﻿using Rental_Car_System.Utils;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.View.Forms;
 using Rental_Car_System.Exceptions;
+using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.Forms
 {
@@ -15,7 +15,7 @@ namespace Rental_Car_System.Forms
         public ClientForm()
         {
             InitializeComponent();
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
 
         public ClientForm(Client client) : this()
@@ -118,15 +118,11 @@ namespace Rental_Car_System.Forms
                     throw new NoAvailableCarsException();
                 }
 
-                Hide();
-
-                var additionalInfoForm = new AdditionalCarInfoForm(cars[(currentDisplayedCarIndex + pictureNumber) % cars.Count]);
-                additionalInfoForm.FormClosed += (s, arg) =>
+                FormHelper.ShowForm(this, new AdditionalCarInfoForm(cars[(currentDisplayedCarIndex + pictureNumber) % cars.Count]), (e) =>
                 {
                     ShowAvailableCars();
                     Show();
-                };
-                additionalInfoForm.Show();
+                });
             }
             catch (NoAvailableCarsException ex)
             {
@@ -153,20 +149,16 @@ namespace Rental_Car_System.Forms
                     throw new MissingClientDataException();
                 }
 
-                Hide();
                 Button button = (Button)sender;
                 int buttonNumber = Convert.ToInt32(button.Tag);
-                var orderForm = new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count]);
 
-                orderForm.FormClosed += (s, arg) =>
+                FormHelper.ShowForm(this, new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count]), (e) =>
                 {
                     ClearFields();
                     ShowAvailableCars();
                     ShowBalance();
                     Show();
-                };
-
-                orderForm.Show();
+                });
             }
             catch(NoAvailableCarsException ex)
             {
@@ -189,14 +181,11 @@ namespace Rental_Car_System.Forms
 
         private void myProfileButton_Click(object sender, EventArgs e)
         {
-            Hide();
-            var profileForm = new ProfileForm(currentClient);
-            profileForm.FormClosed += (s, arg) =>
+            FormHelper.ShowForm(this, new ProfileForm(currentClient), (e) =>
             {
                 ShowBalance();
                 Show();
-            };
-            profileForm.Show();
+            });
         }
 
         private void ClearFields()

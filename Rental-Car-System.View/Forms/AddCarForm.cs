@@ -1,10 +1,10 @@
-﻿using Rental_Car_System.Utils;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Validators;
 using Rental_Car_System.Exceptions;
+using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.Forms
 {
@@ -14,7 +14,7 @@ namespace Rental_Car_System.Forms
         {
             InitializeComponent();
             colorComboBox.SelectedIndex = 0;
-            MaterialFormSkinManager.SetTheme(this);
+            FormHelper.SetTheme(this);
         }
 
         private void addCarButton_Click(object sender, EventArgs e)
