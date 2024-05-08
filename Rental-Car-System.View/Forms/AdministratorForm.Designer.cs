@@ -45,6 +45,9 @@
             endRentDateColumn = new DataGridViewTextBoxColumn();
             priceColumn = new DataGridViewTextBoxColumn();
             skipOrderTimeButton = new Button();
+            nextButton = new Button();
+            prevButton = new Button();
+            currentPageLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)ordersDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -56,7 +59,7 @@
             CreateApplicationButton.FlatStyle = FlatStyle.Flat;
             CreateApplicationButton.Font = new Font("Roboto", 12F);
             CreateApplicationButton.ForeColor = Color.White;
-            CreateApplicationButton.Location = new Point(298, 499);
+            CreateApplicationButton.Location = new Point(270, 499);
             CreateApplicationButton.Margin = new Padding(3, 4, 3, 4);
             CreateApplicationButton.Name = "CreateApplicationButton";
             CreateApplicationButton.Size = new Size(187, 42);
@@ -129,7 +132,7 @@
             ordersDataGridView.RowTemplate.Height = 24;
             ordersDataGridView.RowTemplate.ReadOnly = true;
             ordersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ordersDataGridView.Size = new Size(714, 389);
+            ordersDataGridView.Size = new Size(714, 339);
             ordersDataGridView.TabIndex = 19;
             // 
             // orderIdColumn
@@ -215,10 +218,61 @@
             skipOrderTimeButton.UseVisualStyleBackColor = false;
             skipOrderTimeButton.Click += skipOrderTimeButton_Click;
             // 
+            // nextButton
+            // 
+            nextButton.BackColor = Color.Transparent;
+            nextButton.BackgroundImage = View.Properties.Resources.right_arrow_button;
+            nextButton.BackgroundImageLayout = ImageLayout.Stretch;
+            nextButton.Cursor = Cursors.Hand;
+            nextButton.FlatAppearance.BorderSize = 0;
+            nextButton.FlatStyle = FlatStyle.Flat;
+            nextButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nextButton.ForeColor = Color.White;
+            nextButton.Location = new Point(433, 449);
+            nextButton.Margin = new Padding(3, 4, 3, 4);
+            nextButton.Name = "nextButton";
+            nextButton.Size = new Size(46, 42);
+            nextButton.TabIndex = 29;
+            nextButton.UseVisualStyleBackColor = false;
+            nextButton.Click += nextButton_Click;
+            // 
+            // prevButton
+            // 
+            prevButton.BackColor = Color.Transparent;
+            prevButton.BackgroundImage = View.Properties.Resources.left_arrow_button;
+            prevButton.BackgroundImageLayout = ImageLayout.Stretch;
+            prevButton.Cursor = Cursors.Hand;
+            prevButton.FlatAppearance.BorderSize = 0;
+            prevButton.FlatStyle = FlatStyle.Flat;
+            prevButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            prevButton.ForeColor = Color.White;
+            prevButton.Location = new Point(248, 449);
+            prevButton.Margin = new Padding(3, 4, 3, 4);
+            prevButton.Name = "prevButton";
+            prevButton.Size = new Size(46, 42);
+            prevButton.TabIndex = 30;
+            prevButton.UseVisualStyleBackColor = false;
+            prevButton.Click += prevButton_Click;
+            // 
+            // currentPageLabel
+            // 
+            currentPageLabel.BackColor = Color.Transparent;
+            currentPageLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            currentPageLabel.ForeColor = SystemColors.ActiveCaptionText;
+            currentPageLabel.Location = new Point(300, 449);
+            currentPageLabel.Name = "currentPageLabel";
+            currentPageLabel.Size = new Size(127, 42);
+            currentPageLabel.TabIndex = 32;
+            currentPageLabel.Text = "1";
+            currentPageLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // AdministratorForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(727, 554);
+            Controls.Add(currentPageLabel);
+            Controls.Add(prevButton);
+            Controls.Add(nextButton);
             Controls.Add(skipOrderTimeButton);
             Controls.Add(ordersDataGridView);
             Controls.Add(addCarButton);
@@ -247,5 +301,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endRentDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceColumn;
+        private Button nextButton;
+        private Button prevButton;
+        private Label currentPageLabel;
     }
 }

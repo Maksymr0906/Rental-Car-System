@@ -67,7 +67,7 @@ namespace Rental_Car_System.View.Forms
 
         private void myOrdersButton_Click(object sender, EventArgs e)
         {
-            FormHelper.ShowForm(this, new ClientOrdersForm(new RentalCarContext(), currentClient), (e) =>
+            FormHelper.ShowForm(this, new ClientOrdersForm(currentClient), (e) =>
             {
                 Show();
             });

@@ -58,7 +58,7 @@ namespace Rental_Car_System.Forms
                 }
 
                 MessageBox.Show("You are successfuly logged in!");
-                SwitchToForm(new AdministratorForm(new RentalCarContext(),foundAdmin));
+                SwitchToForm(new AdministratorForm(foundAdmin));
             }
             else
             {

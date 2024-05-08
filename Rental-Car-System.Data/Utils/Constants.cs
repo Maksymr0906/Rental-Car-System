@@ -16,6 +16,7 @@
         public static readonly string pathToCarImages = "../../../Assets/";
         public static readonly int numberOfCarsCards = 3;
         public static readonly int startingClientBalance = 100000;
+        public static readonly int pageSize = 12;
         static Constants()
         {
             maxYearOfManufacture = DateTime.Now.Year;

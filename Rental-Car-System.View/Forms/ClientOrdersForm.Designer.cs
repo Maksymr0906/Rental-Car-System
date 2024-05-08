@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientOrdersForm));
             orderedCarsDataGridView = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -39,6 +41,9 @@
             commentColumn = new DataGridViewTextBoxColumn();
             createdDateColumn = new DataGridViewTextBoxColumn();
             endRentDateColumn = new DataGridViewTextBoxColumn();
+            prevButton = new Button();
+            nextButton = new Button();
+            currentPageLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)orderedCarsDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -50,8 +55,24 @@
             orderedCarsDataGridView.BackgroundColor = SystemColors.Window;
             orderedCarsDataGridView.BorderStyle = BorderStyle.None;
             orderedCarsDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            orderedCarsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             orderedCarsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             orderedCarsDataGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3, Column1, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn9, statusColumn, commentColumn, createdDateColumn, endRentDateColumn });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            orderedCarsDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             orderedCarsDataGridView.GridColor = SystemColors.Window;
             orderedCarsDataGridView.Location = new Point(12, 68);
             orderedCarsDataGridView.Margin = new Padding(3, 4, 3, 4);
@@ -63,7 +84,7 @@
             orderedCarsDataGridView.RowTemplate.Height = 24;
             orderedCarsDataGridView.RowTemplate.ReadOnly = true;
             orderedCarsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            orderedCarsDataGridView.Size = new Size(998, 471);
+            orderedCarsDataGridView.Size = new Size(998, 384);
             orderedCarsDataGridView.TabIndex = 19;
             // 
             // dataGridViewTextBoxColumn1
@@ -139,10 +160,61 @@
             endRentDateColumn.ReadOnly = true;
             endRentDateColumn.Width = 125;
             // 
+            // prevButton
+            // 
+            prevButton.BackColor = Color.Transparent;
+            prevButton.BackgroundImage = Properties.Resources.left_arrow_button;
+            prevButton.BackgroundImageLayout = ImageLayout.Stretch;
+            prevButton.Cursor = Cursors.Hand;
+            prevButton.FlatAppearance.BorderSize = 0;
+            prevButton.FlatStyle = FlatStyle.Flat;
+            prevButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            prevButton.ForeColor = Color.White;
+            prevButton.Location = new Point(396, 410);
+            prevButton.Margin = new Padding(3, 4, 3, 4);
+            prevButton.Name = "prevButton";
+            prevButton.Size = new Size(46, 42);
+            prevButton.TabIndex = 28;
+            prevButton.UseVisualStyleBackColor = false;
+            prevButton.Click += prevButton_Click;
+            // 
+            // nextButton
+            // 
+            nextButton.BackColor = Color.Transparent;
+            nextButton.BackgroundImage = Properties.Resources.right_arrow_button;
+            nextButton.BackgroundImageLayout = ImageLayout.Stretch;
+            nextButton.Cursor = Cursors.Hand;
+            nextButton.FlatAppearance.BorderSize = 0;
+            nextButton.FlatStyle = FlatStyle.Flat;
+            nextButton.Font = new Font("Roboto", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nextButton.ForeColor = Color.White;
+            nextButton.Location = new Point(580, 410);
+            nextButton.Margin = new Padding(3, 4, 3, 4);
+            nextButton.Name = "nextButton";
+            nextButton.Size = new Size(46, 42);
+            nextButton.TabIndex = 30;
+            nextButton.UseVisualStyleBackColor = false;
+            nextButton.Click += nextButton_Click;
+            // 
+            // currentPageLabel
+            // 
+            currentPageLabel.BackColor = Color.Transparent;
+            currentPageLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            currentPageLabel.ForeColor = SystemColors.ActiveCaptionText;
+            currentPageLabel.Location = new Point(448, 410);
+            currentPageLabel.Name = "currentPageLabel";
+            currentPageLabel.Size = new Size(126, 42);
+            currentPageLabel.TabIndex = 31;
+            currentPageLabel.Text = "1";
+            currentPageLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // ClientOrdersForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(1022, 552);
+            ClientSize = new Size(1022, 465);
+            Controls.Add(currentPageLabel);
+            Controls.Add(nextButton);
+            Controls.Add(prevButton);
             Controls.Add(orderedCarsDataGridView);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClientOrdersForm";
@@ -165,5 +237,8 @@
         private DataGridViewTextBoxColumn commentColumn;
         private DataGridViewTextBoxColumn createdDateColumn;
         private DataGridViewTextBoxColumn endRentDateColumn;
+        private Button prevButton;
+        private Button nextButton;
+        private Label currentPageLabel;
     }
 }

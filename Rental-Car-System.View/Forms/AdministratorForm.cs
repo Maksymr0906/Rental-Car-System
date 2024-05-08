@@ -4,7 +4,8 @@ using MaterialSkin.Controls;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data;
 using Microsoft.EntityFrameworkCore;
-using Rental_Car_System.Exceptions;
+using Rental_Car_System.Data.Exceptions;
+using Rental_Car_System.Data.Utils;
 
 namespace Rental_Car_System.Forms
 {
@@ -12,16 +13,20 @@ namespace Rental_Car_System.Forms
     {
         private readonly RentalCarContext context;
         private readonly Admin admin;
+        private readonly int numberOfPages;
+        private int pageNumber = 0;
         public AdministratorForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
         }
 
-        public AdministratorForm(RentalCarContext context, Admin admin) : this()
+        public AdministratorForm(Admin admin) : this()
         {
             this.admin = admin;
-            this.context = context;
+            context = new RentalCarContext();
+            numberOfPages = (int)Math.Ceiling((double)context.Orders.Count(o => 
+                o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Ended) / Constants.pageSize);
             ShowOrders();
         }
 
@@ -29,11 +34,12 @@ namespace Rental_Car_System.Forms
         {
             ordersDataGridView.Rows.Clear();
 
-            //add pagination
             var result = context.Orders.Where(o => o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Ended)
                 .Include(order => order.Car)
                 .Include(order => order.Client)
                 .OrderByDescending(it => it.DateCreated)
+                .Skip((pageNumber) * Constants.pageSize)
+                .Take(Constants.pageSize)
                 .Select(order => new
                 {
                     OrderId = order.Id,
@@ -55,7 +61,7 @@ namespace Rental_Car_System.Forms
 
             result.ForEach(it =>
             {
-                ordersDataGridView.Rows.Add(it.OrderId, it.Client.Name, it.Client.Surname, it.Car.Model, 
+                ordersDataGridView.Rows.Add(it.OrderId, it.Client.Name, it.Client.Surname, it.Car.Model,
                     it.Car.Color, it.DateCreated.ToShortDateString(), it.EndRentDate.ToShortDateString(), it.Price);
             });
         }
@@ -135,6 +141,25 @@ namespace Rental_Car_System.Forms
             }
 
             ShowOrders();
+        }
+
+        private void prevButton_Click(object sender, EventArgs e)
+        {
+            pageNumber = pageNumber > 0 ? pageNumber - 1 : numberOfPages - 1;
+            ShowOrders();
+            UpdateCurrentPageLabel();
+        }
+
+        private void nextButton_Click(object sender, EventArgs e)
+        {
+            pageNumber = pageNumber == numberOfPages - 1 ? 0 : pageNumber + 1;
+            ShowOrders();
+            UpdateCurrentPageLabel();
+        }
+
+        private void UpdateCurrentPageLabel()
+        {
+            currentPageLabel.Text = $"{pageNumber + 1}";
         }
     }
 }
