@@ -113,6 +113,7 @@
             Controls.Add(colorLabel);
             Controls.Add(countryLabel);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximumSize = new Size(404, 406);
             Name = "AdditionalCarInfoForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

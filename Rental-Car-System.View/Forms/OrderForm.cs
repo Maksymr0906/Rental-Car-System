@@ -3,6 +3,7 @@ using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
+using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System.Forms
 {
@@ -10,6 +11,8 @@ namespace Rental_Car_System.Forms
     {
         private readonly Client currentClient;
         private Car selectedCar;
+        private readonly CarService carService;
+        private readonly OrderService orderService;
         private double rentPrice;
 
         public OrderForm()
@@ -18,10 +21,12 @@ namespace Rental_Car_System.Forms
             FormHelper.SetTheme(this);
         }
 
-        public OrderForm(Client client, Car car) : this()
+        public OrderForm(Client client, Car car, CarService carService, OrderService orderService) : this()
         {
             selectedCar = car;
             currentClient = client;
+            this.carService = carService;
+            this.orderService = orderService;
             SetUpDateTimePicker();
             CalculateRentPrice();
             SetUpFields();
@@ -35,8 +40,7 @@ namespace Rental_Car_System.Forms
 
         private void CalculateRentPrice()
         {
-            var days = (rentToTimePicker.Value.Date - DateTime.Today).Days;
-            rentPrice = (selectedCar.Price / Constants.priceDivisor) * days;
+            rentPrice = orderService.CalculateRentPrice(rentToTimePicker.Value.Date, selectedCar.Id);
         }
 
         private void SetUpFields()
@@ -59,7 +63,7 @@ namespace Rental_Car_System.Forms
             }
 
             CreateOrder();
-            UpdateCarInfo();
+            carService.UpdateCarAvailability(selectedCar.Id, false);
 
             MessageBox.Show("Your order adressed to the administrator. Please wait.");
             Close();
@@ -79,12 +83,6 @@ namespace Rental_Car_System.Forms
             };
 
             RepositoryManager.GetRepo<Order>().Create(order);
-        }
-
-        private void UpdateCarInfo()
-        {
-            selectedCar.IsAvailable = false;
-            RepositoryManager.GetRepo<Car>().Update(selectedCar);
         }
 
         private void rentToTimePicker_ValueChanged(object sender, EventArgs e)

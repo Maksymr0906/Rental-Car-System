@@ -1,84 +1,70 @@
 ﻿using Rental_Car_System.Data.Models;
 using MaterialSkin.Controls;
-using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data;
 using Rental_Car_System.View.Utils;
+using Rental_Car_System.Data.Exceptions;
+using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System.Forms
 {
     public partial class SignInForm : MaterialForm
     {
+        private readonly PersonService personService;
+
         public SignInForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
         }
 
-        private void SwitchToForm(MaterialForm form)
+        public SignInForm(PersonService personService) : this()
         {
-            FormHelper.ShowForm(this, form, (e) =>
-            {
-                loginTextField.Text = string.Empty;
-                passwordTextField.Text = string.Empty;
-                seePasswordCheckBox.Checked = false;
-                amIAdminCheckBox.Checked = false;
-                Show();
-            });
+            this.personService = personService;
         }
 
         private void signInButton_Click(object sender, EventArgs e)
         {
-            var currentPerson = new Person
+            try
             {
-                Login = loginTextField.Text, 
-                Password = passwordTextField.Text
-            };
+                var currentPerson = new Person
+                {
+                    Login = loginTextField.Text,
+                    Password = passwordTextField.Text
+                };
 
-            if (currentPerson.Login == string.Empty || currentPerson.Password == string.Empty)
-            {
-                MessageBox.Show("Fill in all fields.");
-                return;
+                if (currentPerson.Login == string.Empty || currentPerson.Password == string.Empty)
+                {
+                    throw new EmptyFieldException("Fill in all fields");
+                }
+
+                if (amIAdminCheckBox.Checked)
+                {
+                    if (personService.TryAuthenticateUser<Admin>(currentPerson, out var foundAdmin))
+                    {
+                        MessageBox.Show("You are successfully logged in!");
+                        SwitchToForm(new AdministratorForm(new RentalCarContext(), foundAdmin, new OrderService(), new RentalApplicationService()));
+                    }
+                }
+                else
+                {
+                    if (personService.TryAuthenticateUser<Client>(currentPerson, out var foundClient))
+                    {
+                        MessageBox.Show("You are successfully logged in!");
+                        SwitchToForm(new ClientForm(foundClient));
+                    }
+                }
             }
-
-            if(amIAdminCheckBox.Checked)
+            catch (EmptyFieldException ex)
             {
-                var foundAdmin = RepositoryManager.GetRepo<Admin>()
-                .GetByFilter(a => a.Login == currentPerson.Login);
-
-                if (foundAdmin == null)
-                {
-                    MessageBox.Show("User with current login does not exist.");
-                    return;
-                }
-
-                if (foundAdmin.Password != currentPerson.Password)
-                {
-                    MessageBox.Show("Incorrect Password.");
-                    return;
-                }
-
-                MessageBox.Show("You are successfuly logged in!");
-                SwitchToForm(new AdministratorForm(foundAdmin));
+                MessageBox.Show(ex.Message);
             }
-            else
+            catch (UserNotFoundException ex)
             {
-                var foundClient = RepositoryManager.GetRepo<Client>()
-                .GetByFilter(client => client.Login == currentPerson.Login);
-
-                if (foundClient == null)
-                {
-                    MessageBox.Show("User with current login does not exist.");
-                    return;
-                }
-
-                if (foundClient.Password != currentPerson.Password)
-                {
-                    MessageBox.Show("Incorrect Password.");
-                    return;
-                }
-
-                MessageBox.Show("You are successfuly logged in!");
-                SwitchToForm(new ClientForm(foundClient));
+                MessageBox.Show(ex.Message);
+            }
+            catch(IncorrectPasswordException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -97,6 +83,18 @@ namespace Rental_Car_System.Forms
             {
                 passwordTextField.PasswordChar = '*';
             }
+        }
+
+        private void SwitchToForm(MaterialForm form)
+        {
+            FormHelper.ShowForm(this, form, (e) =>
+            {
+                loginTextField.Text = string.Empty;
+                passwordTextField.Text = string.Empty;
+                seePasswordCheckBox.Checked = false;
+                amIAdminCheckBox.Checked = false;
+                Show();
+            });
         }
     }
 }

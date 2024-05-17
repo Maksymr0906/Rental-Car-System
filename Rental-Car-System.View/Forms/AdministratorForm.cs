@@ -6,6 +6,7 @@ using Rental_Car_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Data.Exceptions;
 using Rental_Car_System.Data.Utils;
+using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System.Forms
 {
@@ -13,6 +14,8 @@ namespace Rental_Car_System.Forms
     {
         private readonly RentalCarContext context;
         private readonly Admin admin;
+        private readonly OrderService orderService;
+        private readonly RentalApplicationService rentalApplicationService;
         private readonly int numberOfPages;
         private int pageNumber = 0;
         public AdministratorForm()
@@ -21,12 +24,19 @@ namespace Rental_Car_System.Forms
             FormHelper.SetTheme(this);
         }
 
-        public AdministratorForm(Admin admin) : this()
+        public AdministratorForm(RentalCarContext context, Admin admin, OrderService orderService, RentalApplicationService rentalApplicationService) : this()
         {
             this.admin = admin;
-            context = new RentalCarContext();
+            this.orderService = orderService;
+            this.rentalApplicationService = rentalApplicationService;
+            this.context = context;
             numberOfPages = (int)Math.Ceiling((double)context.Orders.Count(o => 
                 o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Ended) / Constants.pageSize);
+            if (numberOfPages <= 0)
+            {
+                prevButton.Enabled = false;
+                nextButton.Enabled = false;
+            }
             ShowOrders();
         }
 
@@ -38,7 +48,7 @@ namespace Rental_Car_System.Forms
                 .Include(order => order.Car)
                 .Include(order => order.Client)
                 .OrderByDescending(it => it.DateCreated)
-                .Skip((pageNumber) * Constants.pageSize)
+                .Skip(pageNumber * Constants.pageSize)
                 .Take(Constants.pageSize)
                 .Select(order => new
                 {
@@ -79,8 +89,9 @@ namespace Rental_Car_System.Forms
             try
             {
                 var selectedOrderId = GetSelectedOrderId();
-                var application = GetOrCreateApplication(selectedOrderId);
-                FormHelper.ShowForm(this, new ApplicationForm(application), (e) =>
+                rentalApplicationService.CreateApplicationByOrderId(selectedOrderId);
+                var application = RepositoryManager.GetRepo<RentalApplication>().GetByFilter(a => a.OrderId == selectedOrderId);
+                FormHelper.ShowForm(this, new ApplicationForm(application, new CarService(new ClientService()), new ClientService(), new OrderService()), (e) =>
                 {
                     ShowOrders();
                     Show();
@@ -100,46 +111,14 @@ namespace Rental_Car_System.Forms
         {
             if (ordersDataGridView.CurrentRow is null)
             {
-                throw new NoAvailableOrdersException();
+                throw new NoAvailableOrdersException("There are no available orders now.");
             }
             return Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString());
         }
 
-        private RentalApplication GetOrCreateApplication(Guid orderId)
-        {
-            var applicationRepo = RepositoryManager.GetRepo<RentalApplication>();
-            var orderRepo = RepositoryManager.GetRepo<Order>();
-
-            var order = orderRepo.GetByFilter(o => o.Id == orderId);
-            var application = applicationRepo.GetByFilter(x => x.OrderId == order.Id);
-
-            if (application is null)
-            {
-                application = new RentalApplication
-                {
-                    OrderId = order.Id,
-                    RejectionComment = string.Empty
-                };
-
-                applicationRepo.Create(application);
-            }
-
-            application.Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded;
-            applicationRepo.Update(application);
-
-            return application;
-        }
-
         private void skipOrderTimeButton_Click(object sender, EventArgs e)
         {
-            var repo = RepositoryManager.GetRepo<Order>();
-            var acceptedOrders = repo.GetAll(o => o.Status == Order.OrderStatus.Accepted).ToList();
-            foreach (var order in acceptedOrders)
-            {
-                order.Status = Order.OrderStatus.Ended;
-                repo.Update(order);
-            }
-
+            orderService.SkipOrderTime();
             ShowOrders();
         }
 

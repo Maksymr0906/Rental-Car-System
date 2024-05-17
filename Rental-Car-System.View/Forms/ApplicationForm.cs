@@ -4,6 +4,7 @@ using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.View.Utils;
+using Rental_Car_System.Data.Services;
 
 #nullable disable
 namespace Rental_Car_System.Forms
@@ -11,6 +12,9 @@ namespace Rental_Car_System.Forms
     public partial class ApplicationForm : MaterialForm
     {
         private RentalApplication currentApplication;
+        private readonly CarService carService;
+        private readonly ClientService clientService;
+        private readonly OrderService orderService;
         private IApplicationState currentState;
         public ApplicationForm()
         {
@@ -18,9 +22,12 @@ namespace Rental_Car_System.Forms
             FormHelper.SetTheme(this);
         }
 
-        public ApplicationForm(RentalApplication application) : this()
+        public ApplicationForm(RentalApplication application, CarService carService, ClientService clientService, OrderService orderService) : this()
         {
             currentApplication = application;
+            this.carService = carService;
+            this.clientService = clientService;
+            this.orderService = orderService;
             SetState();
             ShowUIElements();
             UpdateFields();
@@ -60,11 +67,11 @@ namespace Rental_Car_System.Forms
         private void UpdateFields()
         {
             var order = GetCurrentOrder();
-            Text = $"Application: {currentApplication.Type}";
+            Text = $"{currentApplication.Type}";
             var clientSurname = RepositoryManager.GetRepo<Client>()
-                .GetByFilter(c => c.Id == order.ClientId).Surname;
+                .GetById(order.ClientId).Surname;
             var car = RepositoryManager.GetRepo<Car>()
-                .GetByFilter(c => c.Id == order.CarId);
+                .GetById(order.CarId);
             clientSurnameLabel.Text += $"{clientSurname}";
             carModelLabel.Text += $"{car.Model}";
             carDamageFeeLabel.Text += $"{car.Price / Constants.coefficientForCarDamage}";
@@ -73,21 +80,14 @@ namespace Rental_Car_System.Forms
         private void sendApplicationButton_Click(object sender, EventArgs e)
         {
             var order = GetCurrentOrder();
-            UpdateOrderStatus(order, Order.OrderStatus.Closed);
 
-            var car = RepositoryManager.GetRepo<Car>()
-                .GetByFilter(c => c.Id == order.CarId);
-            car.IsAvailable = true;
-            car.IsDamaged = isCarDamagedCheckBox.Checked;
-            RepositoryManager.GetRepo<Car>().Update(car);
+            orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Closed);
+            carService.UpdateCarAvailability(order.CarId, true);
+            carService.UpdateCarDamageStatus(order.CarId, isCarDamagedCheckBox.Checked);
 
-            if(car.IsDamaged)
+            if(isCarDamagedCheckBox.Checked)
             {
-                var client = RepositoryManager.GetRepo<Client>()
-                    .GetByFilter(c => c.Id == order.ClientId);
-                var feeForCarDamage = car.Price / Constants.coefficientForCarDamage;
-                client.Balance -= feeForCarDamage;
-                RepositoryManager.GetRepo<Client>().Update(client);
+                carService.HandleCarDamage(order.CarId, order.ClientId);
             }
 
             MessageBox.Show("Car rent ended. Client will be notificated");
@@ -97,12 +97,9 @@ namespace Rental_Car_System.Forms
         private void confirmOrderButton_Click(object sender, EventArgs e)
         {
             var order = GetCurrentOrder();
-            UpdateOrderStatus(order, Order.OrderStatus.Accepted);
 
-            var client = RepositoryManager.GetRepo<Client>()
-                .GetByFilter(c => c.Id == order.ClientId);
-            client.Balance -= order.Price;
-            RepositoryManager.GetRepo<Client>().Update(client);
+            orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Accepted);
+            clientService.HandleClientPayment(order.ClientId, order.Price);
 
             MessageBox.Show("Order confirmed. Client will be notificated.");
             Close();
@@ -117,12 +114,9 @@ namespace Rental_Car_System.Forms
             }
 
             var order = GetCurrentOrder();
-            UpdateOrderStatus(order, Order.OrderStatus.Declined);
+            orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Declined);
 
-            var car = RepositoryManager.GetRepo<Car>()
-                .GetByFilter(o => o.Id == order.CarId);
-            car.IsAvailable = true;
-            RepositoryManager.GetRepo<Car>().Update(car);
+            carService.UpdateCarAvailability(order.CarId, true);
 
             currentApplication.RejectionComment = rejectionCommentTextField.Text;
             RepositoryManager.GetRepo<RentalApplication>().Update(currentApplication);
@@ -131,16 +125,10 @@ namespace Rental_Car_System.Forms
             Close();
         }
 
-        private void UpdateOrderStatus(Order order, Order.OrderStatus status)
-        {
-            order.Status = status;
-            RepositoryManager.GetRepo<Order>().Update(order);
-        }
-
         private Order GetCurrentOrder()
         {
             return RepositoryManager.GetRepo<Order>()
-                .GetByFilter(o => o.Id == currentApplication.OrderId);
+                .GetById(currentApplication.OrderId);
         }
     }
 }

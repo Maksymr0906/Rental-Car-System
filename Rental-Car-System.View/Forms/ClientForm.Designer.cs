@@ -216,7 +216,7 @@
             Controls.Add(balanceLabel);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
-            MaximumSize = new Size(1118, 605);
+            MaximumSize = new Size(1118, 515);
             Name = "ClientForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

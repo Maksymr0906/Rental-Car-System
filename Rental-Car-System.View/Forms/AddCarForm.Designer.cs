@@ -228,6 +228,7 @@
             Controls.Add(modelTextField);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(374, 461);
             Name = "AddCarForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

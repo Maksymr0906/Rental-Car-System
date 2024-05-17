@@ -1,6 +1,7 @@
 using Rental_Car_System.Forms;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Models;
+using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System
 {
@@ -16,7 +17,7 @@ namespace Rental_Car_System
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SignInForm());
+            Application.Run(new SignInForm(new PersonService()));
         }
 
         private static void UpdateOrders()

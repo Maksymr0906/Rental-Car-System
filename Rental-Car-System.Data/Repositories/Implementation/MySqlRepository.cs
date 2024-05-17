@@ -9,17 +9,11 @@ namespace Rental_Car_System.Data.Repositories.Implementation
     {
         private readonly RentalCarContext context;
         private readonly DbSet<TEntity> entities;
-        private static MySqlRepository<TEntity> instance;
 
-        private MySqlRepository(RentalCarContext context)
+        public MySqlRepository(RentalCarContext context)
         {
             this.context = context;
             entities = context.Set<TEntity>();
-        }
-
-        public static MySqlRepository<TEntity> GetInstance(RentalCarContext context)
-        {
-            return instance ??= new MySqlRepository<TEntity>(context);
         }
 
         public TEntity Create(TEntity entity)

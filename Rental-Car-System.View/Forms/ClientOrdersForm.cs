@@ -12,7 +12,7 @@ namespace Rental_Car_System.View.Forms
         private readonly Client currentClient;
         private readonly RentalCarContext context;
         private readonly int numberOfPages;
-        private int pageNumber = 0;
+        private int pageNumber;
         public ClientOrdersForm()
         {
             InitializeComponent();
@@ -25,6 +25,11 @@ namespace Rental_Car_System.View.Forms
             context = new RentalCarContext();
             numberOfPages = (int)Math.Ceiling((double)context.Orders
                 .Count(o => o.ClientId == currentClient.Id) / Constants.pageSize);
+            if(numberOfPages <= 0)
+            {
+                prevButton.Enabled = false;
+                nextButton.Enabled = false;
+            }
             ShowOrders();
         }
 
@@ -37,7 +42,7 @@ namespace Rental_Car_System.View.Forms
               .Include(order => order.Car)
               .Include(order => order.RentalApplication)
               .OrderByDescending(it => it.DateCreated)
-              .Skip((pageNumber) * Constants.pageSize)
+              .Skip(pageNumber * Constants.pageSize)
               .Take(Constants.pageSize)
               .Select(order => new
               {
@@ -72,7 +77,7 @@ namespace Rental_Car_System.View.Forms
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            pageNumber = pageNumber == numberOfPages - 1? 0 : pageNumber + 1;
+            pageNumber = pageNumber == numberOfPages - 1 ? 0 : pageNumber + 1;
             ShowOrders();
             UpdateCurrentPageLabel();
         }

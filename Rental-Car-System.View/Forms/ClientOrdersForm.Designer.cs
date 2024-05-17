@@ -217,6 +217,7 @@
             Controls.Add(prevButton);
             Controls.Add(orderedCarsDataGridView);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximumSize = new Size(1022, 465);
             Name = "ClientOrdersForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

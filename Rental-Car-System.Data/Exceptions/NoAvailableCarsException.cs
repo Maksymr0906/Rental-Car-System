@@ -2,7 +2,7 @@
 {
     public class NoAvailableCarsException : Exception
     {
-        public NoAvailableCarsException() : base("There are no available cars now.")
+        public NoAvailableCarsException(string message) : base(message)
         {
 
         }

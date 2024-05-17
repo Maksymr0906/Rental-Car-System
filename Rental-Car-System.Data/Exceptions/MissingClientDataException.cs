@@ -2,7 +2,7 @@
 {
     public class MissingClientDataException : Exception
     {
-        public MissingClientDataException() : base("Fill in your personal data in profile before ordering.")
+        public MissingClientDataException(string message) : base(message)
         {
             
         }

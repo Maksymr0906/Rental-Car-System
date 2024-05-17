@@ -168,6 +168,7 @@
             Controls.Add(surnameTextField);
             Controls.Add(dateOfBirthLabel);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximumSize = new Size(429, 291);
             Name = "ProfileForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

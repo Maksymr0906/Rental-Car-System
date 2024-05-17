@@ -5,6 +5,7 @@ using Rental_Car_System.Data.Utils;
 using Rental_Car_System.View.Forms;
 using Rental_Car_System.Data.Exceptions;
 using Rental_Car_System.View.Utils;
+using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System.Forms
 {
@@ -34,7 +35,7 @@ namespace Rental_Car_System.Forms
 
                 if (!availableCars.Any())
                 {
-                    throw new NoAvailableCarsException();
+                    throw new NoAvailableCarsException("There are no available cars now.");
                 }
 
                 for (int i = 0; i < Constants.numberOfCarsCards; i++)
@@ -83,12 +84,12 @@ namespace Rental_Car_System.Forms
         {
             try
             {
-                var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
-                if (!cars.Any())
+                var carsCount = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).Count();
+                if (carsCount <= 0)
                 {
-                    throw new NoAvailableCarsException();
+                    throw new NoAvailableCarsException("There are no available cars now.");
                 }
-                currentDisplayedCarIndex = (currentDisplayedCarIndex + increment + cars.Count) % cars.Count;
+                currentDisplayedCarIndex = (currentDisplayedCarIndex + increment + carsCount) % carsCount;
                 ShowAvailableCars();
             }
             catch (NoAvailableCarsException ex)
@@ -115,7 +116,7 @@ namespace Rental_Car_System.Forms
                 var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
                 if (!cars.Any())
                 {
-                    throw new NoAvailableCarsException();
+                    throw new NoAvailableCarsException("There are no available cars now.");
                 }
 
                 FormHelper.ShowForm(this, new AdditionalCarInfoForm(cars[(currentDisplayedCarIndex + pictureNumber) % cars.Count]), (e) =>
@@ -141,18 +142,18 @@ namespace Rental_Car_System.Forms
                 var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
                 if (!cars.Any())
                 {
-                    throw new NoAvailableCarsException();
+                    throw new NoAvailableCarsException("There are no available cars now.");
                 }
 
                 if (currentClient.Surname == string.Empty || currentClient.Name == string.Empty)
                 {
-                    throw new MissingClientDataException();
+                    throw new MissingClientDataException("Fill in your personal data in profile before ordering.");
                 }
 
                 Button button = (Button)sender;
                 int buttonNumber = Convert.ToInt32(button.Tag);
 
-                FormHelper.ShowForm(this, new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count]), (e) =>
+                FormHelper.ShowForm(this, new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count], new CarService(new ClientService()), new OrderService()), (e) =>
                 {
                     ClearFields();
                     ShowAvailableCars();
@@ -181,7 +182,7 @@ namespace Rental_Car_System.Forms
 
         private void myProfileButton_Click(object sender, EventArgs e)
         {
-            FormHelper.ShowForm(this, new ProfileForm(currentClient), (e) =>
+            FormHelper.ShowForm(this, new ProfileForm(currentClient, new ClientService()), (e) =>
             {
                 ShowBalance();
                 Show();

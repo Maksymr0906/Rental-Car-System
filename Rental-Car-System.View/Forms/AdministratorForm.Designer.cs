@@ -279,6 +279,7 @@
             Controls.Add(CreateApplicationButton);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
+            MaximumSize = new Size(727, 554);
             Name = "AdministratorForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

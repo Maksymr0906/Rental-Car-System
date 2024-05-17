@@ -2,7 +2,7 @@
 {
     public class NoAvailableOrdersException : Exception
     {
-        public NoAvailableOrdersException() :base("There are no available orders now.")
+        public NoAvailableOrdersException(string message) :base(message)
         {
 
         }

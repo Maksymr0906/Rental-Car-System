@@ -5,11 +5,14 @@ using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Validators;
 using Rental_Car_System.Data.Exceptions;
 using Rental_Car_System.View.Utils;
+using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System.Forms
 {
     public partial class AddCarForm : MaterialForm
     {
+        private readonly CarService carService;
+
         public AddCarForm()
         {
             InitializeComponent();
@@ -17,21 +20,17 @@ namespace Rental_Car_System.Forms
             FormHelper.SetTheme(this);
         }
 
+        public AddCarForm(CarService carService) : base()
+        {
+            this.carService = carService;
+        }
+
         private void addCarButton_Click(object sender, EventArgs e)
         {
             try
             {
                 var car = CreateCar();
-
-                var validator = new CarValidator();
-                var result = validator.Validate(car);
-
-                if (!result.IsValid)
-                {
-                    throw new CarValidationException(result.Errors.Select(error => error.ErrorMessage));
-                }
-
-                RepositoryManager.GetRepo<Car>().Create(car);
+                carService.AddCar(car);
                 MessageBox.Show("Car added.");
                 Close();
             }
@@ -60,7 +59,9 @@ namespace Rental_Car_System.Forms
                 Price = double.Parse(priceTextField.Text),
                 Color = colorComboBox.Text,
                 YearOfManufacture = int.Parse(yearOfManufactureTextField.Text),
-                ImgPath = ConvertToImageFileName(modelTextField.Text)
+                ImgPath = ConvertToImageFileName(modelTextField.Text),
+                IsAvailable = true,
+                IsDamaged = false
             };
         }
 

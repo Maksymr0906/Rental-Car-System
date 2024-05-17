@@ -4,12 +4,14 @@ using Rental_Car_System.Data;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Data.Utils;
 using Rental_Car_System.View.Utils;
+using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System.View.Forms
 {
     public partial class ProfileForm : MaterialForm
     {
         private Client currentClient;
+        private readonly ClientService clientService;
 
         public ProfileForm()
         {
@@ -19,9 +21,10 @@ namespace Rental_Car_System.View.Forms
             dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18);
         }
 
-        public ProfileForm(Client client) : this()
+        public ProfileForm(Client client, ClientService clientService) : this()
         {
             currentClient = client;
+            this.clientService = clientService;
             surnameTextField.Text = currentClient.Surname;
             nameTextField.Text = currentClient.Name;
             dateOfBirthTimePicker.Value = currentClient.DateOfBirthday;
@@ -56,10 +59,8 @@ namespace Rental_Car_System.View.Forms
                 return;
             }
 
-            currentClient.Surname = surnameTextField.Text;
-            currentClient.Name = nameTextField.Text;
-            currentClient.DateOfBirthday = dateOfBirthTimePicker.Value;
-            RepositoryManager.GetRepo<Client>().Update(currentClient);
+            clientService.UpdateClientPersonalInfo(currentClient.Id, surnameTextField.Text, 
+                nameTextField.Text, dateOfBirthTimePicker.Value);
 
             MessageBox.Show("Data updated.");
             Close();
@@ -75,7 +76,7 @@ namespace Rental_Car_System.View.Forms
 
         private void depositButton_Click(object sender, EventArgs e)
         {
-            FormHelper.ShowForm(this, new DepositForm(currentClient), (e) =>
+            FormHelper.ShowForm(this, new DepositForm(currentClient, clientService), (e) =>
             {
                 Show();
             });

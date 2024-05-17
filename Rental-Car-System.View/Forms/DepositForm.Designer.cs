@@ -96,6 +96,7 @@
             Controls.Add(cancelButton);
             Controls.Add(okButton);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximumSize = new Size(211, 169);
             Name = "DepositForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

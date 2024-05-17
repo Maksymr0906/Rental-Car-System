@@ -168,7 +168,7 @@
             Controls.Add(signInLinkLabel);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
-            MaximumSize = new Size(310, 350);
+            MaximumSize = new Size(310, 338);
             Name = "SignUpForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;

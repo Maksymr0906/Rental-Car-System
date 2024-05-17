@@ -1,6 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using Rental_Car_System.Data.Models;
-using Rental_Car_System.Data.Repositories;
+using Rental_Car_System.Data.Services;
 using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.View.Forms
@@ -8,6 +8,7 @@ namespace Rental_Car_System.View.Forms
     public partial class DepositForm : MaterialForm
     {
         private Client currentClient;
+        private readonly ClientService clientService;
 
         public DepositForm()
         {
@@ -15,9 +16,10 @@ namespace Rental_Car_System.View.Forms
             FormHelper.SetTheme(this);
         }
 
-        public DepositForm(Client currentClient) : this()
+        public DepositForm(Client currentClient, ClientService clientService) : this()
         {
             this.currentClient = currentClient;
+            this.clientService = clientService;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -27,8 +29,7 @@ namespace Rental_Car_System.View.Forms
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            currentClient.Balance += double.Parse(depositTextField.Text);
-            RepositoryManager.GetRepo<Client>().Update(currentClient);
+            clientService.HandleClientDeposit(currentClient.Id, double.Parse(depositTextField.Text));
             MessageBox.Show($"Your current balance now: {currentClient.Balance:F2}");
             Close();
         }

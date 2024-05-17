@@ -149,7 +149,7 @@
             Controls.Add(rentToLabel);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
-            MaximumSize = new Size(800, 562);
+            MaximumSize = new Size(379, 533);
             Name = "OrderForm";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
