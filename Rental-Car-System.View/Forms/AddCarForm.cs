@@ -25,12 +25,12 @@ namespace Rental_Car_System.Forms
             this.carService = carService;
         }
 
-        private void addCarButton_Click(object sender, EventArgs e)
+        private async void addCarButton_Click(object sender, EventArgs e)
         {
             try
             {
                 var car = CreateCar();
-                carService.AddCar(car);
+                await carService.AddCar(car);
                 MessageBox.Show("Car added.");
                 Close();
             }

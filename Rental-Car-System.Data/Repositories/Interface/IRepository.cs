@@ -5,11 +5,11 @@ namespace Rental_Car_System.Data.Repositories.Interface
 {
     public interface IRepository<TEntity> where TEntity : Entity
     {
-        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
-        TEntity Create(TEntity entity);
-        TEntity? Update(TEntity entity);
-        TEntity? Delete(TEntity entity);
-        TEntity? GetById(Guid id);
-        TEntity? GetByFilter(Expression<Func<TEntity, bool>> filter);
+        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null);
+        Task<TEntity> CreateAsync(TEntity entity);
+        Task<TEntity?> UpdateAsync(TEntity entity);
+        Task<TEntity?> DeleteAsync(TEntity entity);
+        Task<TEntity?> GetByIdAsync(Guid id);
+        Task<TEntity?> GetByFilterAsync(Expression<Func<TEntity, bool>> filter);
     }
 }

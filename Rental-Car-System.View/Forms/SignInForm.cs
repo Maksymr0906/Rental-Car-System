@@ -22,7 +22,7 @@ namespace Rental_Car_System.Forms
             this.personService = personService;
         }
 
-        private void signInButton_Click(object sender, EventArgs e)
+        private async void signInButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -39,18 +39,20 @@ namespace Rental_Car_System.Forms
 
                 if (amIAdminCheckBox.Checked)
                 {
-                    if (personService.TryAuthenticateUser<Admin>(currentPerson, out var foundAdmin))
+                    var (isAuthenticated, foundUser) = await personService.TryAuthenticateUserAsync<Admin>(currentPerson);
+                    if (isAuthenticated)
                     {
                         MessageBox.Show("You are successfully logged in!");
-                        SwitchToForm(new AdministratorForm(new RentalCarContext(), foundAdmin, new OrderService(), new RentalApplicationService()));
+                        SwitchToForm(new AdministratorForm(new RentalCarContext(), foundUser, new OrderService(), new RentalApplicationService()));
                     }
                 }
                 else
                 {
-                    if (personService.TryAuthenticateUser<Client>(currentPerson, out var foundClient))
+                    var (isAuthenticated, foundUser) = await personService.TryAuthenticateUserAsync<Client>(currentPerson);
+                    if (isAuthenticated)
                     {
                         MessageBox.Show("You are successfully logged in!");
-                        SwitchToForm(new ClientForm(foundClient));
+                        SwitchToForm(new ClientForm(foundUser));
                     }
                 }
             }

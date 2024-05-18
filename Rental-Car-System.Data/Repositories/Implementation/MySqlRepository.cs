@@ -16,14 +16,14 @@ namespace Rental_Car_System.Data.Repositories.Implementation
             entities = context.Set<TEntity>();
         }
 
-        public TEntity Create(TEntity entity)
+        public async Task<TEntity> CreateAsync(TEntity entity)
         {
-            entities.Add(entity);
-            context.SaveChanges();
+            await entities.AddAsync(entity);
+            await context.SaveChangesAsync();
             return entity;
         }
 
-        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = entities;
 
@@ -32,22 +32,22 @@ namespace Rental_Car_System.Data.Repositories.Implementation
                 query = query.Where(filter);
             }
 
-            return [.. query]; // ToList()
+            return await query.ToListAsync();
         }
 
-        public TEntity? GetById(Guid id)
+        public async Task<TEntity?> GetByIdAsync(Guid id)
         {
-            return entities.Find(id);
+            return await entities.FindAsync(id);
         }
 
-        public TEntity? Update(TEntity entity)
+        public async Task<TEntity?> UpdateAsync(TEntity entity)
         {
             context.Entry(entity).State = EntityState.Modified;
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return entity;
         }
 
-        public TEntity? Delete(TEntity entity)
+        public async Task<TEntity?> DeleteAsync(TEntity entity)
         {
             if (context.Entry(entity).State == EntityState.Detached)
             {
@@ -55,13 +55,13 @@ namespace Rental_Car_System.Data.Repositories.Implementation
             }
 
             entities.Remove(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return entity;
         }
 
-        public TEntity? GetByFilter(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity?> GetByFilterAsync(Expression<Func<TEntity, bool>> filter)
         {
-            return entities.FirstOrDefault(filter);
+            return await entities.FirstOrDefaultAsync(filter);
         }
     }
 }

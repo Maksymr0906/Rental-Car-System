@@ -63,48 +63,48 @@ namespace Rental_Car_System.Forms
             carDamageFeeLabel.Visible = true;
         }
 
-        private void UpdateFields()
+        private async void UpdateFields()
         {
-            var order = GetCurrentOrder();
+            var order = await GetCurrentOrder();
             Text = $"{currentApplication.Type}";
-            var clientSurname = RepositoryManager.GetRepo<Client>()
-                .GetById(order.ClientId).Surname;
-            var car = RepositoryManager.GetRepo<Car>()
-                .GetById(order.CarId);
-            clientSurnameLabel.Text += $"{clientSurname}";
+            var client = await RepositoryManager.GetRepo<Client>()
+                .GetByIdAsync(order.ClientId);
+            var car = await RepositoryManager.GetRepo<Car>()
+                .GetByIdAsync(order.CarId);
+            clientSurnameLabel.Text += $"{client.Surname}";
             carModelLabel.Text += $"{car.Model}";
             carDamageFeeLabel.Text += $"{car.Price / Constants.coefficientForCarDamage}";
         }
 
-        private void sendApplicationButton_Click(object sender, EventArgs e)
+        private async void sendApplicationButton_Click(object sender, EventArgs e)
         {
-            var order = GetCurrentOrder();
+            var order = await GetCurrentOrder();
 
-            orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Closed);
-            carService.UpdateCarAvailability(order.CarId, true);
-            carService.UpdateCarDamageStatus(order.CarId, isCarDamagedCheckBox.Checked);
+            await orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Closed);
+            await carService.UpdateCarAvailability(order.CarId, true);
+            await carService.UpdateCarDamageStatus(order.CarId, isCarDamagedCheckBox.Checked);
 
             if(isCarDamagedCheckBox.Checked)
             {
-                carService.HandleCarDamage(order.CarId, order.ClientId);
+                await carService.HandleCarDamage(order.CarId, order.ClientId);
             }
 
             MessageBox.Show("Car rent ended. Client will be notificated");
             Close();
         }
 
-        private void confirmOrderButton_Click(object sender, EventArgs e)
+        private async void confirmOrderButton_Click(object sender, EventArgs e)
         {
-            var order = GetCurrentOrder();
+            var order = await GetCurrentOrder();
 
-            orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Accepted);
-            clientService.HandleClientPayment(order.ClientId, order.Price);
+            await orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Accepted);
+            await clientService.HandleClientPayment(order.ClientId, order.Price);
 
             MessageBox.Show("Order confirmed. Client will be notificated.");
             Close();
         }
 
-        private void cancelOrderButton_Click(object sender, EventArgs e)
+        private async void cancelOrderButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -113,13 +113,13 @@ namespace Rental_Car_System.Forms
                     throw new EmptyFieldException("Write the descriptive rejection comment before cancelling order.");
                 }
 
-                var order = GetCurrentOrder();
-                orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Declined);
+                var order = await GetCurrentOrder();
+                await orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Declined);
 
-                carService.UpdateCarAvailability(order.CarId, true);
+                await carService.UpdateCarAvailability(order.CarId, true);
 
                 currentApplication.RejectionComment = rejectionCommentTextField.Text;
-                RepositoryManager.GetRepo<RentalApplication>().Update(currentApplication);
+                await RepositoryManager.GetRepo<RentalApplication>().UpdateAsync(currentApplication);
 
                 MessageBox.Show("Order cancelled. Client will be notificated.");
                 Close();
@@ -130,10 +130,10 @@ namespace Rental_Car_System.Forms
             }
         }
 
-        private Order GetCurrentOrder()
+        private async Task<Order> GetCurrentOrder()
         {
-            return RepositoryManager.GetRepo<Order>()
-                .GetById(currentApplication.OrderId);
+            return await RepositoryManager.GetRepo<Order>()
+                .GetByIdAsync(currentApplication.OrderId);
         }
     }
 }

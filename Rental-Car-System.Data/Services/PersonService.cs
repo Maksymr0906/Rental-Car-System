@@ -6,9 +6,9 @@ namespace Rental_Car_System.Data.Services
 {
     public class PersonService
     {
-        public bool TryAuthenticateUser<T>(Person currentPerson, out T foundUser) where T : Person
+        public async Task<(bool isAuthenticated, T foundUser)> TryAuthenticateUserAsync<T>(Person currentPerson) where T : Person
         {
-            foundUser = RepositoryManager.GetRepo<T>().GetByFilter(user => user.Login == currentPerson.Login);
+            T foundUser = await RepositoryManager.GetRepo<T>().GetByFilterAsync(user => user.Login == currentPerson.Login);
 
             if (foundUser is null)
             {
@@ -20,7 +20,7 @@ namespace Rental_Car_System.Data.Services
                 throw new IncorrectPasswordException("Incorrect password");
             }
 
-            return true;
+            return (true, foundUser);
         }
     }
 }

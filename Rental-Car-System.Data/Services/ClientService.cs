@@ -5,33 +5,33 @@ namespace Rental_Car_System.Data.Services
 {
     public class ClientService
     {
-        public void HandleClientPayment(Guid clientId, double amount)
+        public async Task HandleClientPayment(Guid clientId, double amount)
         {
-            var client = RepositoryManager.GetRepo<Client>().GetById(clientId);
+            var client = await RepositoryManager.GetRepo<Client>().GetByIdAsync(clientId);
             if(client is null)
             {
                 throw new NullReferenceException("Client is not found");
             }
 
             client.Balance -= amount;
-            RepositoryManager.GetRepo<Client>().Update(client);
+            await RepositoryManager.GetRepo<Client>().UpdateAsync(client);
         }
 
-        public void HandleClientDeposit(Guid clientId, double amount)
+        public async Task HandleClientDeposit(Guid clientId, double amount)
         {
-            var client = RepositoryManager.GetRepo<Client>().GetById(clientId);
+            var client = await RepositoryManager.GetRepo<Client>().GetByIdAsync(clientId);
             if (client is null)
             {
                 throw new NullReferenceException("Client is not found");
             }
 
             client.Balance += amount;
-            RepositoryManager.GetRepo<Client>().Update(client);
+            await RepositoryManager.GetRepo<Client>().UpdateAsync(client);
         }
 
-        public void UpdateClientPersonalInfo(Guid clientId, string surname, string name, DateTime dateOfBirth)
+        public async Task UpdateClientPersonalInfo(Guid clientId, string surname, string name, DateTime dateOfBirth)
         {
-            var client = RepositoryManager.GetRepo<Client>().GetById(clientId);
+            var client = await RepositoryManager.GetRepo<Client>().GetByIdAsync(clientId);
             if (client is null)
             {
                 throw new NullReferenceException("Client is not found");
@@ -40,7 +40,7 @@ namespace Rental_Car_System.Data.Services
             client.Surname = surname;
             client.Name = name;
             client.DateOfBirthday = dateOfBirth;
-            RepositoryManager.GetRepo<Client>().Update(client);
+            await RepositoryManager.GetRepo<Client>().UpdateAsync(client);
         }
     }
 }

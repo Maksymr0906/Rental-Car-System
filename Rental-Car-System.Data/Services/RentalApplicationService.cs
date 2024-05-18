@@ -5,13 +5,13 @@ namespace Rental_Car_System.Data.Services
 {
     public class RentalApplicationService
     {
-        public void CreateApplicationByOrderId(Guid orderId)
+        public async Task CreateApplicationByOrderId(Guid orderId)
         {
             var applicationRepo = RepositoryManager.GetRepo<RentalApplication>();
             var orderRepo = RepositoryManager.GetRepo<Order>();
 
-            var order = orderRepo.GetById(orderId);
-            var application = applicationRepo.GetByFilter(a => a.OrderId == order.Id);
+            var order = await orderRepo.GetByIdAsync(orderId);
+            var application = await applicationRepo.GetByFilterAsync(a => a.OrderId == order.Id);
 
             if (application is null)
             {
@@ -21,11 +21,11 @@ namespace Rental_Car_System.Data.Services
                     RejectionComment = string.Empty
                 };
 
-                applicationRepo.Create(application);
+                await applicationRepo.CreateAsync(application);
             }
 
             application.Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded;
-            applicationRepo.Update(application);
+            await applicationRepo.UpdateAsync(application);
         }
     }
 }

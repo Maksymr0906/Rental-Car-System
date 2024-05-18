@@ -14,7 +14,8 @@ namespace Rental_Car_System.Data.Services
         {
             this.clientService = clientService;
         }
-        public void AddCar(Car car)
+
+        public async Task AddCar(Car car)
         {
             var validator = new CarValidator();
             var result = validator.Validate(car);
@@ -24,42 +25,42 @@ namespace Rental_Car_System.Data.Services
                 throw new CarValidationException(result.Errors.Select(error => error.ErrorMessage));
             }
 
-            RepositoryManager.GetRepo<Car>().Create(car);
+            await RepositoryManager.GetRepo<Car>().CreateAsync(car);
         }
 
-        public void UpdateCarAvailability(Guid carId, bool isAvailable)
+        public async Task UpdateCarAvailability(Guid carId, bool isAvailable)
         {
-            var car = RepositoryManager.GetRepo<Car>().GetById(carId);
+            var car = await RepositoryManager.GetRepo<Car>().GetByIdAsync(carId);
             if(car is null)
             {
                 throw new NullReferenceException("Car is not found");
             }
 
             car.IsAvailable = isAvailable;
-            RepositoryManager.GetRepo<Car>().Update(car);
+            await RepositoryManager.GetRepo<Car>().UpdateAsync(car);
         }
 
-        public void UpdateCarDamageStatus(Guid carId, bool isDamaged)
+        public async Task UpdateCarDamageStatus(Guid carId, bool isDamaged)
         {
-            var car = RepositoryManager.GetRepo<Car>().GetById(carId);
+            var car = await RepositoryManager.GetRepo<Car>().GetByIdAsync(carId);
             if (car is null)
             {
                 throw new NullReferenceException("Car is not found");
             }
 
             car.IsDamaged = isDamaged;
-            RepositoryManager.GetRepo<Car>().Update(car);
+            await RepositoryManager.GetRepo<Car>().UpdateAsync(car);
         }
 
-        public void HandleCarDamage(Guid carId, Guid clientId)
+        public async Task HandleCarDamage(Guid carId, Guid clientId)
         {
-            var car = RepositoryManager.GetRepo<Car>().GetById(carId);
+            var car = await RepositoryManager.GetRepo<Car>().GetByIdAsync(carId);
             if (car is null)
             {
                 throw new NullReferenceException("Car is not found");
             }
 
-            clientService.HandleClientPayment(clientId, car.Price / Constants.coefficientForCarDamage);
+            await clientService.HandleClientPayment(clientId, car.Price / Constants.coefficientForCarDamage);
         }
     }
 }

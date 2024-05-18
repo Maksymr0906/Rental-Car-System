@@ -27,9 +27,9 @@ namespace Rental_Car_System.View.Forms
             Close();
         }
 
-        private void okButton_Click(object sender, EventArgs e)
+        private async void okButton_Click(object sender, EventArgs e)
         {
-            clientService.HandleClientDeposit(currentClient.Id, double.Parse(depositTextField.Text));
+            await clientService.HandleClientDeposit(currentClient.Id, double.Parse(depositTextField.Text));
             MessageBox.Show($"Your current balance now: {currentClient.Balance:F2}");
             Close();
         }

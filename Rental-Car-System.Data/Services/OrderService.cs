@@ -6,32 +6,32 @@ namespace Rental_Car_System.Data.Services
 {
     public class OrderService
     {
-        public void UpdateOrderStatus(Guid orderId, Order.OrderStatus status)
+        public async Task UpdateOrderStatus(Guid orderId, Order.OrderStatus status)
         {
-            var order = RepositoryManager.GetRepo<Order>().GetById(orderId);
+            var order = await RepositoryManager.GetRepo<Order>().GetByIdAsync(orderId);
             if(order is null)
             {
                 throw new NullReferenceException("Order is not found");
             }
 
             order.Status = status;
-            RepositoryManager.GetRepo<Order>().Update(order);
+            await RepositoryManager.GetRepo<Order>().UpdateAsync(order);
         }
 
-        public void SkipOrderTime()
+        public async Task SkipOrderTime()
         {
             var repo = RepositoryManager.GetRepo<Order>();
-            var acceptedOrders = repo.GetAll(o => o.Status == Order.OrderStatus.Accepted).ToList();
+            var acceptedOrders = await repo.GetAllAsync(o => o.Status == Order.OrderStatus.Accepted);
             foreach (var order in acceptedOrders)
             {
                 order.Status = Order.OrderStatus.Ended;
-                repo.Update(order);
+                await repo.UpdateAsync(order);
             }
         }
 
-        public double CalculateRentPrice(DateTime dateToRent, Guid carId)
+        public async Task<double> CalculateRentPrice(DateTime dateToRent, Guid carId)
         {
-            var car = RepositoryManager.GetRepo<Car>().GetById(carId);
+            var car = await RepositoryManager.GetRepo<Car>().GetByIdAsync(carId);
             if(car is null)
             {
                 throw new NullReferenceException("Car is not found.");

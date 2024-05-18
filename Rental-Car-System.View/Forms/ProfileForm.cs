@@ -51,7 +51,7 @@ namespace Rental_Car_System.View.Forms
             }
         }
 
-        private void updateProfileButton_Click(object sender, EventArgs e)
+        private async void updateProfileButton_Click(object sender, EventArgs e)
         {
             if (surnameTextField.Text == string.Empty || nameTextField.Text == string.Empty)
             {
@@ -59,7 +59,7 @@ namespace Rental_Car_System.View.Forms
                 return;
             }
 
-            clientService.UpdateClientPersonalInfo(currentClient.Id, surnameTextField.Text, 
+            await clientService.UpdateClientPersonalInfo(currentClient.Id, surnameTextField.Text, 
                 nameTextField.Text, dateOfBirthTimePicker.Value);
 
             MessageBox.Show("Data updated.");

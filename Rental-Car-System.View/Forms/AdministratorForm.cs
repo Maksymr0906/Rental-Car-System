@@ -84,13 +84,13 @@ namespace Rental_Car_System.Forms
             });
         }
 
-        private void CreateApplicationButton_Click(object sender, EventArgs e)
+        private async void CreateApplicationButton_Click(object sender, EventArgs e)
         {
             try
             {
                 var selectedOrderId = GetSelectedOrderId();
-                rentalApplicationService.CreateApplicationByOrderId(selectedOrderId);
-                var application = RepositoryManager.GetRepo<RentalApplication>().GetByFilter(a => a.OrderId == selectedOrderId);
+                await rentalApplicationService.CreateApplicationByOrderId(selectedOrderId);
+                var application = await RepositoryManager.GetRepo<RentalApplication>().GetByFilterAsync(a => a.OrderId == selectedOrderId);
                 FormHelper.ShowForm(this, new ApplicationForm(application, new CarService(new ClientService()), new ClientService(), new OrderService()), (e) =>
                 {
                     ShowOrders();
@@ -116,9 +116,9 @@ namespace Rental_Car_System.Forms
             return Guid.Parse(ordersDataGridView.CurrentRow.Cells[0].Value.ToString());
         }
 
-        private void skipOrderTimeButton_Click(object sender, EventArgs e)
+        private async void skipOrderTimeButton_Click(object sender, EventArgs e)
         {
-            orderService.SkipOrderTime();
+            await orderService.SkipOrderTime();
             ShowOrders();
         }
 

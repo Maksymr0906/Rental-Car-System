@@ -1,6 +1,4 @@
 using Rental_Car_System.Forms;
-using Rental_Car_System.Data.Repositories;
-using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Services;
 
 namespace Rental_Car_System

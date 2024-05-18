@@ -38,9 +38,9 @@ namespace Rental_Car_System.Forms
             rentToTimePicker.MaxDate = DateTime.Now.AddMonths(Constants.maxMonthToRent);
         }
 
-        private void CalculateRentPrice()
+        private async void CalculateRentPrice()
         {
-            rentPrice = orderService.CalculateRentPrice(rentToTimePicker.Value.Date, selectedCar.Id);
+            rentPrice = await orderService.CalculateRentPrice(rentToTimePicker.Value.Date, selectedCar.Id);
         }
 
         private void SetUpFields()
@@ -54,7 +54,7 @@ namespace Rental_Car_System.Forms
             carPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        private void CreateOrderButton_Click(object sender, EventArgs e)
+        private async void CreateOrderButton_Click(object sender, EventArgs e)
         {
             if (currentClient.Balance < rentPrice)
             {
@@ -63,13 +63,13 @@ namespace Rental_Car_System.Forms
             }
 
             CreateOrder();
-            carService.UpdateCarAvailability(selectedCar.Id, false);
+            await carService.UpdateCarAvailability(selectedCar.Id, false);
 
             MessageBox.Show("Your order adressed to the administrator. Please wait.");
             Close();
         }
 
-        private void CreateOrder()
+        private async void CreateOrder()
         {
             var order = new Order
             {
@@ -82,7 +82,7 @@ namespace Rental_Car_System.Forms
                 Status = Order.OrderStatus.Processing
             };
 
-            RepositoryManager.GetRepo<Order>().Create(order);
+            await RepositoryManager.GetRepo<Order>().CreateAsync(order);
         }
 
         private void rentToTimePicker_ValueChanged(object sender, EventArgs e)
