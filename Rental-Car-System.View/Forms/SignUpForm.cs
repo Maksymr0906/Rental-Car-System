@@ -28,7 +28,7 @@ namespace Rental_Car_System.Forms
             Close();
         }
 
-        private void signUpButton_Click(object sender, EventArgs e)
+        private async void signUpButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Rental_Car_System.Forms
 
                 if (iAmAdminCheckBox.Checked)
                 {
-                    if (RepositoryManager.GetRepo<Admin>().GetByFilter(a => a.Login == person.Login) is not null)
+                    if (await RepositoryManager.GetRepo<Admin>().GetByFilterAsync(a => a.Login == person.Login) is not null)
                     {
                         throw new ExistingPersonException("Admin with this login already exists!");
                     }
@@ -62,11 +62,11 @@ namespace Rental_Car_System.Forms
                         Email = string.Empty,
                     };
 
-                    RepositoryManager.GetRepo<Admin>().Create(admin);
+                    await RepositoryManager.GetRepo<Admin>().CreateAsync(admin);
                 }
                 else
                 {
-                    if (RepositoryManager.GetRepo<Client>().GetByFilter(c => c.Login == person.Login) is not null)
+                    if (await RepositoryManager.GetRepo<Client>().GetByFilterAsync(c => c.Login == person.Login) is not null)
                     {
                         throw new ExistingPersonException("Client with this login already exists!");
                     }
@@ -81,7 +81,7 @@ namespace Rental_Car_System.Forms
                         DateOfBirthday = DateTime.Now.AddYears(-100),
                     };
 
-                    RepositoryManager.GetRepo<Client>().Create(client);
+                    await RepositoryManager.GetRepo<Client>().CreateAsync(client);
                 }
 
 

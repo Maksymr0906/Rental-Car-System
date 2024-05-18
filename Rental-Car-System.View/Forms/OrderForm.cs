@@ -28,8 +28,12 @@ namespace Rental_Car_System.Forms
             this.carService = carService;
             this.orderService = orderService;
             SetUpDateTimePicker();
-            CalculateRentPrice();
+            InitializeRentPrice();
             SetUpFields();
+        }
+        private async void InitializeRentPrice()
+        {
+            rentPrice = await CalculateRentPriceAsync();
         }
 
         private void SetUpDateTimePicker()
@@ -38,9 +42,9 @@ namespace Rental_Car_System.Forms
             rentToTimePicker.MaxDate = DateTime.Now.AddMonths(Constants.maxMonthToRent);
         }
 
-        private async void CalculateRentPrice()
+        private async Task<double> CalculateRentPriceAsync()
         {
-            rentPrice = await orderService.CalculateRentPrice(rentToTimePicker.Value.Date, selectedCar.Id);
+            return await orderService.CalculateRentPrice(rentToTimePicker.Value.Date, selectedCar.Id);
         }
 
         private void SetUpFields()
@@ -85,9 +89,9 @@ namespace Rental_Car_System.Forms
             await RepositoryManager.GetRepo<Order>().CreateAsync(order);
         }
 
-        private void rentToTimePicker_ValueChanged(object sender, EventArgs e)
+        private async void rentToTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            CalculateRentPrice();
+            rentPrice = await CalculateRentPriceAsync();
             priceLabel.Text = $"Price: {rentPrice}";
         }
     }

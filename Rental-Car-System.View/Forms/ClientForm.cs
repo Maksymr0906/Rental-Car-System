@@ -27,11 +27,11 @@ namespace Rental_Car_System.Forms
             ShowAvailableCars();
         }
 
-        private void ShowAvailableCars()
+        private async void ShowAvailableCars()
         {
             try
             {
-                var availableCars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+                var availableCars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
 
                 if (!availableCars.Any())
                 {
@@ -53,9 +53,9 @@ namespace Rental_Car_System.Forms
             }
         }
 
-        private void UpdateCarCard(List<Car> availableCars, int index)
+        private void UpdateCarCard(IEnumerable<Car> availableCars, int index)
         {
-            var currentCar = availableCars[(currentDisplayedCarIndex + index) % availableCars.Count];
+            var currentCar = availableCars.ElementAt((currentDisplayedCarIndex + index) % availableCars.Count());
 
             string pictureBoxName = $"carPictureBox{index + 1}";
             if (Controls[pictureBoxName] is PictureBox pictureBox)
@@ -80,11 +80,12 @@ namespace Rental_Car_System.Forms
             UpdateCurrentDisplayedCarIndex(1);
         }
 
-        private void UpdateCurrentDisplayedCarIndex(int increment)
+        private async void UpdateCurrentDisplayedCarIndex(int increment)
         {
             try
             {
-                var carsCount = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).Count();
+                var cars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
+                var carsCount = cars.Count();
                 if (carsCount <= 0)
                 {
                     throw new NoAvailableCarsException("There are no available cars now.");
@@ -109,17 +110,17 @@ namespace Rental_Car_System.Forms
             OpenAdditionalCarInfo(pictureNumber);
         }
 
-        private void OpenAdditionalCarInfo(int pictureNumber)
+        private async void OpenAdditionalCarInfo(int pictureNumber)
         {
             try
             {
-                var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+                var cars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
                 if (!cars.Any())
                 {
                     throw new NoAvailableCarsException("There are no available cars now.");
                 }
 
-                FormHelper.ShowForm(this, new AdditionalCarInfoForm(cars[(currentDisplayedCarIndex + pictureNumber) % cars.Count]), (e) =>
+                FormHelper.ShowForm(this, new AdditionalCarInfoForm(cars.ElementAt((currentDisplayedCarIndex + pictureNumber) % cars.Count())), (e) =>
                 {
                     ShowAvailableCars();
                     Show();
@@ -135,11 +136,11 @@ namespace Rental_Car_System.Forms
             }
         }
 
-        private void carModelButton_Click(object sender, EventArgs e)
+        private async void carModelButton_Click(object sender, EventArgs e)
         {
             try
             {
-                var cars = RepositoryManager.GetRepo<Car>().GetAll(car => car.IsAvailable).ToList();
+                var cars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
                 if (!cars.Any())
                 {
                     throw new NoAvailableCarsException("There are no available cars now.");
@@ -153,7 +154,7 @@ namespace Rental_Car_System.Forms
                 Button button = (Button)sender;
                 int buttonNumber = Convert.ToInt32(button.Tag);
 
-                FormHelper.ShowForm(this, new OrderForm(currentClient, cars[(currentDisplayedCarIndex + buttonNumber) % cars.Count], new CarService(new ClientService()), new OrderService()), (e) =>
+                FormHelper.ShowForm(this, new OrderForm(currentClient, cars.ElementAt((currentDisplayedCarIndex + buttonNumber) % cars.Count()), new CarService(new ClientService()), new OrderService()), (e) =>
                 {
                     ClearFields();
                     ShowAvailableCars();
