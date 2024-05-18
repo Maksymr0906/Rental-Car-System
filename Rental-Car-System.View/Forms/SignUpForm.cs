@@ -104,16 +104,8 @@ namespace Rental_Car_System.Forms
 
         private void seePasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if(seePasswordCheckBox.Checked)
-            {
-                passwordTextField.PasswordChar = '\0';
-                repeatPasswordTextField.PasswordChar = '\0';
-            }
-            else
-            {
-                passwordTextField.PasswordChar = '*';
-                repeatPasswordTextField.PasswordChar = '*';
-            }
+            passwordTextField.PasswordChar = seePasswordCheckBox.Checked ? '\0' : '*';
+            repeatPasswordTextField.PasswordChar = seePasswordCheckBox.Checked ? '\0' : '*';
         }
     }
 }

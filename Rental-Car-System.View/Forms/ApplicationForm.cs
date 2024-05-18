@@ -5,6 +5,7 @@ using Rental_Car_System.Data.Utils;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.View.Utils;
 using Rental_Car_System.Data.Services;
+using Rental_Car_System.Data.Exceptions;
 
 #nullable disable
 namespace Rental_Car_System.Forms
@@ -35,14 +36,12 @@ namespace Rental_Car_System.Forms
 
         private void SetState()
         {
-            if (currentApplication.Type == RentalApplication.ApplicationType.OrderCar)
+            currentState = currentApplication.Type switch
             {
-                currentState = new OrderCarState(this);
-            }
-            else if (currentApplication.Type == RentalApplication.ApplicationType.RentEnded)
-            {
-                currentState = new RentEndedState(this);
-            }
+                RentalApplication.ApplicationType.OrderCar => new OrderCarState(this),
+                RentalApplication.ApplicationType.RentEnded => new RentEndedState(this),
+                _ => currentState
+            };
         }
 
         private void ShowUIElements() 
@@ -107,22 +106,28 @@ namespace Rental_Car_System.Forms
 
         private void cancelOrderButton_Click(object sender, EventArgs e)
         {
-            if (rejectionCommentTextField.Text == string.Empty)
+            try
             {
-                MessageBox.Show("Write the descriptive rejection comment before cancelling order.");
-                return;
+                if (rejectionCommentTextField.Text == string.Empty)
+                {
+                    throw new EmptyFieldException("Write the descriptive rejection comment before cancelling order.");
+                }
+
+                var order = GetCurrentOrder();
+                orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Declined);
+
+                carService.UpdateCarAvailability(order.CarId, true);
+
+                currentApplication.RejectionComment = rejectionCommentTextField.Text;
+                RepositoryManager.GetRepo<RentalApplication>().Update(currentApplication);
+
+                MessageBox.Show("Order cancelled. Client will be notificated.");
+                Close();
             }
-
-            var order = GetCurrentOrder();
-            orderService.UpdateOrderStatus(currentApplication.OrderId, Order.OrderStatus.Declined);
-
-            carService.UpdateCarAvailability(order.CarId, true);
-
-            currentApplication.RejectionComment = rejectionCommentTextField.Text;
-            RepositoryManager.GetRepo<RentalApplication>().Update(currentApplication);
-
-            MessageBox.Show("Order cancelled. Client will be notificated.");
-            Close();
+            catch(EmptyFieldException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private Order GetCurrentOrder()
