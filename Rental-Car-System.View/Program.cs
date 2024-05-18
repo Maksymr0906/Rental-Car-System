@@ -13,27 +13,9 @@ namespace Rental_Car_System
         [STAThread]
         static void Main()
         {
-            UpdateOrders();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new SignInForm(new PersonService()));
-        }
-
-        private static void UpdateOrders()
-        {
-            var repo = RepositoryManager.GetRepo<Order>();
-            var orders = repo.GetAll(o => o.Status == Order.OrderStatus.Accepted).ToList();
-
-            foreach (var order in orders)
-            {
-                if (order.EndRentDate <= DateTime.Now)
-                {
-                    order.Status = Order.OrderStatus.Ended;
-                }
-
-                repo.Update(order);
-            }
         }
     }
 }
