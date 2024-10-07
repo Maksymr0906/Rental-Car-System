@@ -93,6 +93,16 @@ namespace Rental_Car_System.View.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap plastic_card_template {
+            get {
+                object obj = ResourceManager.GetObject("plastic-card-template", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap right_arrow_button {
             get {
                 object obj = ResourceManager.GetObject("right_arrow_button", resourceCulture);

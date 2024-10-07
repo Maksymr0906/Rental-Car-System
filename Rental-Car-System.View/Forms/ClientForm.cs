@@ -46,6 +46,7 @@ namespace Rental_Car_System.Forms
             catch (NoAvailableCarsException ex)
             {
                 MessageBox.Show(ex.Message);
+                ShowEmptyCarSlots();
             }
             catch (Exception ex)
             {
@@ -96,6 +97,7 @@ namespace Rental_Car_System.Forms
             catch (NoAvailableCarsException ex)
             {
                 MessageBox.Show(ex.Message);
+                ShowEmptyCarSlots();
             }
             catch (Exception ex)
             {
@@ -129,6 +131,7 @@ namespace Rental_Car_System.Forms
             catch (NoAvailableCarsException ex)
             {
                 MessageBox.Show(ex.Message);
+                ShowEmptyCarSlots();
             }
             catch (Exception ex)
             {
@@ -165,6 +168,7 @@ namespace Rental_Car_System.Forms
             catch(NoAvailableCarsException ex)
             {
                 MessageBox.Show(ex.Message);
+                ShowEmptyCarSlots();
             }
             catch(MissingClientDataException ex)
             {
@@ -183,8 +187,9 @@ namespace Rental_Car_System.Forms
 
         private void myProfileButton_Click(object sender, EventArgs e)
         {
-            FormHelper.ShowForm(this, new ProfileForm(currentClient, new ClientService()), (e) =>
+            FormHelper.ShowForm(this, new ProfileForm(currentClient, new ClientService()), async (e) =>
             {
+                currentClient = await RepositoryManager.GetRepo<Client>().GetByIdAsync(currentClient.Id);
                 ShowBalance();
                 Show();
             });
@@ -198,6 +203,24 @@ namespace Rental_Car_System.Forms
             carModelButton1.Text = string.Empty;
             carModelButton2.Text = string.Empty;
             carModelButton3.Text = string.Empty;
+        }
+
+        private void ShowEmptyCarSlots()
+        {
+            for (int i = 0; i < Constants.numberOfCarsCards; i++)
+            {
+                string pictureBoxName = $"carPictureBox{i + 1}";
+                if (Controls[pictureBoxName] is PictureBox pictureBox)
+                {
+                    pictureBox.Image = Image.FromFile(Constants.pathToCarImages + "not_available_car.png");
+                }
+
+                string buttonName = $"carModelButton{i + 1}";
+                if (Controls[buttonName] is Button button)
+                {
+                    button.Text = "Not available";
+                }
+            }
         }
     }
 }

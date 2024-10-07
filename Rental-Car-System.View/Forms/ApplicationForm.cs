@@ -73,7 +73,7 @@ namespace Rental_Car_System.Forms
                 .GetByIdAsync(order.CarId);
             clientSurnameLabel.Text += $"{client.Surname}";
             carModelLabel.Text += $"{car.Model}";
-            carDamageFeeLabel.Text += $"{car.Price / Constants.coefficientForCarDamage}";
+            carDamageFeeLabel.Text += $"{car.Price / Constants.coefficientForCarDamage:F2}";
         }
 
         private async void sendApplicationButton_Click(object sender, EventArgs e)

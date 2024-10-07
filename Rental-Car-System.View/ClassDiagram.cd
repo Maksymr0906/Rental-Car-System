@@ -1,31 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="Rental_Car_System.Data.Models.Admin" Collapsed="true">
-    <Position X="2.5" Y="1.5" Width="1.5" />
+  <Class Name="Rental_Car_System.Data.Models.Admin">
+    <Position X="2.5" Y="1" Width="1.75" />
+    <NestedTypes>
+      <Class Name="Rental_Car_System.Data.Models.Admin.AdminRole" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Car" Collapsed="true">
-    <Position X="8.25" Y="0.5" Width="1.5" />
+  <Class Name="Rental_Car_System.Data.Models.Car">
+    <Position X="9.25" Y="1" Width="2" />
+    <Members>
+      <Property Name="Orders" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="Rental_Car_System.Data.Models.Entity" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="4.5" />
+        <Point X="7.5" Y="4.248" />
+        <Point X="9.25" Y="4.248" />
+        <Point X="9.25" Y="4.312" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Client" Collapsed="true">
-    <Position X="2.5" Y="3.75" Width="1.5" />
+  <Class Name="Rental_Car_System.Data.Models.Client">
+    <Position X="2.5" Y="6" Width="1.75" />
+    <Members>
+      <Property Name="Orders" Hidden="true" />
+    </Members>
     <TypeIdentifier />
   </Class>
   <Class Name="Rental_Car_System.Data.Models.Entity">
-    <Position X="6.25" Y="2.25" Width="1.5" />
+    <Position X="6.75" Y="4.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Order" Collapsed="true">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+  <Class Name="Rental_Car_System.Data.Models.Order">
+    <Position X="5.75" Y="1" Width="2" />
+    <Members>
+      <Property Name="Car" Hidden="true" />
+      <Property Name="Client" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Class Name="Rental_Car_System.Data.Models.Order.OrderStatus" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Person" Collapsed="true">
-    <Position X="2.5" Y="2.5" Width="1.5" />
+  <Class Name="Rental_Car_System.Data.Models.Person">
+    <Position X="2.5" Y="3.75" Width="1.75" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.RentalApplication" Collapsed="true">
-    <Position X="9.25" Y="2.75" Width="1.5" />
+  <Class Name="Rental_Car_System.Data.Models.RentalApplication">
+    <Position X="9.75" Y="5" Width="2" />
+    <Members>
+      <Property Name="Order" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Class Name="Rental_Car_System.Data.Models.RentalApplication.ApplicationType" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier />
   </Class>
   <Font Name="Segoe UI" Size="9" />
