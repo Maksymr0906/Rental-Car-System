@@ -8,7 +8,7 @@ namespace Rental_Car_System.Data.Repositories
     {
         public static IRepository<TEntity> GetRepo<TEntity>() where TEntity : Entity
         {
-            return new MySqlRepository<TEntity>(new RentalCarContext());
+            return new Repository<TEntity>(new RentalCarContext());
         }
     }
 }

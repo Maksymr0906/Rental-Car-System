@@ -5,12 +5,12 @@ using System.Linq.Expressions;
 
 namespace Rental_Car_System.Data.Repositories.Implementation
 {
-    public class MySqlRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         private readonly RentalCarContext context;
         private readonly DbSet<TEntity> entities;
 
-        public MySqlRepository(RentalCarContext context)
+        public Repository(RentalCarContext context)
         {
             this.context = context;
             entities = context.Set<TEntity>();
