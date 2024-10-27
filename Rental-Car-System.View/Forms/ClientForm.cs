@@ -3,7 +3,7 @@ using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Repositories;
 using Rental_Car_System.Bussiness.Utils;
 using Rental_Car_System.View.Forms;
-using Rental_Car_System.Bussiness.Exceptions;
+using Rental_Car_System.Exceptions;
 using Rental_Car_System.View.Utils;
 using Rental_Car_System.Bussiness.Services;
 

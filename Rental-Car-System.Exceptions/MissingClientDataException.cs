@@ -1,4 +1,4 @@
-﻿namespace Rental_Car_System.Bussiness.Exceptions
+﻿namespace Rental_Car_System.Exceptions
 {
     public class MissingClientDataException : Exception
     {

@@ -1,6 +1,4 @@
 ﻿using Rental_Car_System.Data.Models;
-using Rental_Car_System.Data.Repositories.Interface;
-using Rental_Car_System.Data.Repositories.Implementation;
 
 namespace Rental_Car_System.Data.Repositories
 {

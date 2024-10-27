@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Data.Models;
-using Rental_Car_System.Data.Repositories.Interface;
 using System.Linq.Expressions;
 
-namespace Rental_Car_System.Data.Repositories.Implementation
+namespace Rental_Car_System.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
