@@ -1,16 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Generic.Models;
-using Rental_Car_System.Generic.Repositories;
 using System.Linq.Expressions;
 
-namespace Rental_Car_System.Data.Repositories
+namespace Rental_Car_System.Generic.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        private readonly RentalCarContext context;
+        private readonly DbContext context;
         private readonly DbSet<TEntity> entities;
 
-        public Repository(RentalCarContext context)
+        public Repository(DbContext context)
         {
             this.context = context;
             entities = context.Set<TEntity>();

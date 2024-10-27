@@ -1,6 +1,5 @@
 ﻿using Rental_Car_System.Exceptions;
 using Rental_Car_System.Data.Models;
-using Rental_Car_System.Data.Repositories;
 
 namespace Rental_Car_System.Bussiness.Services
 {
