@@ -15,10 +15,7 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Rental-Car-System.Generic\Rental-Car-System.Generic.csproj" />
+    <PackageReference Include="Rental-Car-System.Generic" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
