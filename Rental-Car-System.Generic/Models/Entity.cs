@@ -1,4 +1,4 @@
-﻿namespace Rental_Car_System.Data.Models
+﻿namespace Rental_Car_System.Generic.Models
 {
     public class Entity
     {

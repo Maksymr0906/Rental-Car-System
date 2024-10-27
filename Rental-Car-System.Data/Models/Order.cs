@@ -1,4 +1,6 @@
-﻿namespace Rental_Car_System.Data.Models
+﻿using Rental_Car_System.Generic.Models;
+
+namespace Rental_Car_System.Data.Models
 {
     public sealed class Order : Entity
     {

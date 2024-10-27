@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental-Car-System.Bussiness
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rental-Car-System.Exceptions", "Rental-Car-System.Exceptions\Rental-Car-System.Exceptions.csproj", "{A5E4369C-74D9-481E-AAFC-E36775048958}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rental-Car-System.Generic", "Rental-Car-System.Generic\Rental-Car-System.Generic.csproj", "{A6ADA612-2295-4E37-AEF9-F9BFD7C70C5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A5E4369C-74D9-481E-AAFC-E36775048958}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5E4369C-74D9-481E-AAFC-E36775048958}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5E4369C-74D9-481E-AAFC-E36775048958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6ADA612-2295-4E37-AEF9-F9BFD7C70C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6ADA612-2295-4E37-AEF9-F9BFD7C70C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6ADA612-2295-4E37-AEF9-F9BFD7C70C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6ADA612-2295-4E37-AEF9-F9BFD7C70C5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

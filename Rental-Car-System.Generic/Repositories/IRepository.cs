@@ -1,7 +1,7 @@
-﻿using Rental_Car_System.Data.Models;
+﻿using Rental_Car_System.Generic.Models;
 using System.Linq.Expressions;
 
-namespace Rental_Car_System.Data.Repositories
+namespace Rental_Car_System.Generic.Repositories
 {
     public interface IRepository<TEntity> where TEntity : Entity
     {

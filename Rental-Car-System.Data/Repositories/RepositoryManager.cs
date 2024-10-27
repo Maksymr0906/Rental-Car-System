@@ -1,4 +1,5 @@
-﻿using Rental_Car_System.Data.Models;
+﻿using Rental_Car_System.Generic.Models;
+using Rental_Car_System.Generic.Repositories;
 
 namespace Rental_Car_System.Data.Repositories
 {

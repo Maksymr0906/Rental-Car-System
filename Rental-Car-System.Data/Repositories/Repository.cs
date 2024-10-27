@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rental_Car_System.Data.Models;
+using Rental_Car_System.Generic.Models;
+using Rental_Car_System.Generic.Repositories;
 using System.Linq.Expressions;
 
 namespace Rental_Car_System.Data.Repositories
