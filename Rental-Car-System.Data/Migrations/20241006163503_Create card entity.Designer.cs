@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rental_Car_System.Data;
 
@@ -11,9 +12,11 @@ using Rental_Car_System.Data;
 namespace Rental_Car_System.Data.Migrations
 {
     [DbContext(typeof(RentalCarContext))]
-    partial class RentalCarContextModelSnapshot : ModelSnapshot
+    [Migration("20241006163503_Create card entity")]
+    partial class Createcardentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,7 +232,7 @@ namespace Rental_Car_System.Data.Migrations
             modelBuilder.Entity("Rental_Car_System.Data.Models.BankCard", b =>
                 {
                     b.HasOne("Rental_Car_System.Data.Models.Client", "Client")
-                        .WithMany("BankCards")
+                        .WithMany()
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -274,8 +277,6 @@ namespace Rental_Car_System.Data.Migrations
 
             modelBuilder.Entity("Rental_Car_System.Data.Models.Client", b =>
                 {
-                    b.Navigation("BankCards");
-
                     b.Navigation("Orders");
                 });
 

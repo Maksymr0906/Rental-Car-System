@@ -1,4 +1,4 @@
-﻿namespace Rental_Car_System.Data.Exceptions
+﻿namespace Rental_Car_System.Bussiness.Exceptions
 {
     public class NoAvailableOrdersException : Exception
     {

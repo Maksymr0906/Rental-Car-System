@@ -1,4 +1,4 @@
-﻿namespace Rental_Car_System.Data.Utils
+﻿namespace Rental_Car_System.Bussiness.Utils
 {
     [Obsolete]
     public static class Filenames

@@ -1,4 +1,4 @@
-﻿namespace Rental_Car_System.Data.Utils
+﻿namespace Rental_Car_System.Bussiness.Utils
 {
     public static class Constants
     {

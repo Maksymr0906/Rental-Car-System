@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Rental_Car_System.Data.Models;
-using Rental_Car_System.Data.Utils;
+using Rental_Car_System.Bussiness.Utils;
 
-namespace Rental_Car_System.Data.Validators
+namespace Rental_Car_System.Bussiness.Validators
 {
     public class CarValidator : AbstractValidator<Car> 
     {

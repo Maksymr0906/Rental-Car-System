@@ -1,8 +1,8 @@
-﻿using Rental_Car_System.Data.Exceptions;
+﻿using Rental_Car_System.Bussiness.Exceptions;
 using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Repositories;
 
-namespace Rental_Car_System.Data.Services
+namespace Rental_Car_System.Bussiness.Services
 {
     public class ClientService
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Data;
 using Rental_Car_System.Data.Models;
-using Rental_Car_System.Data.Utils;
+using Rental_Car_System.Bussiness.Utils;
 using Rental_Car_System.View.Utils;
 
 namespace Rental_Car_System.View.Forms

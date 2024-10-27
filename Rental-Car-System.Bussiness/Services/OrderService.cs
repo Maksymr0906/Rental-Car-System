@@ -1,8 +1,8 @@
 ﻿using Rental_Car_System.Data.Models;
 using Rental_Car_System.Data.Repositories;
-using Rental_Car_System.Data.Utils;
+using Rental_Car_System.Bussiness.Utils;
 
-namespace Rental_Car_System.Data.Services
+namespace Rental_Car_System.Bussiness.Services
 {
     public class OrderService
     {

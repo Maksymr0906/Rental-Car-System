@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Rental-Car-System.Bussiness\Rental-Car-System.Bussiness.csproj" />
     <ProjectReference Include="..\Rental-Car-System.Data\Rental-Car-System.Data.csproj" />
   </ItemGroup>
 
