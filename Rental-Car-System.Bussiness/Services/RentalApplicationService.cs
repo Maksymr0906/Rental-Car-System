@@ -1,16 +1,22 @@
-﻿using Rental_Car_System.Data.Models;
+﻿using Rental_Car_System.Data;
+using Rental_Car_System.Data.Models;
+using Rental_Car_System.Generic.Repositories;
 
 namespace Rental_Car_System.Bussiness.Services
 {
     public class RentalApplicationService
     {
-        public async Task CreateApplicationByOrderId(Guid orderId)
-        {
-            var applicationRepo = RepositoryManager.GetRepo<RentalApplication>();
-            var orderRepo = RepositoryManager.GetRepo<Order>();
+		private readonly IUnitOfWork unitOfWork;
 
-            var order = await orderRepo.GetByIdAsync(orderId);
-            var application = await applicationRepo.GetByFilterAsync(a => a.OrderId == order.Id);
+		public RentalApplicationService(IUnitOfWork unitOfWork)
+		{
+			this.unitOfWork = unitOfWork;
+		}
+
+		public async Task CreateApplicationByOrderId(Guid orderId)
+        {
+            var order = await unitOfWork.OrderRepository.GetByIdAsync(orderId);
+            var application = await unitOfWork.RentalApplicationRepository.GetByFilterAsync(a => a.OrderId == order.Id);
 
             if (application is null)
             {
@@ -20,11 +26,13 @@ namespace Rental_Car_System.Bussiness.Services
                     RejectionComment = string.Empty
                 };
 
-                await applicationRepo.CreateAsync(application);
+                await unitOfWork.RentalApplicationRepository.CreateAsync(application);
+                await unitOfWork.SaveAsync();
             }
 
             application.Type = order.Status == Order.OrderStatus.Processing ? RentalApplication.ApplicationType.OrderCar : RentalApplication.ApplicationType.RentEnded;
-            await applicationRepo.UpdateAsync(application);
-        }
-    }
+            await unitOfWork.RentalApplicationRepository.UpdateAsync(application);
+			await unitOfWork.SaveAsync();
+		}
+	}
 }

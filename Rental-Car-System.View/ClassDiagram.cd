@@ -1,68 +1,101 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="Rental_Car_System.Data.Models.Admin">
-    <Position X="2.5" Y="1" Width="1.75" />
-    <NestedTypes>
-      <Class Name="Rental_Car_System.Data.Models.Admin.AdminRole" Collapsed="true">
-        <TypeIdentifier />
-      </Class>
-    </NestedTypes>
+  <Class Name="Rental_Car_System.Bussiness.Services.CarService">
+    <Position X="6.5" Y="1.25" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Car">
-    <Position X="9.25" Y="1" Width="2" />
-    <Members>
-      <Property Name="Orders" Hidden="true" />
-    </Members>
-    <InheritanceLine Type="Rental_Car_System.Data.Models.Entity" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.5" Y="4.5" />
-        <Point X="7.5" Y="4.248" />
-        <Point X="9.25" Y="4.248" />
-        <Point X="9.25" Y="4.312" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="Rental_Car_System.Bussiness.Services.ClientService">
+    <Position X="9.75" Y="1" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Client">
-    <Position X="2.5" Y="6" Width="1.75" />
-    <Members>
-      <Property Name="Orders" Hidden="true" />
-    </Members>
+  <Class Name="Rental_Car_System.Bussiness.Services.OrderService">
+    <Position X="12.5" Y="1.75" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Entity">
-    <Position X="6.75" Y="4.5" Width="1.5" />
+  <Class Name="Rental_Car_System.Bussiness.Services.PersonService">
+    <Position X="4.75" Y="3.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Order">
-    <Position X="5.75" Y="1" Width="2" />
-    <Members>
-      <Property Name="Car" Hidden="true" />
-      <Property Name="Client" Hidden="true" />
-    </Members>
-    <NestedTypes>
-      <Class Name="Rental_Car_System.Data.Models.Order.OrderStatus" Collapsed="true">
-        <TypeIdentifier />
-      </Class>
-    </NestedTypes>
+  <Class Name="Rental_Car_System.Bussiness.Services.RentalApplicationService">
+    <Position X="7.75" Y="4.25" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.Person">
-    <Position X="2.5" Y="3.75" Width="1.75" />
-    <TypeIdentifier />
+  <Class Name="Rental_Car_System.Forms.AddCarForm" Collapsed="true">
+    <Position X="11.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAAACEAAAAAEACAFIECAIEgAIAAAEAIUBBAABA=</HashCode>
+      <FileName>Forms\AddCarForm.cs</FileName>
+    </TypeIdentifier>
   </Class>
-  <Class Name="Rental_Car_System.Data.Models.RentalApplication">
-    <Position X="9.75" Y="5" Width="2" />
-    <Members>
-      <Property Name="Order" Hidden="true" />
-    </Members>
-    <NestedTypes>
-      <Class Name="Rental_Car_System.Data.Models.RentalApplication.ApplicationType" Collapsed="true">
-        <TypeIdentifier />
-      </Class>
-    </NestedTypes>
-    <TypeIdentifier />
+  <Class Name="Rental_Car_System.Forms.AdditionalCarInfoForm" Collapsed="true">
+    <Position X="13.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIAIACBAAAAAAACAAAACAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Forms\AdditionalCarInfoForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.Forms.AdministratorForm" Collapsed="true">
+    <Position X="15" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFACQAGAgSAAAAABACCSAAACIAMUAIIQIAAIBICAAhE=</HashCode>
+      <FileName>Forms\AdministratorForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.Forms.ApplicationForm" Collapsed="true">
+    <Position X="16.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACADCACADCgAABAIACACQQCABIAAQCgQEAAAAAAAAI=</HashCode>
+      <FileName>Forms\ApplicationForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.Forms.ClientForm" Collapsed="true">
+    <Position X="11.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACYSAAEASAQBCCgADCAAYASEBAEAAAQgAAQACWgCCQ=</HashCode>
+      <FileName>Forms\ClientForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.Forms.OrderForm" Collapsed="true">
+    <Position X="16.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIIKASAQAAAAAJCIAAECEBIAAAAAAEAIAJAAAAA=</HashCode>
+      <FileName>Forms\OrderForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.Forms.SignInForm" Collapsed="true">
+    <Position X="13.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACCEAAAICAAAAEAAACAAAACAAQgAAAAACAAAAAAIAA=</HashCode>
+      <FileName>Forms\SignInForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.Forms.SignUpForm" Collapsed="true">
+    <Position X="15" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACEAgAMCAAAAAAAADAAAACAAAgAAAAAAQAAgAAAgA=</HashCode>
+      <FileName>Forms\SignUpForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.View.Forms.ClientOrdersForm" Collapsed="true">
+    <Position X="13.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCASQAAAgDAAAAABACC0AAACABAkAAIAAAAAAICAABU=</HashCode>
+      <FileName>Forms\ClientOrdersForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.View.Forms.DepositForm" Collapsed="true">
+    <Position X="15" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACIAACBKQBEAAwABCQAAACABBAEgAQQAAQBABAAAA=</HashCode>
+      <FileName>Forms\DepositForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rental_Car_System.View.Forms.ProfileForm" Collapsed="true">
+    <Position X="11.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAAAKABEAAAgAKAAIACAFIAAhAAQgAAAAEAAAA=</HashCode>
+      <FileName>Forms\ProfileForm.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

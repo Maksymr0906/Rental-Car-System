@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Data.Models;
-using System.Diagnostics;
+using Rental_Car_System.Generic;
 
 namespace Rental_Car_System.Data
 {
-    public class RentalCarContext : DbContext
-    {
+    public class RentalCarContext : DbContext, IApplicationDbContext
+	{
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Client> Clients { get; set; }
@@ -15,14 +15,12 @@ namespace Rental_Car_System.Data
 
         public RentalCarContext()
         {
-            
+
         }
-        
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var serverVersion = new MySqlServerVersion(new Version(8, 3, 0));
-            optionsBuilder.UseMySql("server=localhost;user=root;password=1111;database=rental_car_system",serverVersion);
-            optionsBuilder.LogTo(message => Debug.WriteLine(message));
-        }
-    }
+
+		public RentalCarContext(DbContextOptions<RentalCarContext> options)
+		    : base(options)
+		{
+		}
+	}
 }

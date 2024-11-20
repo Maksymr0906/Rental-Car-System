@@ -5,16 +5,19 @@ using Rental_Car_System.Bussiness.Utils;
 using Rental_Car_System.Bussiness.Services;
 using Rental_Car_System.Data;
 using Rental_Car_System.Bussiness;
+using Rental_Car_System.Generic.Repositories;
+using Rental_Car_System.View;
 
 namespace Rental_Car_System.Forms
 {
     public partial class OrderForm : MaterialForm
     {
-        private readonly Client currentClient;
+        private Client currentClient;
         private Car selectedCar;
         private readonly CarService carService;
         private readonly OrderService orderService;
-        private double rentPrice;
+		private readonly IUnitOfWork unitOfWork;
+		private double rentPrice;
 
         public OrderForm()
         {
@@ -22,17 +25,24 @@ namespace Rental_Car_System.Forms
             FormHelper.SetTheme(this);
         }
 
-        public OrderForm(Client client, Car car, CarService carService, OrderService orderService) : this()
+        public OrderForm(CarService carService,
+            OrderService orderService, IUnitOfWork unitOfWork) : this()
         {
-            selectedCar = car;
-            currentClient = client;
             this.carService = carService;
             this.orderService = orderService;
-            SetUpDateTimePicker();
-            InitializeRentPrice();
-            SetUpFields();
+			this.unitOfWork = unitOfWork;
         }
-        private async void InitializeRentPrice()
+
+        public void Initialize(Car car, Client client)
+        {
+            currentClient = client;
+			selectedCar = car;
+			InitializeRentPrice();
+			SetUpDateTimePicker();
+			SetUpFields();
+		}
+
+		private async void InitializeRentPrice()
         {
             rentPrice = await CalculateRentPriceAsync();
         }
@@ -67,14 +77,14 @@ namespace Rental_Car_System.Forms
                 return;
             }
 
-            CreateOrder();
+            await CreateOrder();
             await carService.UpdateCarAvailability(selectedCar.Id, false);
 
             MessageBox.Show("Your order adressed to the administrator. Please wait.");
             Close();
         }
 
-        private async void CreateOrder()
+        private async Task CreateOrder()
         {
             var order = new Order
             {
@@ -87,12 +97,18 @@ namespace Rental_Car_System.Forms
                 Status = Order.OrderStatus.Processing
             };
 
-            await RepositoryManager.GetRepo<Order>().CreateAsync(order);
-        }
+            await unitOfWork.OrderRepository.CreateAsync(order);
+			await unitOfWork.SaveAsync();
+		}
 
-        private async void rentToTimePicker_ValueChanged(object sender, EventArgs e)
+		private async void rentToTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            rentPrice = await CalculateRentPriceAsync();
+            if (selectedCar == null)
+            {
+                return;
+            }
+
+			rentPrice = await CalculateRentPriceAsync();
             priceLabel.Text = $"Price: {rentPrice}";
         }
     }

@@ -9,9 +9,9 @@ namespace Rental_Car_System.View.Forms
 {
     public partial class ClientOrdersForm : MaterialForm
     {
-        private readonly Client currentClient;
+        private Client currentClient;
         private readonly RentalCarContext context;
-        private readonly int numberOfPages;
+        private int numberOfPages;
         private int pageNumber;
         public ClientOrdersForm()
         {
@@ -19,19 +19,23 @@ namespace Rental_Car_System.View.Forms
             FormHelper.SetTheme(this);
         }
 
-        public ClientOrdersForm(Client client) : this()
+        public ClientOrdersForm(RentalCarContext context) : this()
+        {
+            this.context = context;
+        }
+
+        public void Initialize(Client client)
         {
             currentClient = client;
-            context = new RentalCarContext();
-            numberOfPages = (int)Math.Ceiling((double)context.Orders
-                .Count(o => o.ClientId == currentClient.Id) / Constants.pageSize);
-            if(numberOfPages <= 0)
-            {
-                prevButton.Enabled = false;
-                nextButton.Enabled = false;
-            }
-            ShowOrders();
-        }
+			numberOfPages = (int)Math.Ceiling((double)context.Orders
+				.Count(o => o.ClientId == currentClient.Id) / Constants.pageSize);
+			if (numberOfPages <= 0)
+			{
+				prevButton.Enabled = false;
+				nextButton.Enabled = false;
+			}
+			ShowOrders();
+		}
 
         private void ShowOrders()
         {

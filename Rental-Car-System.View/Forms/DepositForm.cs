@@ -18,10 +18,14 @@ namespace Rental_Car_System.View.Forms
 			FormHelper.SetTheme(this);
 		}
 
-		public DepositForm(Client currentClient, ClientService clientService) : this()
+		public DepositForm(ClientService clientService) : this()
 		{
-			this.currentClient = currentClient;
 			this.clientService = clientService;
+		}
+
+		public void Initialize(Client client)
+		{
+			currentClient = client;
 			nameTextField.Text = currentClient.Name;
 			surnameTextField.Text = currentClient.Surname;
 		}

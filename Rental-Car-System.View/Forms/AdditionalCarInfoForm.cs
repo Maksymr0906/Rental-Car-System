@@ -13,17 +13,17 @@ namespace Rental_Car_System.Forms
             FormHelper.SetTheme(this);
         }
 
-        public AdditionalCarInfoForm(Car car) : this()
+        public void Initialize(Car car)
         {
-            Text = car.Model;
-            countryLabel.Text = "Country: " + car.Country;
-            brandLabel.Text = "Brand: " + car.Brand;
-            colorLabel.Text = "Color: " + car.Color;
-            priceLabel.Text = "Price: " + car.Price;
-            fuelConsumptionLabel.Text = "Fuel Consumption: " + car.FuelConsumption;
-            carPictureBox.BorderStyle = BorderStyle.FixedSingle;
-            carPictureBox.Image = Image.FromFile(Constants.pathToCarImages + car.ImgPath);
-            carPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-        }
+			Text = car.Model;
+			countryLabel.Text = "Country: " + car.Country;
+			brandLabel.Text = "Brand: " + car.Brand;
+			colorLabel.Text = "Color: " + car.Color;
+			priceLabel.Text = "Price: " + car.Price;
+			fuelConsumptionLabel.Text = "Fuel Consumption: " + car.FuelConsumption;
+			carPictureBox.BorderStyle = BorderStyle.FixedSingle;
+			carPictureBox.Image = Image.FromFile(Constants.pathToCarImages + car.ImgPath);
+			carPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+		}
     }
 }

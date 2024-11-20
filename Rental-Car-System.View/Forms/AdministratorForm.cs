@@ -6,31 +6,35 @@ using Microsoft.EntityFrameworkCore;
 using Rental_Car_System.Exceptions;
 using Rental_Car_System.Bussiness.Utils;
 using Rental_Car_System.Bussiness.Services;
-using Rental_Car_System.Bussiness;
+using Rental_Car_System.View;
 
 namespace Rental_Car_System.Forms
 {
     public partial class AdministratorForm : MaterialForm
     {
         private readonly RentalCarContext context;
-        private readonly Admin admin;
         private readonly OrderService orderService;
         private readonly RentalApplicationService rentalApplicationService;
-        private readonly int numberOfPages;
+		private readonly IUnitOfWork unitOfWork;
+		private readonly int numberOfPages;
         private int pageNumber = 0;
+        private IFormFactory formFactory;
         public AdministratorForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
         }
 
-        public AdministratorForm(RentalCarContext context, Admin admin, OrderService orderService, RentalApplicationService rentalApplicationService) : this()
+        public AdministratorForm(RentalCarContext context, OrderService orderService,
+            RentalApplicationService rentalApplicationService,
+            IUnitOfWork unitOfWork) : this()
         {
-            this.admin = admin;
             this.orderService = orderService;
             this.rentalApplicationService = rentalApplicationService;
-            this.context = context;
-            numberOfPages = (int)Math.Ceiling((double)context.Orders.Count(o => 
+			this.unitOfWork = unitOfWork;
+			this.context = context;
+
+			numberOfPages = (int)Math.Ceiling((double)context.Orders.Count(o => 
                 o.Status == Order.OrderStatus.Processing || o.Status == Order.OrderStatus.Ended) / Constants.pageSize);
             if (numberOfPages <= 0)
             {
@@ -38,6 +42,11 @@ namespace Rental_Car_System.Forms
                 nextButton.Enabled = false;
             }
             ShowOrders();
+        }
+
+		public void Initialize(IFormFactory formFactory)
+        {
+            this.formFactory = formFactory;
         }
 
         private void ShowOrders()
@@ -90,8 +99,12 @@ namespace Rental_Car_System.Forms
             {
                 var selectedOrderId = GetSelectedOrderId();
                 await rentalApplicationService.CreateApplicationByOrderId(selectedOrderId);
-                var application = await RepositoryManager.GetRepo<RentalApplication>().GetByFilterAsync(a => a.OrderId == selectedOrderId);
-                FormHelper.ShowForm(this, new ApplicationForm(application, new CarService(new ClientService()), new ClientService(), new OrderService()), (e) =>
+                var application = await unitOfWork.RentalApplicationRepository.GetByFilterAsync(a => a.OrderId == selectedOrderId);
+
+                var applicationForm = formFactory.CreateApplicationForm();
+                applicationForm.Initialize(application);
+
+                FormHelper.ShowForm(this, applicationForm, (e) =>
                 {
                     ShowOrders();
                     Show();

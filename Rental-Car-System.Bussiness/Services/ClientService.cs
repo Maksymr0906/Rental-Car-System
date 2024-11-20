@@ -1,37 +1,47 @@
 ﻿using Rental_Car_System.Exceptions;
 using Rental_Car_System.Data.Models;
+using Rental_Car_System.Data;
 
 namespace Rental_Car_System.Bussiness.Services
 {
     public class ClientService
     {
-        public async Task HandleClientPayment(Guid clientId, double amount)
+		private readonly IUnitOfWork unitOfWork;
+
+		public ClientService(IUnitOfWork unitOfWork)
+		{
+			this.unitOfWork = unitOfWork;
+		}
+
+		public async Task HandleClientPayment(Guid clientId, double amount)
         {
-            var client = await RepositoryManager.GetRepo<Client>().GetByIdAsync(clientId);
+            var client = await unitOfWork.ClientRepository.GetByIdAsync(clientId);
             if(client is null)
             {
                 throw new NullReferenceException("Client is not found");
             }
 
             client.Balance -= amount;
-            await RepositoryManager.GetRepo<Client>().UpdateAsync(client);
-        }
+            await unitOfWork.ClientRepository.UpdateAsync(client);
+			await unitOfWork.SaveAsync();
+		}
 
-        public async Task HandleClientDeposit(Guid clientId, double amount)
+		public async Task HandleClientDeposit(Guid clientId, double amount)
         {
-            var client = await RepositoryManager.GetRepo<Client>().GetByIdAsync(clientId);
+            var client = await unitOfWork.ClientRepository.GetByIdAsync(clientId);
             if (client is null)
             {
                 throw new NullReferenceException("Client is not found");
             }
 
             client.Balance += amount;
-            await RepositoryManager.GetRepo<Client>().UpdateAsync(client);
-        }
+            await unitOfWork.ClientRepository.UpdateAsync(client);
+			await unitOfWork.SaveAsync();
+		}
 
-        public async Task UpdateClientPersonalInfo(Guid clientId, string surname, string name, DateTime dateOfBirth)
+		public async Task UpdateClientPersonalInfo(Guid clientId, string surname, string name, DateTime dateOfBirth)
         {
-            var client = await RepositoryManager.GetRepo<Client>().GetByIdAsync(clientId);
+            var client = await unitOfWork.ClientRepository.GetByIdAsync(clientId);
             if (client is null)
             {
                 throw new NullReferenceException("Client is not found");
@@ -40,12 +50,13 @@ namespace Rental_Car_System.Bussiness.Services
             client.Surname = surname;
             client.Name = name;
             client.DateOfBirthday = dateOfBirth;
-            await RepositoryManager.GetRepo<Client>().UpdateAsync(client);
-        }
+            await unitOfWork.ClientRepository.UpdateAsync(client);
+			await unitOfWork.SaveAsync();
+		}
 
-        public async Task<BankCard> GetCardByClientId(Guid clientId)
+		public async Task<BankCard> GetCardByClientId(Guid clientId)
         {
-            var cards = await RepositoryManager.GetRepo<BankCard>().GetAllAsync();
+            var cards = await unitOfWork.BankCardRepository.GetAllAsync();
             var card = cards.FirstOrDefault(c => c.ClientId == clientId);
             return card;
         }
@@ -63,10 +74,11 @@ namespace Rental_Car_System.Bussiness.Services
 				ClientId = clientId,
 			};
 
-            await RepositoryManager.GetRepo<BankCard>().CreateAsync(card);
+            await unitOfWork.BankCardRepository.CreateAsync(card);
+			await unitOfWork.SaveAsync();
 		}
 
-        public async Task ValidateCardInfo(string cardNumber, int month, int year, string cvv)
+		public async Task ValidateCardInfo(string cardNumber, int month, int year, string cvv)
         {
 			if (string.IsNullOrWhiteSpace(cardNumber) || cardNumber.Length != 19)
 			{

@@ -9,9 +9,10 @@ namespace Rental_Car_System.View.Forms
     public partial class ProfileForm : MaterialForm
     {
         private Client currentClient;
-        private readonly ClientService clientService;
+		private readonly ClientService clientService;
+		private IFormFactory formFactory;
 
-        public ProfileForm()
+		public ProfileForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
@@ -19,15 +20,21 @@ namespace Rental_Car_System.View.Forms
             dateOfBirthTimePicker.MaxDate = DateTime.Now.AddYears(-18);
         }
 
-        public ProfileForm(Client client, ClientService clientService) : this()
+        public ProfileForm(ClientService clientService)
+            : this()
         {
-            currentClient = client;
-            this.clientService = clientService;
-            surnameTextField.Text = currentClient.Surname;
-            nameTextField.Text = currentClient.Name;
-            dateOfBirthTimePicker.Value = currentClient.DateOfBirthday;
-            Text = $"Logged as: {currentClient.Login}";
-        }
+			this.clientService = clientService;
+		}
+
+        public void Initialize(Client client, IFormFactory formFactory)
+        {
+			this.formFactory = formFactory;
+			currentClient = client;
+			surnameTextField.Text = currentClient.Surname;
+			nameTextField.Text = currentClient.Name;
+			dateOfBirthTimePicker.Value = currentClient.DateOfBirthday;
+			Text = $"Logged as: {currentClient.Login}";
+		}
 
         private void surnameTextField_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -66,7 +73,9 @@ namespace Rental_Car_System.View.Forms
 
         private void myOrdersButton_Click(object sender, EventArgs e)
         {
-            FormHelper.ShowForm(this, new ClientOrdersForm(currentClient), (e) =>
+            var clientOrdersForm = formFactory.CreateClientOrdersForm();
+            clientOrdersForm.Initialize(currentClient);
+            FormHelper.ShowForm(this, clientOrdersForm, (e) =>
             {
                 Show();
             });
@@ -74,7 +83,9 @@ namespace Rental_Car_System.View.Forms
 
         private void depositButton_Click(object sender, EventArgs e)
         {
-            FormHelper.ShowForm(this, new DepositForm(currentClient, clientService), (e) =>
+            var depositForm = formFactory.CreateDepositForm();
+            depositForm.Initialize(currentClient);
+            FormHelper.ShowForm(this, depositForm, (e) =>
             {
                 Show();
             });

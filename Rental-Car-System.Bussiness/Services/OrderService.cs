@@ -1,36 +1,45 @@
 ﻿using Rental_Car_System.Data.Models;
 using Rental_Car_System.Bussiness.Utils;
+using Rental_Car_System.Data;
 
 namespace Rental_Car_System.Bussiness.Services
 {
     public class OrderService
     {
-        public async Task UpdateOrderStatus(Guid orderId, Order.OrderStatus status)
+		private readonly IUnitOfWork unitOfWork;
+
+		public OrderService(IUnitOfWork unitOfWork)
+		{
+			this.unitOfWork = unitOfWork;
+		}
+
+		public async Task UpdateOrderStatus(Guid orderId, Order.OrderStatus status)
         {
-            var order = await RepositoryManager.GetRepo<Order>().GetByIdAsync(orderId);
+            var order = await unitOfWork.OrderRepository.GetByIdAsync(orderId);
             if(order is null)
             {
                 throw new NullReferenceException("Order is not found");
             }
 
             order.Status = status;
-            await RepositoryManager.GetRepo<Order>().UpdateAsync(order);
-        }
+            await unitOfWork.OrderRepository.UpdateAsync(order);
+			await unitOfWork.SaveAsync();
+		}
 
-        public async Task SkipOrderTime()
+		public async Task SkipOrderTime()
         {
-            var repo = RepositoryManager.GetRepo<Order>();
-            var acceptedOrders = await repo.GetAllAsync(o => o.Status == Order.OrderStatus.Accepted);
+            var acceptedOrders = await unitOfWork.OrderRepository.GetAllAsync(o => o.Status == Order.OrderStatus.Accepted);
             foreach (var order in acceptedOrders)
             {
                 order.Status = Order.OrderStatus.Ended;
-                await repo.UpdateAsync(order);
-            }
-        }
+                await unitOfWork.OrderRepository.UpdateAsync(order);
+				await unitOfWork.SaveAsync();
+			}
+		}
 
         public async Task<double> CalculateRentPrice(DateTime dateToRent, Guid carId)
         {
-            var car = await RepositoryManager.GetRepo<Car>().GetByIdAsync(carId);
+            var car = await unitOfWork.CarRepository.GetByIdAsync(carId);
             if(car is null)
             {
                 throw new NullReferenceException("Car is not found.");

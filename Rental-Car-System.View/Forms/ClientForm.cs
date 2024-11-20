@@ -4,9 +4,8 @@ using Rental_Car_System.Bussiness.Utils;
 using Rental_Car_System.View.Forms;
 using Rental_Car_System.Exceptions;
 using Rental_Car_System.View.Utils;
-using Rental_Car_System.Bussiness.Services;
+using Rental_Car_System.View;
 using Rental_Car_System.Data;
-using Rental_Car_System.Bussiness;
 
 namespace Rental_Car_System.Forms
 {
@@ -14,25 +13,35 @@ namespace Rental_Car_System.Forms
     {
         private Client currentClient;
         private int currentDisplayedCarIndex;
-        public ClientForm()
+		private readonly IUnitOfWork unitOfWork;
+		private IFormFactory formFactory;
+
+		public ClientForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
         }
 
-        public ClientForm(Client client) : this()
+        public ClientForm(IUnitOfWork unitOfWork) : this()
+        {
+			this.unitOfWork = unitOfWork;
+		}
+
+		public void Initialize(Client client, IFormFactory formFactory)
         {
             currentClient = client;
-            Text = $"Logged as: {currentClient.Login}";
-            ShowBalance();
-            ShowAvailableCars();
-        }
+			this.formFactory = formFactory;
 
-        private async void ShowAvailableCars()
+			Text = $"Logged as: {currentClient.Login}";
+			ShowBalance();
+			ShowAvailableCars();
+		}
+
+		private async void ShowAvailableCars()
         {
             try
             {
-                var availableCars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
+                var availableCars = await unitOfWork.CarRepository.GetAllAsync(car => car.IsAvailable);
 
                 if (!availableCars.Any())
                 {
@@ -86,7 +95,7 @@ namespace Rental_Car_System.Forms
         {
             try
             {
-                var cars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
+                var cars = await unitOfWork.CarRepository.GetAllAsync(car => car.IsAvailable);
                 var carsCount = cars.Count();
                 if (carsCount <= 0)
                 {
@@ -117,13 +126,16 @@ namespace Rental_Car_System.Forms
         {
             try
             {
-                var cars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
+                var cars = await unitOfWork.CarRepository.GetAllAsync(car => car.IsAvailable);
                 if (!cars.Any())
                 {
                     throw new NoAvailableCarsException("There are no available cars now.");
                 }
 
-                FormHelper.ShowForm(this, new AdditionalCarInfoForm(cars.ElementAt((currentDisplayedCarIndex + pictureNumber) % cars.Count())), (e) =>
+                var additionalCarInfoForm = formFactory.CreateAdditionalCarInfoForm();
+                additionalCarInfoForm.Initialize(cars.ElementAt((currentDisplayedCarIndex + pictureNumber) % cars.Count()));
+
+				FormHelper.ShowForm(this, additionalCarInfoForm, (e) =>
                 {
                     ShowAvailableCars();
                     Show();
@@ -144,7 +156,7 @@ namespace Rental_Car_System.Forms
         {
             try
             {
-                var cars = await RepositoryManager.GetRepo<Car>().GetAllAsync(car => car.IsAvailable);
+                var cars = await unitOfWork.CarRepository.GetAllAsync(car => car.IsAvailable);
                 if (!cars.Any())
                 {
                     throw new NoAvailableCarsException("There are no available cars now.");
@@ -157,8 +169,11 @@ namespace Rental_Car_System.Forms
 
                 Button button = (Button)sender;
                 int buttonNumber = Convert.ToInt32(button.Tag);
+                
+                var orderForm = formFactory.CreateOrderForm();
+                orderForm.Initialize(cars.ElementAt((currentDisplayedCarIndex + buttonNumber) % cars.Count()), currentClient);
 
-                FormHelper.ShowForm(this, new OrderForm(currentClient, cars.ElementAt((currentDisplayedCarIndex + buttonNumber) % cars.Count()), new CarService(new ClientService()), new OrderService()), (e) =>
+                FormHelper.ShowForm(this, orderForm, (e) =>
                 {
                     ClearFields();
                     ShowAvailableCars();
@@ -188,9 +203,11 @@ namespace Rental_Car_System.Forms
 
         private void myProfileButton_Click(object sender, EventArgs e)
         {
-            FormHelper.ShowForm(this, new ProfileForm(currentClient, new ClientService()), async (e) =>
+            var profileForm = formFactory.CreateProfileForm();
+            profileForm.Initialize(currentClient, formFactory);
+            FormHelper.ShowForm(this, profileForm, async (e) =>
             {
-                currentClient = await RepositoryManager.GetRepo<Client>().GetByIdAsync(currentClient.Id);
+                currentClient = await unitOfWork.ClientRepository.GetByIdAsync(currentClient.Id);
                 ShowBalance();
                 Show();
             });

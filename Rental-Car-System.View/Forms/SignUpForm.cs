@@ -6,23 +6,25 @@ using Rental_Car_System.Exceptions;
 using Rental_Car_System.Bussiness.Services;
 using Rental_Car_System.Data;
 using Rental_Car_System.Bussiness;
+using Rental_Car_System.Generic.Repositories;
 
 namespace Rental_Car_System.Forms
 {
     public partial class SignUpForm : MaterialForm
     {
-        private readonly PersonService personService;
+		private readonly IUnitOfWork unitOfWork;
 
-        public SignUpForm()
+		public SignUpForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
         }
 
-        public SignUpForm(PersonService personService) : this()
+        public SignUpForm(IUnitOfWork unitOfWork)
+            : this()
         {
-            this.personService = personService;
-        }
+			this.unitOfWork = unitOfWork;
+		}
 
         private void signInLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -51,7 +53,7 @@ namespace Rental_Car_System.Forms
 
                 if (iAmAdminCheckBox.Checked)
                 {
-                    if (await RepositoryManager.GetRepo<Admin>().GetByFilterAsync(a => a.Login == person.Login) is not null)
+                    if (await unitOfWork.AdminRepository.GetByFilterAsync(a => a.Login == person.Login) is not null)
                     {
                         throw new ExistingPersonException("Admin with this login already exists!");
                     }
@@ -63,11 +65,11 @@ namespace Rental_Car_System.Forms
                         Email = string.Empty,
                     };
 
-                    await RepositoryManager.GetRepo<Admin>().CreateAsync(admin);
+                    await unitOfWork.AdminRepository.CreateAsync(admin);
                 }
                 else
                 {
-                    if (await RepositoryManager.GetRepo<Client>().GetByFilterAsync(c => c.Login == person.Login) is not null)
+                    if (await unitOfWork.ClientRepository.GetByFilterAsync(c => c.Login == person.Login) is not null)
                     {
                         throw new ExistingPersonException("Client with this login already exists!");
                     }
@@ -82,7 +84,7 @@ namespace Rental_Car_System.Forms
                         DateOfBirthday = DateTime.Now.AddYears(-100),
                     };
 
-                    await RepositoryManager.GetRepo<Client>().CreateAsync(client);
+                    await unitOfWork.ClientRepository.CreateAsync(client);
                 }
 
 

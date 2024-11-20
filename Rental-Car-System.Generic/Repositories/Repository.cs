@@ -6,10 +6,10 @@ namespace Rental_Car_System.Generic.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        private readonly DbContext context;
+        private readonly IApplicationDbContext context;
         private readonly DbSet<TEntity> entities;
 
-        public Repository(DbContext context)
+        public Repository(IApplicationDbContext context)
         {
             this.context = context;
             entities = context.Set<TEntity>();
@@ -18,7 +18,6 @@ namespace Rental_Car_System.Generic.Repositories
         public async Task<TEntity> CreateAsync(TEntity entity)
         {
             await entities.AddAsync(entity);
-            await context.SaveChangesAsync();
             return entity;
         }
 
@@ -42,7 +41,6 @@ namespace Rental_Car_System.Generic.Repositories
         public async Task<TEntity?> UpdateAsync(TEntity entity)
         {
             context.Entry(entity).State = EntityState.Modified;
-            await context.SaveChangesAsync();
             return entity;
         }
 
@@ -54,7 +52,6 @@ namespace Rental_Car_System.Generic.Repositories
             }
 
             entities.Remove(entity);
-            await context.SaveChangesAsync();
             return entity;
         }
 

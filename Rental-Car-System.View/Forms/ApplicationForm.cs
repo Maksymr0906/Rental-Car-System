@@ -7,6 +7,7 @@ using Rental_Car_System.Bussiness.Services;
 using Rental_Car_System.Exceptions;
 using Rental_Car_System.Data;
 using Rental_Car_System.Bussiness;
+using Rental_Car_System.Generic.Repositories;
 
 #nullable disable
 namespace Rental_Car_System.Forms
@@ -17,25 +18,33 @@ namespace Rental_Car_System.Forms
         private readonly CarService carService;
         private readonly ClientService clientService;
         private readonly OrderService orderService;
-        private IApplicationState currentState;
+		private readonly IUnitOfWork unitOfWork;
+		private IApplicationState currentState;
+
         public ApplicationForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
         }
 
-        public ApplicationForm(RentalApplication application, CarService carService, ClientService clientService, OrderService orderService) : this()
+        public ApplicationForm(CarService carService, ClientService clientService,
+            OrderService orderService, IUnitOfWork unitOfWork) : this()
         {
-            currentApplication = application;
             this.carService = carService;
             this.clientService = clientService;
             this.orderService = orderService;
-            SetState();
-            ShowUIElements();
+			this.unitOfWork = unitOfWork;
+        }
+
+        public void Initialize(RentalApplication application)
+        {
+            currentApplication = application;
+			SetState();
+			ShowUIElements();
             UpdateFields();
         }
 
-        private void SetState()
+		private void SetState()
         {
             currentState = currentApplication.Type switch
             {
@@ -68,10 +77,9 @@ namespace Rental_Car_System.Forms
         {
             var order = await GetCurrentOrder();
             Text = $"{currentApplication.Type}";
-            var client = await RepositoryManager.GetRepo<Client>()
+            var client = await unitOfWork.ClientRepository
                 .GetByIdAsync(order.ClientId);
-            var car = await RepositoryManager.GetRepo<Car>()
-                .GetByIdAsync(order.CarId);
+            var car = await unitOfWork.CarRepository.GetByIdAsync(order.CarId);
             clientSurnameLabel.Text += $"{client.Surname}";
             carModelLabel.Text += $"{car.Model}";
             carDamageFeeLabel.Text += $"{car.Price / Constants.coefficientForCarDamage:F2}";
@@ -120,9 +128,9 @@ namespace Rental_Car_System.Forms
                 await carService.UpdateCarAvailability(order.CarId, true);
 
                 currentApplication.RejectionComment = rejectionCommentTextField.Text;
-                await RepositoryManager.GetRepo<RentalApplication>().UpdateAsync(currentApplication);
+                await unitOfWork.RentalApplicationRepository.UpdateAsync(currentApplication);
 
-                MessageBox.Show("Order cancelled. Client will be notificated.");
+				MessageBox.Show("Order cancelled. Client will be notificated.");
                 Close();
             }
             catch(EmptyFieldException ex)
@@ -133,7 +141,7 @@ namespace Rental_Car_System.Forms
 
         private async Task<Order> GetCurrentOrder()
         {
-            return await RepositoryManager.GetRepo<Order>()
+            return await unitOfWork.OrderRepository
                 .GetByIdAsync(currentApplication.OrderId);
         }
     }

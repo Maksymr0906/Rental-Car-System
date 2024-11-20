@@ -1,26 +1,28 @@
 ﻿using Rental_Car_System.Data.Models;
 using MaterialSkin.Controls;
-using Rental_Car_System.Data;
 using Rental_Car_System.View.Utils;
 using Rental_Car_System.Exceptions;
 using Rental_Car_System.Bussiness.Services;
+using Rental_Car_System.View;
 
 namespace Rental_Car_System.Forms
 {
     public partial class SignInForm : MaterialForm
     {
         private readonly PersonService personService;
+		private readonly IFormFactory formFactory;
 
-        public SignInForm()
+		public SignInForm()
         {
             InitializeComponent();
             FormHelper.SetTheme(this);
         }
 
-        public SignInForm(PersonService personService) : this()
+        public SignInForm(PersonService personService, IFormFactory formFactory) : this()
         {
             this.personService = personService;
-        }
+			this.formFactory = formFactory;
+		}
 
         private async void signInButton_Click(object sender, EventArgs e)
         {
@@ -42,8 +44,11 @@ namespace Rental_Car_System.Forms
                     var (isAuthenticated, foundUser) = await personService.TryAuthenticateUserAsync<Admin>(currentPerson);
                     if (isAuthenticated)
                     {
-                        MessageBox.Show("You are successfully logged in!");
-                        SwitchToForm(new AdministratorForm(new RentalCarContext(), foundUser, new OrderService(), new RentalApplicationService()));
+						MessageBox.Show("You are successfully logged in!");
+
+                        var administratorForm = formFactory.CreateAdministratorForm();
+                        administratorForm.Initialize(formFactory);
+                        SwitchToForm(administratorForm);
                     }
                 }
                 else
@@ -51,8 +56,11 @@ namespace Rental_Car_System.Forms
                     var (isAuthenticated, foundUser) = await personService.TryAuthenticateUserAsync<Client>(currentPerson);
                     if (isAuthenticated)
                     {
-                        MessageBox.Show("You are successfully logged in!");
-                        SwitchToForm(new ClientForm(foundUser));
+						MessageBox.Show("You are successfully logged in!");
+
+                        var clientForm = formFactory.CreateClientForm();
+                        clientForm.Initialize(foundUser, formFactory);
+                        SwitchToForm(clientForm);
                     }
                 }
             }
@@ -72,7 +80,8 @@ namespace Rental_Car_System.Forms
 
         private void signUpLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            SwitchToForm(new SignUpForm());
+            var signUpForm = formFactory.CreateSignUpForm();
+            SwitchToForm(signUpForm);
         }
 
         private void seePasswordCheckBox_CheckedChanged(object sender, EventArgs e)
